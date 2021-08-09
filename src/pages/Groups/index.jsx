@@ -1,6 +1,6 @@
 import { Menu } from '../../components/Menu'
 
-export const Home = () => {
+export const Groups = () => {
   return (
     <Menu />
   )
