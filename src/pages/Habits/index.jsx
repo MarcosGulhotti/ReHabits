@@ -34,7 +34,7 @@ export const Habits = () => {
       <Container>
         <Content>
           <h1>Seus Hábitos</h1>
-          {Habits}
+          <div>{Habits}</div>
         </Content>
       </Container>
     </>

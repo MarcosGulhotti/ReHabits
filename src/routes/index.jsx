@@ -18,9 +18,7 @@ export const Router = () => {
       <Route path="/dashboard">{Dashboard}</Route>
       <Route path="/groups">{Groups}</Route>
       <Route path="/contact">{Contact}</Route>
-      <Route path="/habits">
-        <Habits />
-      </Route>
+      <Route path="/habits" component={Habits} />
     </Switch>
   );
 };
