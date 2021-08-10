@@ -13,11 +13,11 @@ export const Router = () => {
       <Route exact path="/">
         {Home}
       </Route>
-      <Route path="/login">{Login}</Route>
-      <Route path="/register">{Register}</Route>
-      <Route path="/dashboard">{Dashboard}</Route>
-      <Route path="/groups">{Groups}</Route>
-      <Route path="/contact">{Contact}</Route>
+      <Route path="/login" component={Login}/>
+      <Route path="/register" component={Register}/>
+      <Route path="/dashboard" component={Dashboard}/>
+      <Route path="/groups" component={Groups}/>
+      <Route path="/contact" component={Contact}/>
       <Route path="/habits" component={Habits} />
     </Switch>
   );

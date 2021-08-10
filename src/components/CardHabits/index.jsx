@@ -21,7 +21,7 @@ const Card = styled.div`
   .Trabalho {
     background-color: #9da0ec;
   }
-  .Familia {
+  .Família {
     background-color: #ecab9d;
   }
   .Amigos {
