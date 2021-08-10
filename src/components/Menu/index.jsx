@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { LoginContext } from "../../providers/Login";
-import { Input } from "../../components/Input";
 
 const MenuBar = styled.nav`
   width: 100%;

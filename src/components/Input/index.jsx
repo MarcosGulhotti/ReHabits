@@ -6,8 +6,10 @@ const Container = styled.div`
   div {
     font-size: 17px;
     font-weight: bold;
+    font-family: var(--font-label);
     span {
       color: var(--red);
+      font-family: var(--font-label);
     }
   }
 `;
@@ -21,6 +23,7 @@ const ContainerInput = styled.div`
   width: 100%;
   display: flex;
   transition: 0.5s;
+  font-family: var(--font-label);
 
   ${(props) =>
     props.isErrored &&
@@ -33,6 +36,7 @@ const ContainerInput = styled.div`
   }
 
   input {
+    font-family: var(--font-label);
     background: transparent;
     align-items: center;
     flex: 1;
@@ -41,6 +45,7 @@ const ContainerInput = styled.div`
     font-size: 20px;
 
     &::placeholder {
+      font-family: var(--font-label);
       color: var(--placeholder);
       font-size: 15px;
       font-weight: bold;
