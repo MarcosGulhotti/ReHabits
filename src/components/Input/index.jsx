@@ -19,7 +19,7 @@ const ContainerInput = styled.div`
   border-radius: 10px;
   border: 2px solid var(--gray);
   color: var(--gray);
-  padding: 1rem;
+  padding: 0.9rem;
   width: 100%;
   display: flex;
   transition: 0.5s;
@@ -41,8 +41,8 @@ const ContainerInput = styled.div`
     align-items: center;
     flex: 1;
     border: 0;
-    color: var(--gray);
-    font-size: 20px;
+    color: var(--background);
+    font-size: 18px;
 
     &::placeholder {
       font-family: var(--font-label);
