@@ -10,9 +10,7 @@ import { Contact } from "../pages/Contact";
 export const Router = () => {
   return (
     <Switch>
-      <Route exact path="/">
-        {Home}
-      </Route>
+      <Route exact path="/" component={Home} />
       <Route path="/login" component={Login}/>
       <Route path="/register" component={Register}/>
       <Route path="/dashboard" component={Dashboard}/>
