@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom"
 
 const LeftContainer = styled.div`
   @media (max-width: 768px) {
-    width: 100vw;
-    height: 10vh
+    width: 0;
+    height: 0;
   }
     background-color: var(--white);
     width: 55vw;
@@ -19,7 +19,7 @@ const LeftContainer = styled.div`
 const RightContainer = styled.div`
   @media (max-width: 768px) {
     width: 100vw;
-    height: 90vh
+    height: 100vh
   }
     background-color: var(--background);
     width: 45vw;
@@ -39,10 +39,27 @@ const HomePageContainer = styled.div`
 `
 
 const Titulo = styled.h1`
-  @media (max-width: 768px) {
-      margin-top: 20px;
-      font-size: 50px;
+  @media (max-width: 766px) {
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    color: var(--white);
+    font-family: var(--font-title);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 84px;
+    margin-top: 20px;
   }
+  @media (min-width: 767px) {
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    color: var(--white);
+    font-family: var(--font-title);
+    font-style: normal;
+    font-weight: normal;
+    font-size: 100px;
+    line-height: 84px;
+    margin-top: 20px;
+  }
+  @media (min-width: 1023px) {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     color: var(--white);
     font-family: var(--font-title);
@@ -51,6 +68,8 @@ const Titulo = styled.h1`
     font-size: 64px;
     line-height: 84px;
     margin-top: 80px;
+  }
+
 `
 
 const Button = styled.button`
@@ -74,14 +93,27 @@ const Button = styled.button`
 const ButtonContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
+    width: 80%;
+    height: 200px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  }
+  @media (min-width: 1023px) {
+    display: flex;
+    flex-direction: column;
     height: 200px;
     justify-content: space-between;
     align-items: center;
   }
+  @media (min-width: 1025px) {
+    flex-direction: row;
     width: 80%;
     height: 67px;
     display: flex;
     justify-content: space-between;
+  }
+
 `
 
 const Paragraph = styled.p`
