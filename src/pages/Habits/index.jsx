@@ -2,6 +2,7 @@ import { Menu } from "../../components/Menu";
 import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
 import { useContext } from "react";
+import { CardHabits } from "../../components/CardHabits";
 
 const Content = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ const Container = styled.div`
 `;
 
 export const Habits = () => {
-  const { Habits } = useContext(HabitsContext);
+  const { habits } = useContext(HabitsContext);
 
   return (
     <>
@@ -34,7 +35,14 @@ export const Habits = () => {
       <Container>
         <Content>
           <h1>Seus Hábitos</h1>
-          <div>{Habits}</div>
+          {habits.map((elm, i) => (
+            <CardHabits key={i} habits={elm} />
+          ))}
+        </Content>
+        
+        <Content>
+          <h1>Seus Grupos</h1>
+
         </Content>
       </Container>
     </>

@@ -9,8 +9,6 @@ export const HabitsProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("Habits")) || []
   );
 
-  console.log(habits)
-
   api
     .get("/habits/personal")
     .then((resp) => setHabits(resp))
@@ -32,11 +30,15 @@ export const HabitsProvider = ({ children }) => {
   };
 
   const removeFromHabits = (item) => {
-    const newHabits = habits.filter((elm) => elm.title !== item.title);
-    toast("Hábito removido", {
-      icon: "😭",
-    });
-    setHabits(newHabits);
+    // const newHabits = habits.filter((elm) => elm.title !== item.title);
+    // toast("Hábito removido", {
+    //   icon: "😭",
+    // });
+    // setHabits(newHabits);
+    api
+      .delete(`/habits/${item.user}`)
+      .then((resp) => console.log(resp))
+      .catch((e) => console.log(e));
   };
 
   return (

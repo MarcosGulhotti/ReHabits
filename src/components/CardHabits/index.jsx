@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { HabitsContext } from "../../providers/Habits";
 
 const Container = styled.div`
   width: 100%;
@@ -62,10 +64,11 @@ const Info = styled.div`
 
 export const CardHabits = ({ habits }) => {
   const { title, difficulty, frequency, category } = habits;
+  const { removeFromHabits } = useContext(HabitsContext);
 
   return (
     <Container>
-      <i class="fas fa-minus-circle"></i>
+      <i onClick={() => removeFromHabits(habits)} class="fas fa-minus-circle"></i>
       <Card className={category}>
         <Title>
           <p>{title}</p>
