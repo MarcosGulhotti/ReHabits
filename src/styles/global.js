@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     overflow: auto;
+    background-color: var(--background);
 
     ::-webkit-scrollbar {
       display: none;
