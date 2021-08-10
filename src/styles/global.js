@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     --orange: #FF7A00;
     --red: #FF0000;
     --placeholder: #676767;
+    --font-text: 'Roboto Condensed', sans-serif;
+    --font-title:  'Roboto Mono', monospace;
+    --font-button: 'Roboto Slab', serif;
+    --font-label: 'Roboto Slab', serif;;
   }
 
   body, div, ul, button, h1, p, img, h2, h3, nav, a {
@@ -28,6 +32,6 @@ const GlobalStyle = createGlobalStyle`
       display: none;
     }
   }
-` 
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
