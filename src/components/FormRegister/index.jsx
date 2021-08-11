@@ -36,11 +36,11 @@ export const FormRegister = () => {
     })
 
     const formSubmit = ({ username, email, password }) => {
-        const user = { username, email, password }
-        api
-        .post("/users/", user)
-        .then(() => history.push("/login"))
-        .catch(() => console.log("Nome ou e-mail já existente"))
+      const user = { username, email, password }
+      api
+      .post("/users/", user)
+      .then((resp) => history.push("/login"))
+      .catch(() => console.log("Nome ou e-mail já existente"))
     }
 
     return (

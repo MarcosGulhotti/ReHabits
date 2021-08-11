@@ -129,7 +129,6 @@ export const Register = () => {
         </FormContainer>
       </Content>
     </Container>
-
     </>
   )
 }

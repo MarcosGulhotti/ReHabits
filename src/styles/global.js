@@ -27,10 +27,19 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     overflow: auto;
+    height: 100vh;
+
+    @media (max-width: 768px) {
+      height: 100%;
+    }
 
     ::-webkit-scrollbar {
       display: none;
     }
+  }
+
+  #root {
+    height: 100%;
   }
 `;
 

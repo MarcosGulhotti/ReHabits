@@ -1,6 +1,8 @@
 import imageHome from "../../Assets/img/Home Page.svg"
 import styled from 'styled-components'
 import { useHistory } from "react-router-dom"
+import { useContext, useEffect } from "react"
+import { LoginContext } from "../../providers/Login"
 
 const LeftContainer = styled.div`
   @media (max-width: 768px) {
@@ -13,7 +15,6 @@ const LeftContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
 `
 
 const RightContainer = styled.div`
@@ -139,8 +140,9 @@ const Image = styled.img`
 `
 
 export const Home = () => {
-
+      const { setIsLogged } = useContext(LoginContext)
       const history = useHistory()
+      const token = localStorage.getItem("token");
 
       const RedirectToLogin = () => {
         if (token) {
@@ -148,14 +150,21 @@ export const Home = () => {
         }else{
           history.push("/login")
         }
-       
       }
 
       const RedirectToRegister = () => {
         history.push("/register")
       }
 
-      const token = localStorage.getItem("token");
+      useEffect(() => {
+        if (token) {
+          setIsLogged(true)
+        } else {
+          setIsLogged(false)
+        }
+        // eslint-disable-next-line
+      }, [])
+
 
   return (
   
