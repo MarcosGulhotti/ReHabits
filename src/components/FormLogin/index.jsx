@@ -7,8 +7,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services/api'
 import { useContext } from 'react';
 import { LoginContext } from '../../providers/Login'
+import { useUserId } from '../../providers/UserId';
 
 export const FormLogin = () => {
+    const { setUserId, id } = useUserId()
     const history = useHistory()
     const { setIsLogged } = useContext(LoginContext)
 
@@ -33,9 +35,9 @@ export const FormLogin = () => {
       api
         .post("/sessions/", data)
         .then((response) => {
-          console.log(response)
           const { access } = response.data
           localStorage.setItem("token", JSON.stringify(access))
+          setUserId(access)
           setIsLogged(true)
           history.push("/dashboard")
         })
