@@ -1,9 +1,10 @@
-import { LoginProvider } from "./Login"
+import { LoginProvider } from "./Login";
+import { HabitsProvider } from "./Habits";
 
 export const Providers = ({ children }) => {
-  return(
+  return (
     <LoginProvider>
-      {children}
+      <HabitsProvider>{children}</HabitsProvider>
     </LoginProvider>
-  )
-}
+  );
+};

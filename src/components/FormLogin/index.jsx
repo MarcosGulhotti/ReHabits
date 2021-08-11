@@ -33,6 +33,7 @@ export const FormLogin = () => {
       api
         .post("/sessions/", data)
         .then((response) => {
+          console.log(response)
           const { access } = response.data
           localStorage.setItem("token", JSON.stringify(access))
           setIsLogged(true)
