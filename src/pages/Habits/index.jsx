@@ -160,10 +160,6 @@ export const Habits = () => {
             </form>
           </Content>
         )}
-
-        <Content>
-          <h1>Seus Grupos</h1>
-        </Content>
       </Container>
     </>
   );
