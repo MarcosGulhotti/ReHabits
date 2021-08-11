@@ -67,31 +67,31 @@ export const GroupList = () => {
             <h2>Trabalho</h2>
             <img src={work} alt='work' />
           </StyledGroups>
-          <StyledGroups background='#F87777'>
+          <StyledGroups background='#F87777' onClick={() => history.push('/groups/education')}>
             <h2>Educação</h2>
             <img src={education} alt="education" />
           </StyledGroups>
-          <StyledGroups background='#ECAB9D'>
+          <StyledGroups background='#ECAB9D' onClick={() => history.push('/groups/family')}>
             <h2>Família</h2>
             <img src={family} alt="family" />
           </StyledGroups>
-          <StyledGroups background='#EC9DDF'>
+          <StyledGroups background='#EC9DDF' onClick={() => history.push('/groups/relationship')}>
             <h2>Relacionamento</h2>
             <img src={relationship} alt="relationship" />
           </StyledGroups>
-          <StyledGroups background='#BE5BEC'>
+          <StyledGroups background='#BE5BEC' onClick={() => history.push('/groups/friends')}>
             <h2>Amigos</h2>
             <img src={friends} alt="friends" />
           </StyledGroups>
-          <StyledGroups background='#EC5BA1'>
+          <StyledGroups background='#EC5BA1' onClick={() => history.push('/groups/healthy')}>
             <h2>Saúde</h2>
             <img src={healthy} alt="healthy" />
           </StyledGroups>
-          <StyledGroups background='#3E9350'>
+          <StyledGroups background='#3E9350' onClick={() => history.push('/groups/sports')}>
             <h2>Exercício</h2>
             <img src={sports} alt="sports" />
           </StyledGroups>
-          <StyledGroups background='#936C3E'>
+          <StyledGroups background='#936C3E' onClick={() => history.push('/groups/meditation')}>
             <h2>Meditação</h2>
             <img src={meditation} alt="meditation" />
           </StyledGroups>
