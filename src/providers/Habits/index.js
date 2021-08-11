@@ -32,12 +32,12 @@ export const HabitsProvider = ({ children }) => {
   const removeFromHabits = (habit) => {
     console.log(habit);
     api
-      .delete(`habits/${habit.id}`, {
+      .delete(`habits/${habit.id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((resp) => console.log(resp))
+      .then(() => setHabits(habits.filter((habitItem) => habitItem.id !== habit.id)))
       .catch((e) => console.log(e));
   };
 
