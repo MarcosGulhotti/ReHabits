@@ -10,7 +10,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { InputCategory } from "../../components/InputCategory";
 import { InputDifficulty } from "../../components/InputDifficulty";
 import { InputFrequency } from "../../components/InputFrequency";
-import api from "../../services/api";
 
 const Content = styled.div`
   display: flex;
@@ -91,7 +90,7 @@ export const Habits = () => {
   });
 
   const formSubmit = (data) => {
-    const newData = { ...data, how_much_achieved: 0, user: 1 };
+    const newData = { ...data, how_much_achieved: 0, user: 1656 };
     addToHabits(newData, setModal, modal);
   };
 

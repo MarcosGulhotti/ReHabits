@@ -6,38 +6,53 @@ const token = JSON.parse(localStorage.getItem("token"));
 export const HabitsContext = createContext([]);
 
 export const HabitsProvider = ({ children }) => {
-  const [habits, setHabits] = useState(
-    JSON.parse(localStorage.getItem("Habits")) || []
-  );
+  const [habits, setHabits] = useState([]);
+
+  const getHabits = () => {
+    api
+      .get("habits/personal/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => {
+        setHabits(resp.data);
+        localStorage.setItem("Habits", JSON.stringify(habits));
+      })
+      .catch((e) => console.log(e));
+  };
 
   useEffect(() => {
-    localStorage.setItem("Habits", JSON.stringify(habits));
-  }, [habits]);
+    getHabits();
+  }, []);
 
   const addToHabits = (item, setModal, modal) => {
-    console.log(item);
     api
       .post(`habits/`, item, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((resp) => setHabits([...habits, resp.data]))
+      .then((resp) => {
+        setHabits([...habits, resp.data]);
+        localStorage.setItem("Habits", JSON.stringify(habits));
+        toast.success("Hábito Adicionado");
+      })
       .catch((e) => console.log(e));
 
-    toast.success("Hábito Adicionado");
     setModal(!modal);
   };
 
   const removeFromHabits = (habit) => {
-    console.log(habit);
     api
       .delete(`habits/${habit.id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => setHabits(habits.filter((habitItem) => habitItem.id !== habit.id)))
+      .then(() =>
+        setHabits(habits.filter((habitItem) => habitItem.id !== habit.id))
+      )
       .catch((e) => console.log(e));
   };
 
