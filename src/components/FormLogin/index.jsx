@@ -5,9 +5,12 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services/api'
+import { useContext } from 'react';
+import { LoginContext } from '../../providers/Login'
 
 export const FormLogin = () => {
     const history = useHistory()
+    const { setIsLogged } = useContext(LoginContext)
 
     const formSchema = yup.object().shape({
       username: yup
@@ -33,6 +36,7 @@ export const FormLogin = () => {
           console.log(response)
           const { access } = response.data
           localStorage.setItem("token", JSON.stringify(access))
+          setIsLogged(true)
           history.push("/dashboard")
         })
         .catch(() => console.log("Usuário ou e-mail inválido"))
