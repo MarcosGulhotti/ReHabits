@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { CardGroup } from '../CardGroup'
 
 export const StyledBackgroundGroups = styled.div`
   background-color: var(--background);
@@ -18,11 +19,12 @@ export const StyledBackgroundGroups = styled.div`
     }
 
     .backgroundWork {
-      height: 70%;
+      height: 75%;
       width: 80%;
-      background-color: #9DA0EC;
+      background-color: ${props => props.backgroundColor};
       margin: 0 auto;
       position: relative;
+      /* overflow: auto; */
 
       .button {
         position: absolute;
@@ -52,15 +54,26 @@ export const StyledBackgroundGroups = styled.div`
         margin: 0 auto;
       }
 
-      .workList {
-        background-color: transparent;
+      .containerGoalsActivies {
         display: flex;
-        height: 100%;
-        width: 100%;
-        flex-wrap: wrap;
-        position: absolute;
-        top: 0;
-        justify-content: space-around;
+
+        .workGoals, .workActivies {
+          width: 50%;
+          position: absolute;
+          top: 0;
+          padding: 10px;
+      
+          h2 {
+            font-family: var(--font-title);
+            text-align: center;
+            padding-top: 15px;
+          }
+        }
+
+        .workActivies {   
+          right: 0;
+          overflow: auto;
+        }
       }
     }
     
@@ -74,3 +87,38 @@ export const StyledBackgroundGroups = styled.div`
     }
   }
 `
+
+export const BackgroundGroups = ({ groupName, image, goals, backgroundColor, activities }) => {  
+  return (
+    <StyledBackgroundGroups backgroundColor={backgroundColor}>
+      <div className="containerGroups">
+        <h1>{groupName}</h1>
+        <div className='backgroundWork'>
+          <img src={image} alt="Group work" />
+          <div className='containerGoalsActivies'>
+            <ul className='workGoals'>
+              <h2>Objetivos</h2>
+              {goals?.map((el, idx) =>
+                <CardGroup
+                  key={idx}
+                  title={el.title} 
+                  difficulty={el.difficulty}
+                  achieved={JSON.stringify(el.achieved)}
+                />
+              )}
+            </ul>
+            <ul className='workActivies'>
+              <h2>Atividades</h2>
+              {activities?.map((el, idx) =>
+                <CardGroup
+                  key={idx}
+                  title={el.title} 
+                />
+              )}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </StyledBackgroundGroups>
+  )
+}
