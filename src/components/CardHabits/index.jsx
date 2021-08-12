@@ -6,40 +6,49 @@ const Container = styled.div`
   width: 100%;
   background: transparent;
   margin-bottom: 1rem;
+
   i {
     color: var(--red);
   }
   .Trabalho {
     background-color: #9da0ec;
     border-radius: 10px;
+    color: black;
   }
   .Família {
     background-color: #ecab9d;
     border-radius: 10px;
+    color: black;
   }
   .Amigos {
     background-color: #be5bec;
     border-radius: 10px;
+    color: black;
   }
   .Exercício {
     background-color: #3e9350;
     border-radius: 10px;
+    color: black;
   }
   .Educação {
     background-color: #f87777;
     border-radius: 10px;
+    color: black;
   }
   .Relacionamento {
     background-color: #ec9ddf;
     border-radius: 10px;
+    color: black;
   }
   .Saúde {
     background-color: #ec5ba1;
     border-radius: 10px;
+    color: black;
   }
   .Meditação {
     background-color: #936c3e;
     border-radius: 10px;
+    color: black;
   }
 `;
 const Card = styled.div`
@@ -49,51 +58,170 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   color: var(--white);
+  border: 2px solid black;
+  box-shadow: ${(props) => props.styleOnAchieve};
 `;
 
 const Title = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
 
   font-family: var(--font-label);
-  p {
-    margin-top: 0.5rem;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.2rem;
+
+  .limit {
+    width: 65%;
+    word-wrap: break-word;
+
+    @media (max-width: 1100px) {
+      width: 50%;
+    }
+
+    p {
+      width: 100%;
+      font-size: 2.5rem;
+      line-height: 30px;
+      margin-top: 15px;
+      font-family: var(--font-label);
+      text-align: center;
+      word-wrap: break-word;
+
+      @media (max-width: 1100px) {
+        font-size: 1.5rem;
+        line-height: 25px;
+      }
+    }
   }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    span {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .label {
+      font-weight: 400;
+      font-size: 0.8rem;
+
+      @media (max-width: 800px) {
+        font-size: 0.7rem;
+      }
+    }
+  }
+
   span {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-right: 10px;
+    margin: 10px 20px -5px 10px;
     button {
       background: transparent;
       border: none;
+      cursor: pointer;
     }
   }
+
+  .remove {
+    width: 72px;
+
+    @media (max-width: 800px) {
+      width: 63px;
+    }
+  }
+
 `;
 
 const Info = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
+  align-items: flex-end;
+  padding: 0 1rem 0.5rem 1rem;
+
+  @media (max-width: 1000px) {
+      padding: 0 0.5rem 0.25rem 0.5rem;
+    }
+
+  > div {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-family: var(--font-label);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    p {
+
+      font-size: 0.8rem;
+      font-family: var(--font-label);
+
+      @media (max-width: 800px) {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      font-size: 1rem;
+    }
+  }
+
+  .frequency {
+    align-items: flex-end;
+  }
+
+  button {
+    background-color: var(--background);
+    color: white;
+    border: 1px solid black;
+    border-radius: 30px;
+    width: 100px;
+    height: 20px;
+    font-family: var(--font-button);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin: auto;
+  }
+
+  button:hover {
+    background-color: gray;
+  }
 `;
 
-export const CardHabits = ({ habits }) => {
-  const { title, difficulty, frequency, category } = habits;
-  const { removeFromHabits } = useContext(HabitsContext);
+export const CardHabits = ({ habits, setModal }) => {
+  const { title, difficulty, frequency, category, how_much_achieved, achieved, id } = habits;
+  const { removeFromHabits, setEditHabit } = useContext(HabitsContext);
+
+  const handleClick = (id) => {
+    setEditHabit(id)
+    setModal('edit')
+  }
+
+  const styleOnAchieve = () => {
+    if (achieved) {
+      return "0px 0px 5px 0px #00cf00e8"
+    } else {
+      return "none"
+    }
+  }
 
   return (
     <Container>
-      <Card className={category}>
+      <Card className={category} styleOnAchieve={styleOnAchieve}>
         <Title>
-          <p>{title}</p>
-          <span>
+          <div>
+            <span className="label">Completado:</span>
+            <span>{how_much_achieved}</span>
+          </div>
+          <div className="limit">
+            <p>{title}</p>
+          </div>
+          <span className="remove">
             <button onClick={() => removeFromHabits(habits)}>
               <i
                 onClick={() => removeFromHabits(habits)}
@@ -103,8 +231,17 @@ export const CardHabits = ({ habits }) => {
           </span>
         </Title>
         <Info>
-          <span>{difficulty}</span>
-          <span>{frequency}</span>
+          <div>
+            <p>Dificuldade:</p>
+            <span>{difficulty}</span>
+          </div>
+          <div>
+            <button onClick={() => handleClick(id)}>Editar</button>
+          </div>
+          <div className="frequency">
+            <p>Frequencia:</p>
+            <span>{frequency}</span>
+          </div>
         </Info>
       </Card>
     </Container>

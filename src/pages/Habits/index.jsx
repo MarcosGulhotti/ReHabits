@@ -3,42 +3,45 @@ import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
 import { useContext, useState } from "react";
 import { CardHabits } from "../../components/CardHabits";
-import { Input } from "../../components/Input";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { InputCategory } from "../../components/InputCategory";
-import { InputDifficulty } from "../../components/InputDifficulty";
-import { InputFrequency } from "../../components/InputFrequency";
+import { ModalHabit } from "../../components/ModalHabit"
+import { ModalEditHabit } from "../../components/ModalEditHabit";
 
 const Content = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: ${(props) => props.align};
   align-items: center;
   flex-direction: column;
 
-  width: 100%;
-  height: 800px;
+  width: 95%;
+  max-width: 1366px;
+  height: 88vh;
   background-color: var(--white);
   border-radius: 10px;
-  margin-top: 1rem;
+  padding: 0.75rem;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    border-radius: 0;
+    height: 90vh;
+  }
 
   h1 {
     font-family: var(--font-title);
-    margin-top: 1rem;
+    font-size: 3rem;
+    font-weight: 400;
   }
 `;
 
 const Container = styled.div`
+  background-color: var(--background);
+  height: calc(100vh - 55px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   @media (min-width: 768px) {
     display: flex;
   }
-`;
-const HabitsCard = styled.div`
-  margin-top: 3rem;
-  padding: 1rem;
-  width: 100%;
-  max-height: 550px;
 `;
 
 const ButtonPosition = styled.div`
@@ -48,8 +51,8 @@ const ButtonPosition = styled.div`
   justify-content: center;
 
   button {
-    height: 55px;
-    width: 60%;
+    height: 65px;
+    width: 30%;
     border-radius: 7px;
     border: 2px solid black;
     background-color: var(--gold);
@@ -70,94 +73,66 @@ const ButtonPosition = styled.div`
   }
 `;
 
+const HabitsContainer = styled.div`
+  width: 100%;
+  height: 90%;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  > div {
+    width: 50%;
+    padding: 2rem 2rem 0rem 2rem;
+
+    @media (max-width: 800px) {
+    width: 100%;
+    padding: 1rem 0rem 0rem 0rem;
+  }
+
+    > div {
+      height: 150px;
+
+      @media (max-width: 800px) {
+        height: 120px;
+      }
+    }
+  }
+`
+
 export const Habits = () => {
-  const { habits, addToHabits } = useContext(HabitsContext);
-  const [modal, setModal] = useState(true);
-
-  const formSchema = yup.object().shape({
-    title: yup.string().required("Titulo obrigatório"),
-    category: yup.string().required("Categoria obrigatória"),
-    difficulty: yup.string().required("Categoria obrigatória"),
-    frequency: yup.string().required("Categoria obrigatória"),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(formSchema),
-  });
-
-  const formSubmit = (data) => {
-    const newData = { ...data, how_much_achieved: 0, user: 1656 };
-    addToHabits(newData, setModal, modal);
-  };
-
+  const { habits } = useContext(HabitsContext);
+  const [modal, setModal] = useState('closed');
+  
   return (
     <>
       <Menu />
-      <Container>
-        {modal ? (
+      <Container align={"space-between"}>
+        {modal === 'closed' ? (
           <>
             <Content>
               <h1>Seus Hábitos</h1>
-              <HabitsCard>
-                {habits.map((elm, i) => (
-                  <CardHabits key={i} habits={elm} />
-                ))}
-              </HabitsCard>
+              <HabitsContainer>
+                  {habits.map((elm, i) => (
+                    <CardHabits key={i} habits={elm} setModal={setModal}/>
+                  ))}
+              </HabitsContainer>
               <ButtonPosition>
-                <button onClick={() => setModal(!modal)}>
+                <button onClick={() => setModal('create')}>
                   Adicionar Hábito
                 </button>
               </ButtonPosition>
             </Content>
           </>
+        ) : modal === 'create' ? (
+          <ModalHabit modal={modal} setModal={setModal} />
         ) : (
-          <Content style={{ backgroundColor: `var(--gray)` }}>
-            <form onSubmit={handleSubmit(formSubmit)}>
-              <div>
-                <Input
-                  error={errors.title?.message}
-                  name="title"
-                  register={register}
-                  placeholder="Coloque um titulo"
-                  label="Titulo"
-                />
-              </div>
-              <div>
-                <InputCategory
-                  error={errors.category?.message}
-                  name="category"
-                  register={register}
-                  placeholder="Coloque uma categoria"
-                  label="Categoria"
-                />
-              </div>
-              <div>
-                <InputDifficulty
-                  error={errors.difficulty?.message}
-                  name="difficulty"
-                  register={register}
-                  placeholder="Coloque uma Dificuldade"
-                  label="Dificuldade"
-                />
-              </div>
-              <div>
-                <InputFrequency
-                  error={errors.frequency?.message}
-                  name="frequency"
-                  register={register}
-                  placeholder="Coloque uma Frequencia"
-                  label="Frequencia"
-                />
-              </div>
-              <button style={{ width: `250px`, height: `25px` }} type="submit">
-                Adicionar
-              </button>
-            </form>
-          </Content>
+          <ModalEditHabit modal={modal} setModal={setModal} />
         )}
       </Container>
     </>

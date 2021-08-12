@@ -7,40 +7,43 @@ export const HabitsContext = createContext([]);
 
 export const HabitsProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
+  const [editHabit, setEditHabit] = useState("")
 
-  const getHabits = () => {
+  useEffect(() => {
     api
-      .get("habits/personal/", {
+      .get(`habits/personal/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((resp) => {
-        setHabits(resp.data);
-        localStorage.setItem("Habits", JSON.stringify(habits));
+      .then((response) => setHabits(response.data))
+      .catch((err) => console.log(err))
+  }, [])
+  
+  const getHabits = () => {
+    api
+      .get(`habits/personal/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((e) => console.log(e));
-  };
+      .then((response) => setHabits(response.data))
+      .catch((err) => console.log(err))
+  }
 
-  useEffect(() => {
-    getHabits();
-  }, []);
-
-  const addToHabits = (item, setModal, modal) => {
+  const addToHabits = (item, setModal) => {
+    console.log(item)
     api
       .post(`habits/`, item, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((resp) => {
-        setHabits([...habits, resp.data]);
-        localStorage.setItem("Habits", JSON.stringify(habits));
-        toast.success("Hábito Adicionado");
-      })
+      .then(() => getHabits())
       .catch((e) => console.log(e));
 
-    setModal(!modal);
+    toast.success("Hábito Adicionado");
+    setModal('closed');
   };
 
   const removeFromHabits = (habit) => {
@@ -50,14 +53,23 @@ export const HabitsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() =>
-        setHabits(habits.filter((habitItem) => habitItem.id !== habit.id))
-      )
+      .then(() => getHabits())
       .catch((e) => console.log(e));
   };
 
+  const editHabits = (item) => {
+    api
+      .patch(`habits/${editHabit}/`, item, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => getHabits())
+      .catch((e) => console.log(e))
+  }
+
   return (
-    <HabitsContext.Provider value={{ habits, addToHabits, removeFromHabits }}>
+    <HabitsContext.Provider value={{ habits, addToHabits, removeFromHabits, editHabit, setEditHabit, editHabits }}>
       {children}
     </HabitsContext.Provider>
   );
