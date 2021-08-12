@@ -180,14 +180,14 @@ export const Home = () => {
             width={"250px"}
             nome={"Login"}
             func={RedirectToLogin}
-            firstButton={true}
+            loginButton={true}
           />
           <Button
             height={"67px"}
             width={"250px"}
             nome={"Cadastro"}
             func={RedirectToRegister}
-            firstButton={false}
+            loginButton={false}
           />
         </ButtonContainer>
         <Paragraph>
