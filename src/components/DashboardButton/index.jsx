@@ -15,16 +15,16 @@ const ButtonStyle = styled.button`
   cursor: pointer;
   transition: filter 0.2s;
   font-family: var(--font-button);
-  background-color: ${(props) => (props.loginButton ? "#ECDEB0" : "#5F6874")};
+  background-color: ${(props) => (props.loginButton ? "#ECDEB0" : "#F5F3EB")};
   border: ${(props) =>
-    props.loginButton ? "2px solid #000000" : "2px solid #F5F3EB"};
-  color: ${(props) => (props.loginButton ? "#000000" : "#F5F3EB")};
+    props.loginButton ? "2px solid #000000" : "2px solid #ECDEB0"};
+  color: #000000;
   &:hover {
     filter: brightness(110%);
   }
 `;
 
-export const Button = ({ nome, loginButton, width, height, func }) => {
+export const DashboardButton = ({ nome, loginButton, width, height, func }) => {
   return (
     <ButtonStyle
       onClick={() => func()}
