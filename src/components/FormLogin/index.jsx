@@ -10,7 +10,7 @@ import { LoginContext } from '../../providers/Login'
 import { useUserId } from '../../providers/UserId';
 
 export const FormLogin = () => {
-    const { setUserId, id } = useUserId()
+    const { setUserId } = useUserId()
     const history = useHistory()
     const { setIsLogged } = useContext(LoginContext)
 
@@ -30,7 +30,7 @@ export const FormLogin = () => {
     } = useForm({
       resolver: yupResolver(formSchema)
     })
-  
+
     const formSubmit = (data) => {
       api
         .post("/sessions/", data)
