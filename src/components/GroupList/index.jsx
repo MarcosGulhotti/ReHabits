@@ -3,7 +3,7 @@ import { StyledBackgroundGroups } from '../BackgroundGroups'
 import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import { CardGroup } from '../CardGroup'
-import toast from 'react-hot-toast'
+import { useHistory } from 'react-router'
 
 const StyledGroupList = styled.ul`
   width: 80%;
@@ -25,21 +25,25 @@ export const GroupList = () => {
   const token = JSON.parse(localStorage.getItem('token'))
   const [showMyGroups, setShowMyGroups] = useState(false)
   const [myGroups, setMyGroups] = useState([])
+  const history = useHistory()
 
   useEffect(() => {
     api.get('/groups/')
     .then(resp => setGroups(resp.data.results))
   }, [])
   
-  const handleSubscribe = async (id) => {
-    await api.post(`/groups/${id}/subscribe/`, {},
-      { 
-        headers: 
-        {
-          Authorization: `Bearer ${token}`
-        }
-      })
-    toast.sucess('Parabens, você acabou de entrar em um grupo.')
+  // const handleSubscribe = async (id) => {
+  //   await api.post(`/groups/${id}/subscribe/`, {},
+  //     { 
+  //       headers: 
+  //       {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     })
+  // }
+
+  const enterGroupInterface = (id) => {
+    history.push(`/groups/${id}`)
   }
 
   const getMyGroups = async () => {
@@ -57,8 +61,10 @@ export const GroupList = () => {
   return(
     <StyledBackgroundGroups>
       <div className='containerGroups'>
-        <h1>Grupos</h1>
-        <button className='myGroups' onClick={getMyGroups}>{showMyGroups ? 'Todos os grupos' : 'Seus grupos'}</button>
+        <div id='headerPosition'>
+          <h1>Grupos</h1>
+          <button className='myGroups' onClick={getMyGroups}>{showMyGroups ? 'Todos os grupos' : 'Seus grupos'}</button>
+        </div>
         {!showMyGroups ?
         <StyledGroupList>
           {groups?.map(el => 
@@ -66,7 +72,7 @@ export const GroupList = () => {
               key={el.id}
               title={el.name} 
               category={el.category}
-              handleFunction={() => handleSubscribe(el.id)}
+              handleFunction={() => enterGroupInterface(el.id)}
             />
           )}
         </StyledGroupList>
@@ -81,6 +87,7 @@ export const GroupList = () => {
           )} 
         </StyledGroupList>
         }
+      <button className='back' onClick={() => history.push('/dashboard')}>Voltar</button>
       </div>
     </StyledBackgroundGroups>
   )
