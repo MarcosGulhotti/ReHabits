@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const StyledCardGroup = styled.li`
   opacity: 0.8;
-  width: 40%;
+  width: 100%;
   background-color: var(--background);
   height: 100px;
   display: flex;
@@ -14,11 +14,13 @@ const StyledCardGroup = styled.li`
   margin-top: 30px;
   border-radius: 15px;
 
-  h2 {
-    font-size: 24px;
+  #cardsTitle {
+    font-family: var(--font-label);
+    font-size: 18px;
     width: 100%;
     font-weight: 600;
     text-align: center;
+    padding: 0;
   }
 
   h3 {
@@ -30,7 +32,7 @@ const StyledCardGroup = styled.li`
 export const CardGroup = ({ title, difficulty, achieved }) => {
   return(
     <StyledCardGroup>
-      <h2>{title}</h2>
+      <h2 id="cardsTitle">{title}</h2>
       <h3>{difficulty}</h3>
       <h3>{achieved}</h3>
     </StyledCardGroup>
