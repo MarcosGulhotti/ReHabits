@@ -20,12 +20,14 @@ const Image = styled.img`
   width: 200px;
   height: 200px;
   border-radius: 100%;
+  border: 2px solid var(--background);
 `;
 
 const Links = styled.div`
   display: flex;
   justify-content: space-evenly;
   img {
+    border-radius: 100%;  
     cursor: pointer;
     width: 70px;
     height: 70px;
