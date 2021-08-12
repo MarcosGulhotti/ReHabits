@@ -8,11 +8,6 @@ import Atividades from "../../Assets/img/Atividades.png";
 import GroupDashbord from "../../Assets/img/Groups Dashboard.jpg";
 import { DashboardButton } from "../../components/DashboardButton";
 
-const DashboardContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
-
 const TopContainer = styled.div`
   @media (min-width: 280px) {
     width: 100vw;
@@ -116,7 +111,6 @@ const ImageMenuDashboardContainer = styled.div`
   }
   @media (min-width: 1024px) {
     margin: 0 120px 0 0;
-    height: calc(60vh - 55px);
     width: 40vw;
     display: flex;
     justify-content: center;
@@ -203,7 +197,7 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <DashboardContainer>
+    <>
       <Menu />
       <TopContainer>
         <ParagraphContainer>
@@ -236,6 +230,6 @@ export const Dashboard = () => {
           />
         </OtherImagesContainer>
       </BottomContainer>
-    </DashboardContainer>
+    </>
   );
 };

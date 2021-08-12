@@ -10,12 +10,47 @@ export const StyledBackgroundGroups = styled.div`
     padding: 0;
   }
 
+  button {
+    font-size: 24px;
+    font-family: var(--font-title);
+    height: 50px;
+    width: 250px;
+    background: #ECDEB0;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid #000000;
+  }
+
+  .back {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+
   .containerGroups {
     background-color: var(--white);
     height: 100%;
+    position: relative;
 
     @media (max-width: 768px) {
       background-color: var(--background);
+    }
+
+    #headerPosition {
+      width: 100%;
+      display: flex;
+      position: relative;
+
+      h1 {
+        width: 100%;
+      }
+
+      button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        align-self: flex-end;
+      }
     }
 
     .backgroundWork {
@@ -24,7 +59,6 @@ export const StyledBackgroundGroups = styled.div`
       background-color: ${props => props.backgroundColor};
       margin: 0 auto;
       position: relative;
-      /* overflow: auto; */
 
       .button {
         position: absolute;
@@ -83,7 +117,6 @@ export const StyledBackgroundGroups = styled.div`
       text-shadow: 0 4px 4px gray;
       text-align: center;
       font-size: 64px;
-      margin-bottom: 50px;
     }
   }
 `
