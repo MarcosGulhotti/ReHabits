@@ -2,11 +2,13 @@ import styled from 'styled-components'
 
 const StyledCardGroup = styled.li`
   opacity: 0.8;
-  width: 100%;
+  width: 45%;
   background-color: var(--background);
-  height: 100px;
+  height: 200px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
   padding: 10px;
@@ -15,26 +17,31 @@ const StyledCardGroup = styled.li`
   border-radius: 15px;
 
   #cardsTitle {
+    text-align: center;
     font-family: var(--font-label);
     font-size: 18px;
     width: 100%;
     font-weight: 600;
-    text-align: center;
     padding: 0;
   }
 
   h3 {
-    align-self: center;
     font-weight: 400;
+  }
+
+  button {
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
   }
 `
 
-export const CardGroup = ({ title, difficulty, achieved }) => {
+export const CardGroup = ({ title, category, handleFunction}) => {
   return(
     <StyledCardGroup>
       <h2 id="cardsTitle">{title}</h2>
-      <h3>{difficulty}</h3>
-      <h3>{achieved}</h3>
+      <h3>{category}</h3>
+      <button onClick={handleFunction}>Entrar</button>
     </StyledCardGroup>
   )
 }
