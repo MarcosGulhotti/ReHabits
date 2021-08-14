@@ -177,7 +177,8 @@ const OtherImagesContainer = styled.div`
 
 export const Dashboard = () => {
   const history = useHistory();
-  const { isLogged, setIsLogged } = useContext(LoginContext);
+  const { setIsLogged } = useContext(LoginContext);
+  const token = localStorage.getItem("token");
 
   const PushToGroups = () => {
     history.push("/groups");
@@ -188,10 +189,11 @@ export const Dashboard = () => {
   };
 
   useEffect(() => {
-    if (isLogged === false) {
-      history.push("/");
-    } else {
+    if (token) {
       setIsLogged(true);
+    } else {
+      setIsLogged(false);
+      history.push("/");
     }
     // eslint-disable-next-line
   }, []);
