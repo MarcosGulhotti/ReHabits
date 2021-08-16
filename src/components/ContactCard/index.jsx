@@ -8,6 +8,9 @@ const Container = styled.div`
   height: 750px;
   background-color: var(--gold);
   border-radius: 10px;
+  box-shadow: 10px 10px 25px -8px #000000;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
   .Profile {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;

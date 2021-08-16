@@ -58,6 +58,10 @@ const ContactDiv = styled.div`
     justify-content: space-evenly;
     flex-direction: row;
   }
+  @media (max-width: 1024px){
+    display: flex;
+    flex-direction: column;
+  }
   margin-top: 3rem;
 `;
 
