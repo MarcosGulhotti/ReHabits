@@ -1,14 +1,14 @@
 import { Menu } from "../../components/Menu";
 import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CardHabits } from "../../components/CardHabits";
 import { ModalHabit } from "../../components/ModalHabit"
 import { ModalEditHabit } from "../../components/ModalEditHabit";
 
 const Content = styled.div`
   display: flex;
-  justify-content: ${(props) => props.align};
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 
@@ -31,6 +31,15 @@ const Content = styled.div`
     font-weight: 400;
   }
 `;
+
+const Background = styled.div`
+background-color: var(--background);
+width: 100%;
+min-height: calc(100vh - 55px);
+display: flex;
+justify-content: center;
+padding-top: 1rem;
+`
 
 const Container = styled.div`
   background-color: var(--background);
@@ -106,15 +115,19 @@ const HabitsContainer = styled.div`
 `
 
 export const Habits = () => {
-  const { habits } = useContext(HabitsContext);
+  const { habits, getHabits } = useContext(HabitsContext);
   const [modal, setModal] = useState('closed');
   
+  useEffect(() => {
+    getHabits()
+  }, [])
+
   return (
     <>
       <Menu />
-      <Container align={"space-between"}>
         {modal === 'closed' ? (
           <>
+            <Container>
             <Content>
               <h1>Seus Hábitos</h1>
               <HabitsContainer>
@@ -128,13 +141,17 @@ export const Habits = () => {
                 </button>
               </ButtonPosition>
             </Content>
+            </Container>
           </>
         ) : modal === 'create' ? (
-          <ModalHabit modal={modal} setModal={setModal} />
+          <Background>
+            <ModalHabit modal={modal} setModal={setModal} />
+          </Background>
         ) : (
-          <ModalEditHabit modal={modal} setModal={setModal} />
+          <Background>
+            <ModalEditHabit modal={modal} setModal={setModal} />
+          </Background>
         )}
-      </Container>
     </>
   );
 };

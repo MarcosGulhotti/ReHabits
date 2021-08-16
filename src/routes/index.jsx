@@ -7,6 +7,7 @@ import { Groups } from "../pages/Groups";
 import { Habits } from "../pages/Habits";
 import { Contact } from "../pages/Contact";
 import { SpecifyGroup } from '../pages/SpecifyGroup'
+import { Profile } from '../pages/Profile'
 
 export const Router = () => {
   return (
@@ -19,6 +20,7 @@ export const Router = () => {
       <Route exact path="/groups/:id" component={SpecifyGroup}/>
       <Route path="/contact" component={Contact}/>
       <Route path="/habits" component={Habits} />
+      <Route path="/profile" component={Profile} />
     </Switch>
   );
 };

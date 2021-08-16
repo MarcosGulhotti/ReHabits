@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import toast from "react-hot-toast";
 import api from "../../services/api";
 const token = JSON.parse(localStorage.getItem("token"));
@@ -8,17 +8,6 @@ export const HabitsContext = createContext([]);
 export const HabitsProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
   const [editHabit, setEditHabit] = useState("")
-
-  useEffect(() => {
-    api
-      .get(`habits/personal/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => setHabits(response.data))
-      .catch((err) => console.log(err))
-  }, [])
   
   const getHabits = () => {
     api
@@ -69,7 +58,7 @@ export const HabitsProvider = ({ children }) => {
   }
 
   return (
-    <HabitsContext.Provider value={{ habits, addToHabits, removeFromHabits, editHabit, setEditHabit, editHabits }}>
+    <HabitsContext.Provider value={{ habits, addToHabits, removeFromHabits, editHabit, setEditHabit, editHabits, getHabits }}>
       {children}
     </HabitsContext.Provider>
   );

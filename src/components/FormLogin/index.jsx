@@ -10,8 +10,8 @@ import { LoginContext } from '../../providers/Login'
 import { useUserId } from '../../providers/UserId';
 
 export const FormLogin = () => {
+  const history = useHistory()
     const { setUserId } = useUserId()
-    const history = useHistory()
     const { setIsLogged } = useContext(LoginContext)
 
     const formSchema = yup.object().shape({
