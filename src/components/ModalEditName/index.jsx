@@ -1,29 +1,11 @@
 import styled from 'styled-components'
 import { Input } from '../Input'
-import { InputCategory } from '../InputCategory'
-import { InputDifficulty } from '../InputDifficulty'
-import { InputFrequency } from '../InputFrequency'
 import { HabitsContext } from "../../providers/Habits";
 import { useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { InputAchieved } from '../InputAchieved'
-
-const Container = styled.div`
-background-color: var(--white);
-display: flex;
-align-items: center;
-justify-content: center;
-padding-top: 1rem;
-padding-bottom: 1rem;
-width: 80%;
-
-@media (max-width: 800px) {
-  width: 100%;
-  padding: 0;
-}
-`
+import { useProfile } from '../../providers/Profile';
 
 const Content = styled.div`
   display: flex;
@@ -31,9 +13,9 @@ const Content = styled.div`
   align-items: center;
   flex-direction: column;
 
-  width: 95%;
+  width: 100%;
   max-width: 1366px;
-  min-height: 88vh;
+  height: 88vh;
   background-color: var(--white);
   border-radius: 10px;
   padding: 0.75rem;
@@ -48,12 +30,6 @@ const Content = styled.div`
     font-family: var(--font-title);
     font-size: 3rem;
     font-weight: 400;
-    margin-bottom: 2rem;
-
-    @media (max-width: 800px) {
-      font-size: 2rem;
-      text-align: center;
-    }
   }
 `;
 
@@ -91,34 +67,24 @@ background-color: var(--background);
 border-radius: 15px;
 padding: 2rem 7rem 2rem 7rem;
 
-@media (max-width: 600px) {
-  width: 100%;
-  padding: 0rem 1rem 0rem 1rem;
-}
-
 > * > * > div {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 input {
   width: 350px;
 }
 
-#return {
-  background-color: var(--background);
-  padding: 1rem 0rem 2rem 0rem;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
+button {
+  bottom: 0;
 }
 `
 
-export const ModalEditHabit = ({ modal, setModal }) => {
-    const { editHabits } = useContext(HabitsContext);
+export const ModalEditName = ({ setModal }) => {
+    const { editUsername } = useProfile()
 
     const formSchema = yup.object().shape({
-        how_much_achieved: yup.string().required("Categoria obrigatório"),
-        achieved: yup.string().required("Categoria obrigatória"),
+        username: yup.string().required("Categoria obrigatório"),
     });
 
     const {
@@ -130,50 +96,33 @@ export const ModalEditHabit = ({ modal, setModal }) => {
     });
 
     const formSubmit = (data) => {
-        editHabits(data)
-        setModal('closed')
+        editUsername(data)
+        setModal(false)
     };
 
     return (
-      <Container>
         <Content align={"center"}>
-          <h1>Editar hábito</h1>
             <Modal>
               <form onSubmit={handleSubmit(formSubmit)}>
-                <i
-                  onClick={() => setModal('closed')}
-                  class="fas fa-chevron-left"
-                  id="return"
-                />
+                <button onClick={() => setModal(false)}>Close</button>
                 <div>
                     <div>
                         <Input
-                        error={errors.how_much_achieved?.message}
-                        name="how_much_achieved"
+                        error={errors.username?.message}
+                        name="username"
                         register={register}
-                        placeholder="Quantos dias"
-                        label="Dias concluídos -"
+                        placeholder="Usuário"
+                        label="Mudar usuário -"
                         />
                     </div>
-                    <div>
-                        <InputAchieved
-                        error={errors.achieved?.message}
-                        name="achieved"
-                        register={register}
-                        placeholder="Completou?"
-                        label="Completou a meta ? -"
-                        />
-                    </div>
-
                 </div>
                 <ButtonPosition>
                   <button style={{ width: `250px` }} type="submit">
-                    Adicionar
+                    Mudar
                   </button>
                 </ButtonPosition>
               </form>
             </Modal>
           </Content>
-        </Container>
     )
 }

@@ -11,42 +11,50 @@ const Container = styled.div`
     color: var(--red);
   }
   .Trabalho {
-    background-color: #9da0ec;
+    //background-color: #9da0ec;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
   .Família {
-    background-color: #ecab9d;
+    //background-color: #ecab9d;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
   .Amigos {
-    background-color: #be5bec;
+    //background-color: #be5bec;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
   .Exercício {
-    background-color: #3e9350;
+    //background-color: #3e9350;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
   .Educação {
-    background-color: #f87777;
+    //background-color: #f87777;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
   .Relacionamento {
-    background-color: #ec9ddf;
+    //background-color: #ec9ddf;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
   .Saúde {
-    background-color: #ec5ba1;
+    //background-color: #ec5ba1;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
   .Meditação {
-    background-color: #936c3e;
+    //background-color: #936c3e;
+    background-color: var(--gold);
     border-radius: 10px;
     color: black;
   }
@@ -236,7 +244,7 @@ export const CardHabits = ({ habits, setModal }) => {
             <span>{difficulty}</span>
           </div>
           <div>
-            <button onClick={() => handleClick(id)}>Editar</button>
+            <button className="edit" onClick={() => handleClick(id)}>Editar</button>
           </div>
           <div className="frequency">
             <p>Frequencia:</p>

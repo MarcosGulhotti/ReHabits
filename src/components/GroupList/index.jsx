@@ -6,22 +6,35 @@ import { CardGroup } from "../CardGroup";
 import { useHistory } from "react-router";
 
 export const StyledGroupList = styled.ul`
-  width: 80%;
-  margin: 0 auto;
-  height: 70%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  overflow: auto;
-
-  @media (max-width: 768px) {
+  @media (min-width: 280px) {
+    display: flex;
     margin: 0;
     width: 100%;
+    align-items: center;
+    flex-direction: column;
   }
+  @media (min-width: 768px) {
+    width: 80%;
+    margin: 0 auto;
+    height: 75%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: auto;
 
-  h2 {
-    width: 100%;
+    h2 {
+      width: 100%;
+    }
   }
+  @media (min-width: 1024px) {
+    height: 85%;
+  }
+<<<<<<< HEAD
+=======
+  @media (min-width: 1200px) {
+    height: 70%;
+  }
+>>>>>>> c5be621863b0fa86fa01883e34cf5b07561e9cd9
 `;
 
 export const StyledGoalsActivitiesList = styled.ul`
@@ -70,7 +83,11 @@ export const GroupList = () => {
         <div id="headerPosition">
           <h1>Grupos</h1>
           <button className="myGroups" onClick={getMyGroups}>
+<<<<<<< HEAD
             {showMyGroups ? "Todos os grupos" : "Seus grupos"}
+=======
+            {showMyGroups ? "Todos os grupos" : "Meus grupos"}
+>>>>>>> c5be621863b0fa86fa01883e34cf5b07561e9cd9
           </button>
         </div>
         {!showMyGroups ? (

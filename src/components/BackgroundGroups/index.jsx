@@ -7,6 +7,10 @@ export const StyledBackgroundGroups = styled.div`
   padding: 30px;
 
   @media (max-width: 768px) {
+    position: fixed;
+    z-index: -1;
+    width: 100vw;
+    overflow: auto;
     padding: 0;
   }
 
@@ -51,9 +55,16 @@ export const StyledBackgroundGroups = styled.div`
   }
 
   .back {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    @media (min-width: 280px) {
+      position: static;
+      display: block;
+      margin: 20px 0 0 calc(50vw - 110px);
+    }
+    @media (min-width: 768px) {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
   }
 
   .containerGroups {
@@ -66,19 +77,39 @@ export const StyledBackgroundGroups = styled.div`
     }
 
     #headerPosition {
-      width: 100%;
-      display: flex;
-      position: relative;
+      @media (min-width: 280px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
 
-      h1 {
-        width: 100%;
+        button {
+          position: static;
+          height: 60px;
+          font-size: 23px;
+        }
+
+        h1 {
+          margin-bottom: 10px;
+        }
       }
+      @media (min-width: 1024px) {
+        width: 100%;
+        flex-direction: row;
+        position: relative;
+        margin: 0;
 
-      button {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        align-self: flex-end;
+        h1 {
+          width: 100%;
+          margin: 0;
+        }
+
+        button {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          align-self: flex-end;
+        }
       }
     }
 
