@@ -19,6 +19,7 @@ export const Router = () => {
       <Route path="/groups" component={Groups}/>
       <Route path="/contact" component={Contact}/>
       <Route path="/habits" component={Habits} />
+      <Route path="/profile" component={Profile} />
       <Route exact path="/:id" component={SpecifyGroup}/>
     </Switch>
   );
