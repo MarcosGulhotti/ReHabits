@@ -36,6 +36,27 @@ const StyledCardGroup = styled.li`
   }
 `
 
+export const StyledCardGoals = styled.li`
+  border: 2px solid #000000;
+  background: #ECDEB0;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100px;
+
+  h1 {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+  }
+
+  p {
+    text-align: center;
+    width: 50%;
+  }
+`
+
 export const CardGroup = ({ title, category, handleFunction}) => {
   return(
     <StyledCardGroup>
