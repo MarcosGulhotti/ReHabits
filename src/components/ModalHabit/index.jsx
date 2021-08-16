@@ -10,6 +10,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserId } from '../../providers/UserId'
 
+const Container = styled.div`
+background-color: var(--white);
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 2rem;
+width: 80%;
+
+@media (max-width: 800px) {
+  width: 100%;
+  padding: 0;
+}
+`
+
 const Content = styled.div`
   display: flex;
   justify-content: ${(props) => props.align};
@@ -18,10 +32,7 @@ const Content = styled.div`
 
   width: 95%;
   max-width: 1366px;
-  height: 88vh;
-  background-color: var(--white);
   border-radius: 10px;
-  padding: 0.75rem;
 
   @media (max-width: 600px) {
     width: 100%;
@@ -31,8 +42,14 @@ const Content = styled.div`
 
   h1 {
     font-family: var(--font-title);
-    font-size: 3rem;
+    font-size: 3.25rem;
     font-weight: 400;
+    margin-bottom: 2rem;
+
+    @media (max-width: 800px) {
+      font-size: 2rem;
+      text-align: center;
+    }
   }
 `;
 
@@ -68,12 +85,21 @@ const ButtonPosition = styled.div`
 const Modal = styled.div`
 background-color: var(--background);
 border-radius: 15px;
-padding: 2rem 7rem 2rem 7rem;
+padding: 0rem 7rem 0rem 7rem;
+
+@media (max-width: 600px) {
+  width: 100%;
+  padding: 0rem 1rem 0rem 1rem;
+}
 
 > * {
 
   > * {
     margin-bottom: 20px;
+
+    > * {
+      margin-bottom: 15px;
+    }
   }
 }
 
@@ -81,8 +107,12 @@ input {
   width: 350px;
 }
 
-button {
-  bottom: 0;
+#return {
+  background-color: var(--background);
+  padding: 2rem 0rem 0.5rem 0rem;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
 }
 `
 
@@ -111,10 +141,16 @@ export const ModalHabit = ({ modal, setModal }) => {
     };
 
     return (
+      <Container>
         <Content align={"center"}>
+          <h1>Adicionar hábito</h1>
             <Modal>
               <form onSubmit={handleSubmit(formSubmit)}>
-                <button onClick={() => setModal('closed')}>Close</button>
+              <i
+                onClick={() => setModal('closed')}
+                class="fas fa-chevron-left"
+                id="return"
+              />
                 <div>
                   <div>
                     <Input
@@ -126,7 +162,7 @@ export const ModalHabit = ({ modal, setModal }) => {
                     />
                   </div>
                   <div>
-                    <InputCategory
+                    <Input
                       error={errors.category?.message}
                       name="category"
                       register={register}
@@ -135,7 +171,7 @@ export const ModalHabit = ({ modal, setModal }) => {
                     />
                   </div>
                   <div>
-                    <InputDifficulty
+                    <Input
                       error={errors.difficulty?.message}
                       name="difficulty"
                       register={register}
@@ -144,7 +180,7 @@ export const ModalHabit = ({ modal, setModal }) => {
                     />
                   </div>
                   <div>
-                    <InputFrequency
+                    <Input
                       error={errors.frequency?.message}
                       name="frequency"
                       register={register}
@@ -161,5 +197,6 @@ export const ModalHabit = ({ modal, setModal }) => {
               </form>
             </Modal>
           </Content>
+        </Container>
     )
 }
