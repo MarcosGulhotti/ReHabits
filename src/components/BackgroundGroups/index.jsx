@@ -14,6 +14,16 @@ export const StyledBackgroundGroups = styled.div`
     padding: 0;
   }
 
+  #editGroup {
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .goalsActivitiesContainerList {
     padding: 1rem;
     background-color: var(--white);
@@ -41,6 +51,7 @@ export const StyledBackgroundGroups = styled.div`
   #headerPositionSpecify {
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
 
   button {
@@ -84,7 +95,6 @@ export const StyledBackgroundGroups = styled.div`
         margin-bottom: 10px;
 
         button {
-          position: static;
           height: 60px;
           font-size: 23px;
         }
@@ -98,17 +108,11 @@ export const StyledBackgroundGroups = styled.div`
         flex-direction: row;
         position: relative;
         margin: 0;
+        padding: 10px;
+        justify-content: space-around;
 
         h1 {
-          width: 100%;
           margin: 0;
-        }
-
-        button {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          align-self: flex-end;
         }
       }
     }
