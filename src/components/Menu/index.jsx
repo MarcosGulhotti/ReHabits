@@ -10,7 +10,8 @@ const MenuBar = styled.nav`
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
-
+  position: relative;
+  z-index: 100;
   .logo {
     padding: 15px 0;
   }
