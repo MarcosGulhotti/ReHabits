@@ -15,11 +15,16 @@ export const StyledBackgroundGroups = styled.div`
   }
 
   .goalsActivitiesContainerList {
+    padding: 1rem;
+    background-color: var(--white);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    width: 40%;
-    height: 750px;
+    align-items: center;
+    width: 550px;
+    height: 700px;
     justify-content: space-between;
+    margin-top: 1rem;
 
     .createGoalsButton {
       align-self: center;
@@ -42,7 +47,7 @@ export const StyledBackgroundGroups = styled.div`
     font-size: 24px;
     font-family: var(--font-title);
     height: 50px;
-    width: 220px;
+    width: 250px;
     background: #ecdeb0;
     cursor: pointer;
     border-radius: 10px;

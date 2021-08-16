@@ -51,6 +51,7 @@ export const StyledCardGoals = styled.li`
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   height: 100px;
 
@@ -64,6 +65,47 @@ export const StyledCardGoals = styled.li`
     text-align: center;
     width: 50%;
   }
+`;
+export const CheckBox = styled.div`
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 100%;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  margin-top: 5px;
+
+  i {
+    font-size: 0.7rem;
+  }
+
+  ${(props) =>
+    props.achieved === true
+      ? `background-color: lightgreen`
+      : `background-color: red`}
+`;
+
+export const CheckBoxDiv = styled.div`
+  margin: 0;
+  display: flex;
+  span {
+    margin-left: 5px;
+    margin-top: 7px;
+  }
+  .fa-minus-circle {
+    margin-right: 5px;
+    margin-top: 5px;
+    color: var(--red);
+    cursor: pointer;
+  }
+`;
+
+export const InfosDiv = styled.div`
+  display: flex;
+  margin-top: 1rem;
 `;
 
 export const CardGroup = ({ title, category, handleFunction }) => {
