@@ -29,12 +29,9 @@ export const StyledGroupList = styled.ul`
   @media (min-width: 1024px) {
     height: 85%;
   }
-<<<<<<< HEAD
-=======
   @media (min-width: 1200px) {
     height: 70%;
   }
->>>>>>> c5be621863b0fa86fa01883e34cf5b07561e9cd9
 `;
 
 export const StyledGoalsActivitiesList = styled.ul`
@@ -83,11 +80,7 @@ export const GroupList = () => {
         <div id="headerPosition">
           <h1>Grupos</h1>
           <button className="myGroups" onClick={getMyGroups}>
-<<<<<<< HEAD
-            {showMyGroups ? "Todos os grupos" : "Seus grupos"}
-=======
             {showMyGroups ? "Todos os grupos" : "Meus grupos"}
->>>>>>> c5be621863b0fa86fa01883e34cf5b07561e9cd9
           </button>
         </div>
         {!showMyGroups ? (
