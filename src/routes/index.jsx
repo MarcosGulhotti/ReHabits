@@ -17,9 +17,9 @@ export const Router = () => {
       <Route path="/register" component={Register}/>
       <Route path="/dashboard" component={Dashboard}/>
       <Route path="/groups" component={Groups}/>
-      <Route exact path="/groups/:id" component={SpecifyGroup}/>
       <Route path="/contact" component={Contact}/>
       <Route path="/habits" component={Habits} />
+      <Route exact path="/:id" component={SpecifyGroup}/>
     </Switch>
   );
 };

@@ -10,6 +10,30 @@ export const StyledBackgroundGroups = styled.div`
     padding: 0;
   }
 
+  .goalsActivitiesContainerList {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 750px;
+    justify-content: space-between;
+
+    .createGoalsButton {
+      align-self: center;
+    }
+
+    h2 {
+    margin-top: 20px;
+    font-family: var(--font-title);
+    text-align: center;
+    font-size: 48px;
+    }
+  }
+
+  #headerPositionSpecify {
+      display: flex;
+      justify-content: space-between;
+    }
+
   button {
     font-size: 24px;
     font-family: var(--font-title);
