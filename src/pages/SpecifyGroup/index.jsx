@@ -7,15 +7,23 @@ import { StyledGoalsActivitiesList } from "../../components/GroupList";
 import { StyledCardGoals } from "../../components/CardGroup";
 import { CheckBox, CheckBoxDiv, InfosDiv } from "../../components/CardGroup";
 import { FormGoalsModal } from "../../components/FormGoalsModal";
+import { Modal, ButtonPosition } from '../../components/ModalHabit';
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Input } from '../../components/Input'
+import { useUserId } from "../../providers/UserId";
 
 export const SpecifyGroup = () => {
   const { id } = useParams();
-  const token = localStorage.getItem("token");
+  const token = JSON.parse(localStorage.getItem("token"))
   const [dataGroup, setDataGroup] = useState([]);
   const history = useHistory();
   const [groupGoals, setGroupGoals] = useState([]);
   const [groupActivities, setGroupActivities] = useState([]);
   const [goalModal, setgoalModal] = useState(false);
+  const [editGroupModal, setEditGroupModal] = useState(false)
+  const userInfo = useUserId()
 
   const handleSubscribe = async (id) => {
     await api.post(
@@ -44,7 +52,6 @@ export const SpecifyGroup = () => {
   }, []);
 
   const handlePatch = (elm) => {
-    const newToken = JSON.parse(token);
     const { id, achieved } = elm;
     const newAchieved = { achieved: !achieved };
 
@@ -52,7 +59,7 @@ export const SpecifyGroup = () => {
       .patch(`/goals/${id}/`, newAchieved, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${newToken}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((_) => {})
@@ -62,22 +69,46 @@ export const SpecifyGroup = () => {
   };
 
   const removeFromGoals = (id) => {
-    const newToken = JSON.parse(token);
-
     api
       .delete(`goals/${id}/`, {
         headers: {
-          Authorization: `Bearer ${newToken}`,
+          Authorization: `Bearer ${token}`,
         },
       })
-      .then((resp) => setGroupGoals(groupGoals.filter(elm => elm.id !== id)))
+      .then(() => setGroupGoals(groupGoals.filter(elm => elm.id !== id)))
       .catch((e) => console.log(e));
+  };
+
+  const formSchema = yup.object().shape({
+    category: yup.string().required("Categoria obrigatória"),
+  });
+
+  const {
+      register,
+      handleSubmit,
+      formState: { errors },
+  } = useForm({
+      resolver: yupResolver(formSchema),
+  });
+
+  const handleEditGroup = async (data) => {
+    if (dataGroup.creator.id === userInfo.id) {
+      await api.patch(`/groups/${Number(id)}/`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      await alert('grupo editado')
+      .catch(() => alert('Alguma coisa deu errada.'))
+    } else {
+      alert('Apenas o dono do grupo pode editar.')
+    }
   };
 
   return (
     <>
       <Menu />
-      <StyledBackgroundGroups>
+      <StyledBackgroundGroups style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
         <div id="headerPositionSpecify">
           <button
             onClick={() =>
@@ -137,6 +168,39 @@ export const SpecifyGroup = () => {
             </>
           )}
         </div>
+        <div className='goalsActivitiesContainerList'>
+          <h2>Atividades</h2>
+        </div>
+        <button id='editGroup' onClick={() => setEditGroupModal(true)}>
+          <i class="fas fa-edit"></i>
+        </button>
+        {editGroupModal && 
+          <Modal style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+            <form onSubmit={handleSubmit(handleEditGroup)}>
+            <i
+              onClick={() => setEditGroupModal(false)}
+              class="fas fa-chevron-left"
+              id="return"
+            />
+              <div>
+                <div>
+                  <Input
+                    error={errors.category?.message}
+                    name="category"
+                    register={register}
+                    placeholder="Coloque uma categoria"
+                    label="Categoria"
+                  />
+                </div>
+              </div>
+              <ButtonPosition>
+                <button style={{ width: `250px` }} type="submit">
+                  Editar
+                </button>
+              </ButtonPosition>
+            </form>
+          </Modal>
+        }
       </StyledBackgroundGroups>
     </>
   );

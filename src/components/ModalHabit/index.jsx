@@ -53,7 +53,7 @@ const Content = styled.div`
   }
 `;
 
-const ButtonPosition = styled.div`
+export const ButtonPosition = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
@@ -82,7 +82,7 @@ const ButtonPosition = styled.div`
     }
 `;
 
-const Modal = styled.div`
+export const Modal = styled.div`
 background-color: var(--background);
 border-radius: 15px;
 padding: 0rem 7rem 0rem 7rem;
