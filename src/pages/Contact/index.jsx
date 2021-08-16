@@ -41,6 +41,7 @@ const Dados = {
     github: "https://github.com/luizvictor19",
   },
 };
+
 const Container = styled.div`
   @media (min-width: 769px) {
     height: 100vh;
@@ -49,6 +50,7 @@ const Container = styled.div`
   background-color: var(--background);
   overflow: scroll;
 `;
+
 const ContactDiv = styled.div`
   display: flex;
   align-items: center;
