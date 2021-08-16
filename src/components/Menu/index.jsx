@@ -105,13 +105,13 @@ const Burger = styled.div`
 export const Menu = () => {
   const [open, setOpen] = useState(false);
   const { isLogged, setIsLogged } = useContext(LoginContext);
-  const history = useHistory()
+  const history = useHistory();
 
   const handleLogout = () => {
-    localStorage.clear()
-    setIsLogged(false)
-    history.push('/')
-  }
+    localStorage.clear();
+    setIsLogged(false);
+    history.push("/");
+  };
 
   return (
     <MenuBar>
