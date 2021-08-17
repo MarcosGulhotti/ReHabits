@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { CardGroup } from "../CardGroup";
 import { useHistory } from "react-router";
-import { Modal, ButtonPosition } from '../ModalHabit'
-import { Input } from '../Input'
+import { Modal, ButtonPosition } from "../ModalHabit";
+import { Input } from "../Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import toast from "react-hot-toast";
 
 export const StyledGroupList = styled.ul`
   @media (min-width: 280px) {
@@ -28,7 +29,7 @@ export const StyledGroupList = styled.ul`
     overflow: auto;
     padding: 1rem;
 
-    button{
+    button {
       width: 200px;
     }
     h2 {
@@ -63,7 +64,7 @@ export const GroupList = () => {
   const [showMyGroups, setShowMyGroups] = useState(false);
   const [myGroups, setMyGroups] = useState([]);
   const history = useHistory();
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     api.get("/groups/").then((resp) => setGroups(resp.data.results));
@@ -84,27 +85,32 @@ export const GroupList = () => {
   };
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Titulo obrigatório").max(20, "Máximo de 20 characteres atingido"),
+    name: yup
+      .string()
+      .required("Titulo obrigatório")
+      .max(20, "Máximo de 20 characteres atingido"),
     description: yup.string().required("Descrição obrigatória"),
     category: yup.string().required("Categoria obrigatória"),
-});
+  });
 
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
+    register,
+    handleSubmit,
+    formState: { errors },
   } = useForm({
-      resolver: yupResolver(formSchema),
+    resolver: yupResolver(formSchema),
   });
 
   const handleCreateGroup = async (data) => {
-    const resp = await api.post('/groups/', data, {
+    const resp = await api.post("/groups/", data, {
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    alert('grupo criado')
-  }
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    toast.success("grupo criado");
+    setMyGroups([...myGroups, data]);
+    setModalOpen(false);
+  };
 
   return (
     <StyledBackgroundGroups background="#F5F3EB">
@@ -130,7 +136,12 @@ export const GroupList = () => {
         ) : (
           <StyledGroupList>
             {myGroups?.map((el) => (
-              <CardGroup key={el.id} title={el.name} category={el.category} />
+              <CardGroup
+                key={el.id}
+                title={el.name}
+                category={el.category}
+                handleFunction={() => enterGroupInterface(el.id)}
+              />
             ))}
           </StyledGroupList>
         )}
@@ -138,50 +149,58 @@ export const GroupList = () => {
           Voltar
         </button>
       </div>
-      {modalOpen && 
-      <Modal style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-        <form onSubmit={handleSubmit(handleCreateGroup)}>
-          <i
-            onClick={() => setModalOpen(false)}
-            class="fas fa-chevron-left"
-            id="return"
-          />
-          <div>
+      {modalOpen && (
+        <Modal
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <form onSubmit={handleSubmit(handleCreateGroup)}>
+            <i
+              onClick={() => setModalOpen(false)}
+              class="fas fa-chevron-left"
+              id="return"
+            />
             <div>
-              <Input
-                error={errors.title?.message}
-                name="name"
-                register={register}
-                placeholder="Coloque um titulo"
-                label="Titulo"
-              />
+              <div>
+                <Input
+                  error={errors.title?.message}
+                  name="name"
+                  register={register}
+                  placeholder="Coloque um titulo"
+                  label="Titulo"
+                />
+              </div>
+              <div>
+                <Input
+                  error={errors.description?.message}
+                  name="description"
+                  register={register}
+                  placeholder="Coloque uma descrição"
+                  label="Descrição"
+                />
+              </div>
+              <div>
+                <Input
+                  error={errors.category?.message}
+                  name="category"
+                  register={register}
+                  placeholder="Coloque uma categoria"
+                  label="Categoria"
+                />
+              </div>
             </div>
-            <div>
-              <Input
-                error={errors.description?.message}
-                name="description"
-                register={register}
-                placeholder="Coloque uma descrição"
-                label="Descrição"
-              />
-            </div>
-            <div>
-              <Input
-                error={errors.category?.message}
-                name="category"
-                register={register}
-                placeholder="Coloque uma categoria"
-                label="Categoria"
-              />
-            </div>
-          </div>
-          <ButtonPosition>
-            <button style={{ width: `250px` }} type="submit">
-              Adicionar
-            </button>
-          </ButtonPosition>
-        </form>
-      </Modal> }
+            <ButtonPosition>
+              <button style={{ width: `250px` }} type="submit">
+                Adicionar
+              </button>
+            </ButtonPosition>
+          </form>
+        </Modal>
+      )}
     </StyledBackgroundGroups>
   );
 };
