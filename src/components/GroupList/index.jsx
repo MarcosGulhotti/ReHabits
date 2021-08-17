@@ -26,16 +26,22 @@ export const StyledGroupList = styled.ul`
     flex-wrap: wrap;
     flex-direction: row;
     overflow: auto;
+    padding: 1rem;
 
+    button{
+      width: 200px;
+    }
     h2 {
       width: 100%;
     }
   }
   @media (min-width: 1024px) {
     height: 85%;
+    padding: 1rem;
   }
   @media (min-width: 1200px) {
     height: 70%;
+    padding: 1rem;
   }
 `;
 
@@ -48,10 +54,7 @@ export const StyledGoalsActivitiesList = styled.ul`
   max-height: 550px;
   overflow: auto;
   margin-bottom: 20px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  padding: 1rem;
 `;
 
 export const GroupList = () => {
