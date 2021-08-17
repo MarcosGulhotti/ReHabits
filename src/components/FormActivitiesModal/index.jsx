@@ -30,7 +30,7 @@ export const FormActivitiesModal = ({
   setGroupActivities,
   groupActivities,
 }) => {
-  const token = JSON.parse(localStorage.getItem("token"))
+  const token = JSON.parse(localStorage.getItem("token"));
   const formSchema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     realization_time: yup.string().required("Campo obrigatório"),
@@ -47,12 +47,13 @@ export const FormActivitiesModal = ({
   const formSubmit = async (data) => {
     const newData = { ...data, group: groupId };
 
-   await api
-      .post("activities/", newData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+    await api.post("activities/", newData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setGroupActivities([...groupActivities, newData]);
+    setActivitiesModal(false);
   };
 
   return (
@@ -74,7 +75,6 @@ export const FormActivitiesModal = ({
             register={register}
             placeholder="Coloque o tempo de realização aqui"
             label="Tempo de realização"
-            type="date"
           />
         </div>
         <button type="submit">Criar atividade</button>

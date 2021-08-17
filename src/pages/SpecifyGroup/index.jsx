@@ -119,13 +119,7 @@ export const SpecifyGroup = () => {
         }}
       >
         <div id="headerPositionSpecify">
-          <button
-            onClick={() =>
-              goalModal ? setgoalModal(!goalModal) : history.push("/groups")
-            }
-          >
-            Voltar
-          </button>
+          <button onClick={() => history.push("/groups")}>Voltar</button>
           <h1>{dataGroup.name}</h1>
           <button onClick={() => handleSubscribe(id)}>Inscrever-se</button>
         </div>
@@ -187,36 +181,38 @@ export const SpecifyGroup = () => {
               groupActivities={groupActivities}
             />
           ) : (
-            <StyledGoalsActivitiesList>
-              {groupActivities.map((el) => (
-                <StyledCardGoals style={{ height: `200px` }} key={el.id}>
-                  {console.log(groupActivities)}
-                  <CheckBoxDiv>
-                    <h1>{el.title}</h1>
-                    <i onClick={() => null} class="fas fa-minus-circle" />
-                  </CheckBoxDiv>
-                  <InfosDiv>
-                    <button
-                      style={{
-                        height: `35px`,
-                        backgroundColor: `var(--background)`,
-                        color: `var(--white)`,
-                        margin: `0 auto`,
-                      }}
-                    >
-                      Editar
-                    </button>
-                  </InfosDiv>
-                </StyledCardGoals>
-              ))}
-            </StyledGoalsActivitiesList>
+            <>
+              <StyledGoalsActivitiesList>
+                {groupActivities.map((el) => (
+                  <StyledCardGoals style={{ height: `200px` }} key={el.id}>
+                    {console.log(groupActivities)}
+                    <CheckBoxDiv>
+                      <h1>{el.title}</h1>
+                      <i onClick={() => null} class="fas fa-minus-circle" />
+                    </CheckBoxDiv>
+                    <InfosDiv>
+                      <button
+                        style={{
+                          height: `35px`,
+                          backgroundColor: `var(--background)`,
+                          color: `var(--white)`,
+                          margin: `0 auto`,
+                        }}
+                      >
+                        Editar
+                      </button>
+                    </InfosDiv>
+                  </StyledCardGoals>
+                ))}
+              </StyledGoalsActivitiesList>
+              <button
+                onClick={() => setActivitiesModal(!activitiesModal)}
+                className="createGoalsButton"
+              >
+                Criar Atividade
+              </button>
+            </>
           )}
-          <button
-            onClick={() => setActivitiesModal(!activitiesModal)}
-            className="createGoalsButton"
-          >
-            Criar Atividade
-          </button>
         </div>
         <button id="editGroup" onClick={() => setEditGroupModal(true)}>
           <i class="fas fa-edit"></i>
