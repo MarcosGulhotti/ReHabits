@@ -74,10 +74,10 @@ export const StyledBackgroundGroups = styled.div`
     @media (min-width: 280px) {
       position: static;
       display: block;
-      margin: 20px 0 0 calc(50vw - 110px);
+      margin: 20px 0 0 calc(50vw - 113px);
     }
     @media (min-width: 360px) {
-      margin: 20px 0 0 calc(50vw - 125px);
+      margin: 20px 0 0 calc(50vw - 131px);
     }
     @media (min-width: 768px) {
       position: absolute;

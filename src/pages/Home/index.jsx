@@ -125,7 +125,7 @@ export const Home = () => {
   const history = useHistory();
 
   const RedirectToLogin = () => {
-    if (isLogged !== undefined) {
+    if (isLogged !== null) {
       history.push("/dashboard");
     } else {
       history.push("/login");

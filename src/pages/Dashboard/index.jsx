@@ -188,7 +188,7 @@ export const Dashboard = () => {
     history.push("/habits");
   };
 
-  if (isLogged === undefined) {
+  if (isLogged === null) {
     return <Redirect to="/" />;
   }
 

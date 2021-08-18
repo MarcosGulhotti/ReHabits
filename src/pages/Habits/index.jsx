@@ -131,7 +131,7 @@ export const Habits = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (isLogged === undefined) {
+  if (isLogged === null) {
     return <Redirect to="/" />;
   }
 

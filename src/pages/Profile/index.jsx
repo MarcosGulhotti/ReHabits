@@ -43,7 +43,7 @@ export const Profile = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (isLogged === undefined) {
+  if (isLogged === null) {
     return <Redirect to="/" />;
   }
 
@@ -53,12 +53,12 @@ export const Profile = () => {
       <Background>
         <Container>
           {!modal ? (
-          <>
-            <UserInfo />
-            <ProfileHabits />
-          </>
+            <>
+              <UserInfo />
+              <ProfileHabits />
+            </>
           ) : (
-          <ModalEditName setModal={setModal} />
+            <ModalEditName setModal={setModal} />
           )}
         </Container>
       </Background>
