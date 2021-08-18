@@ -11,7 +11,7 @@ const LeftContainer = styled.div`
     height: 0;
   }
   background-color: var(--white);
-  width: 55vw;
+  width: 60vw;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@ const RightContainer = styled.div`
     height: 100vh;
   }
   background-color: var(--background);
-  width: 45vw;
+  width: 40vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -73,28 +73,6 @@ const Titulo = styled.h1`
   }
 `;
 
-// Old Button
-
-// const Button = styled.button`
-//   width: 250px;
-//   height: 67px;
-//   background-color: ${({ firstButton }) =>
-//     firstButton ? "#ECDEB0" : "#5F6874"};
-//   border: ${({ firstButton }) =>
-//     firstButton ? "2px solid #000000" : "2px solid #F5F3EB"};
-//   color: ${({ firstButton }) => (firstButton ? "#000000" : "#F5F3EB")};
-//   box-sizing: border-box;
-//   border-radius: 10px;
-//   font-family: Roboto Slab;
-//   font-style: normal;
-//   font-weight: normal;
-//   font-size: 36px;
-//   line-height: 47px;
-//   &:hover {
-//     cursor: pointer;
-//   }
-// `;
-
 const ButtonContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
@@ -139,15 +117,15 @@ const Image = styled.img`
     width: 0;
     height: 0;
   }
+  width: 75%;
 `;
 
 export const Home = () => {
-  const { setIsLogged } = useContext(LoginContext);
+  const { isLogged } = useContext(LoginContext);
   const history = useHistory();
-  const token = localStorage.getItem("token");
 
   const RedirectToLogin = () => {
-    if (token) {
+    if (isLogged !== undefined) {
       history.push("/dashboard");
     } else {
       history.push("/login");
@@ -157,15 +135,6 @@ export const Home = () => {
   const RedirectToRegister = () => {
     history.push("/register");
   };
-
-  useEffect(() => {
-    if (token) {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <HomePageContainer>
@@ -177,14 +146,14 @@ export const Home = () => {
         <ButtonContainer>
           <Button
             height={"67px"}
-            width={"250px"}
+            width={"80%"}
             nome={"Login"}
             func={RedirectToLogin}
             loginButton={true}
           />
           <Button
             height={"67px"}
-            width={"250px"}
+            width={"80%"}
             nome={"Cadastro"}
             func={RedirectToRegister}
             loginButton={false}
