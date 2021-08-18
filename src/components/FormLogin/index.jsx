@@ -8,6 +8,7 @@ import api from '../../services/api'
 import { useContext } from 'react';
 import { LoginContext } from '../../providers/Login'
 import { useUserId } from '../../providers/UserId';
+import toast from 'react-hot-toast';
 
 export const FormLogin = () => {
   const history = useHistory()
@@ -40,8 +41,9 @@ export const FormLogin = () => {
           setUserId(access)
           setIsLogged(true)
           history.push("/dashboard")
+          toast.success("Logado com sucesso!")
         })
-        .catch(() => console.log("Usuário ou e-mail inválido"))
+        .catch(() => toast.error("Usuário ou senha inválido"))
     }
 
     return (

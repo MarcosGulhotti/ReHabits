@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserId } from '../../providers/UserId'
+import toast from 'react-hot-toast'
 
 const Container = styled.div`
 background-color: var(--white);
@@ -37,7 +38,6 @@ const Content = styled.div`
   @media (max-width: 600px) {
     width: 100%;
     border-radius: 0;
-    height: 90vh;
   }
 
   h1 {

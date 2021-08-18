@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 import { Input } from '../Input'
-import { HabitsContext } from "../../providers/Habits";
-import { useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,7 +7,7 @@ import { useProfile } from '../../providers/Profile';
 
 const Content = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 
@@ -20,16 +18,21 @@ const Content = styled.div`
   border-radius: 10px;
   padding: 0.75rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     width: 100%;
     border-radius: 0;
-    height: 90vh;
+    height: calc(100vh - 55px);
   }
 
   h1 {
     font-family: var(--font-title);
     font-size: 3rem;
     font-weight: 400;
+    margin-bottom: 1rem;
+
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
   }
 `;
 
@@ -41,7 +44,7 @@ const ButtonPosition = styled.div`
 
     button {
         height: 65px;
-        width: 30%;
+        width: 250px;
         border-radius: 7px;
         border: 2px solid black;
         background-color: var(--gold);
@@ -54,6 +57,8 @@ const ButtonPosition = styled.div`
 
         @media (max-width: 600px) {
         width: 80%;
+        height: 45px;
+        font-size: 1rem;
         }
     }
 
@@ -67,6 +72,11 @@ background-color: var(--background);
 border-radius: 15px;
 padding: 2rem 7rem 2rem 7rem;
 
+@media (max-width: 600px) {
+  width: 100%;
+  padding: 1rem 1rem 1rem 1rem;
+}
+
 > * > * > div {
     margin-bottom: 20px;
 }
@@ -77,6 +87,14 @@ input {
 
 button {
   bottom: 0;
+}
+
+#return {
+  background-color: var(--background);
+  padding: 0rem 0rem 1rem 0rem;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
 }
 `
 
@@ -102,9 +120,14 @@ export const ModalEditName = ({ setModal }) => {
 
     return (
         <Content align={"center"}>
+          <h1>Mudar usuário</h1>
             <Modal>
               <form onSubmit={handleSubmit(formSubmit)}>
-                <button onClick={() => setModal(false)}>Close</button>
+                <i
+                  onClick={() => setModal(false)}
+                  class="fas fa-chevron-left"
+                  id="return"
+                />
                 <div>
                     <div>
                         <Input
@@ -117,7 +140,7 @@ export const ModalEditName = ({ setModal }) => {
                     </div>
                 </div>
                 <ButtonPosition>
-                  <button style={{ width: `250px` }} type="submit">
+                  <button type="submit">
                     Mudar
                   </button>
                 </ButtonPosition>

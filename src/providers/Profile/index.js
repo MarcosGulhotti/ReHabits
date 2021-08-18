@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import toast from "react-hot-toast";
 import api from "../../services/api";
 
 const ProfileContext = createContext()
@@ -28,8 +29,11 @@ export const ProfileProvider = ({ children }) => {
                 Authorization: `Bearer ${token}`,
                 },
             })
-            .then(() => getUser())
-            .catch((e) => console.log(e))
+            .then(() => {
+                getUser()
+                toast.success("Nome editado com sucesso!")
+            })
+            .catch(() => toast.error("Usuário já existente"))
       }
 
     return (
