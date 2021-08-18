@@ -43,6 +43,13 @@ const RightNav = styled.ul`
         color: var(--background);
       }
     }
+
+    i {
+      height: 27px;
+      width: 27px;
+      display: flex;
+      justify-content: center;
+    }
   }
 
   @media (max-width: 768px) {
@@ -139,6 +146,12 @@ export const Menu = () => {
           <Link to="/dashboard">
             <i class="fas fa-columns"></i>
             Dashboard
+          </Link>
+        </li>
+        <li>
+          <Link to="/profile">
+            <i class="fas fa-user-circle"></i>
+            Profile
           </Link>
         </li>
         <li>

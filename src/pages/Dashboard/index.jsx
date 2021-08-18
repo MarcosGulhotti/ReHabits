@@ -7,6 +7,7 @@ import MenuDashboard from "../../Assets/img/Menu Dashboard.jpg";
 import Atividades from "../../Assets/img/Atividades.png";
 import GroupDashbord from "../../Assets/img/Groups Dashboard.jpg";
 import { DashboardButton } from "../../components/DashboardButton";
+import { Redirect } from "react-router-dom";
 
 const TopContainer = styled.div`
   @media (min-width: 280px) {
@@ -177,8 +178,7 @@ const OtherImagesContainer = styled.div`
 
 export const Dashboard = () => {
   const history = useHistory();
-  const { setIsLogged } = useContext(LoginContext);
-  const token = localStorage.getItem("token");
+  const { isLogged, setIsLogged } = useContext(LoginContext);
 
   const PushToGroups = () => {
     history.push("/groups");
@@ -188,15 +188,24 @@ export const Dashboard = () => {
     history.push("/habits");
   };
 
-  useEffect(() => {
-    if (token) {
+  const token = localStorage.getItem("token");
+
+  const authenticate = () => {
+    if (token !== "") {
       setIsLogged(true);
     } else {
       setIsLogged(false);
-      history.push("/");
     }
+  };
+
+  useEffect(() => {
+    authenticate();
     // eslint-disable-next-line
   }, []);
+
+  if (!isLogged) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
