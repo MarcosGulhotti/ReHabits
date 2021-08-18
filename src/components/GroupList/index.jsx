@@ -22,7 +22,7 @@ export const StyledGroupList = styled.ul`
   @media (min-width: 768px) {
     width: 80%;
     margin: 0 auto;
-    height: 75%;
+    height: 80%;
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
