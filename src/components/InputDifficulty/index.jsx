@@ -35,7 +35,7 @@ const ContainerInput = styled.div`
     border-color: var(--gray);
   }
 
-  input {
+  select {
     font-family: var(--font-label);
     background: transparent;
     align-items: center;
@@ -56,12 +56,12 @@ const ContainerInput = styled.div`
 export const InputDifficulty = ({ label, register, name, error, ...rest }) => {
   return (
     <Container>
-      <div>
+      <div style={{marginBottom: '0.8rem'}}>
         {label} {!!error && <span> - {error}</span>}{" "}
       </div>
       <ContainerInput isErrored={!!error}>
         <select {...register(name)} {...rest}>
-          <option></option>
+          <option value='Muito Fácil'>Escolha uma dificuldade</option>
           <option value="Muito Fácil">Muito Fácil</option>
           <option value="Fácil">Fácil</option>
           <option value="Médio">Médio</option>

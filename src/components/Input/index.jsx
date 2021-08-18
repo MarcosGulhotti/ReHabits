@@ -56,7 +56,7 @@ const ContainerInput = styled.div`
 export const Input = ({ label, register, name, error, ...rest }) => {
   return (
     <Container>
-      <div>
+      <div style={{marginBottom: '0.8rem'}}>
         {label} {!!error && <span> - {error}</span>}{" "}
       </div>
       <ContainerInput isErrored={!!error}>

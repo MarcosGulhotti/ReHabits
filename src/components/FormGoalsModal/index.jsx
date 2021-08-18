@@ -4,14 +4,15 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
+import { InputDifficulty } from "../InputDifficulty";
 
 const Container = styled.div`
   width: 510px;
   height: 475px;
-  background-color: var(--background);
+  background-color: var(--gray);
   border-radius: 10px;
   padding: 1rem;
-  margin-bottom: 8rem;
+
   form {
     display: flex;
     flex-direction: column;
@@ -80,7 +81,7 @@ export const FormGoalsModal = ({
           />
         </div>
         <div className="inputDiv">
-          <Input
+          <InputDifficulty
             error={errors.difficulty?.message}
             name="difficulty"
             register={register}

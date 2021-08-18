@@ -32,32 +32,6 @@ const Container = styled.div`
 `;
 
 export const Profile = () => {
-<<<<<<< HEAD
-    const { getUser, modal, setModal } = useProfile()
-
-    useEffect(() => {
-        getUser()
-    }, [])
-
-    return (
-        <>
-        <Menu />
-        <Background>
-            <Container>
-                {!modal ? (
-                <>
-                    <UserInfo />
-                    <ProfileHabits />
-                </>
-                ) : (
-                <ModalEditName setModal={setModal} />
-                )}
-            </Container>
-        </Background>
-        </>
-    )
-}
-=======
   const { getUser, modal, setModal } = useProfile();
 
   const { isLogged, setIsLogged } = useContext(LoginContext);
@@ -94,4 +68,3 @@ export const Profile = () => {
     </>
   );
 };
->>>>>>> 1fd51ea2625f2a4f3f007b8d0cb3448675ef53f0

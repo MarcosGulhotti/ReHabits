@@ -38,8 +38,10 @@ const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar-thumb:hover {
       background: var(--background); 
     }
+  }
 
-
+  input, select {
+    outline: none;
   }
 
   body {
