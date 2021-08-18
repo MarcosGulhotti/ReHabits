@@ -132,6 +132,8 @@ export const Home = () => {
     }
   };
 
+  console.log(isLogged);
+
   const RedirectToRegister = () => {
     history.push("/register");
   };

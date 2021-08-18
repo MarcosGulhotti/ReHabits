@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-  @media (min-width: 1100px) {
+  @media (min-width: 1024px) {
     flex: 1;
     background: url(${registerImage});
     background-repeat: no-repeat;

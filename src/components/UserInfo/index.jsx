@@ -29,6 +29,7 @@ const Container = styled.div`
       transition: filter 0.2s;
       font-family: var(--font-button);
       margin-left: 2rem;
+      margin-right: 2rem;
 
       @media (max-width: 820px) {
         height: 30px;
@@ -67,7 +68,7 @@ const Infos = styled.div`
     font-size: calc(1vw + 1rem);
     font-family: var(--font-label);
     font-weight: 400;
-    margin: 0rem 0rem 1rem 2rem;
+    margin: 0rem 2rem 1rem 2rem;
 
     @media (max-width: 800px) {
       margin-top: 1rem;

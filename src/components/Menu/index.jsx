@@ -117,7 +117,7 @@ export const Menu = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    setIsLogged(undefined);
+    setIsLogged(null);
     history.push("/");
   };
 
