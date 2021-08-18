@@ -20,8 +20,13 @@ const Container = styled.li`
   flex-direction: column;
   justify-content: space-between;
 
+  @media (max-width: 600px) {
+    width: 98%;
+    overflow-x: hidden;
+  }
+
   #return {
-    padding: 0.2rem;
+    padding: 0.5rem 0rem 0rem 1rem;
     border: none;
     font-size: 2rem;
     cursor: pointer;

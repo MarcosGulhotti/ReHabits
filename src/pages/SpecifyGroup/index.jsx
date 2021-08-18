@@ -38,21 +38,24 @@ const ButtonDiv = styled.div`
 `;
 
 const Content = styled.div`
-  width: 1750px;
-  height: 1000px;
+  width: 100%;
+  margin: 1rem;
 
   background-color: var(--white);
 
   border-radius: 15px;
 
   padding: 1.5rem;
+
+  @media (max-width: 600px) {
+    margin: 1rem 0rem 1rem 0rem;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   overflow: auto;
 
   background-color: var(--background);
@@ -61,6 +64,11 @@ const Container = styled.div`
 const GroupContent = styled.div`
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 1300px) {
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 export const SpecifyGroup = () => {

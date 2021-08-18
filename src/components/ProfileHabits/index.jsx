@@ -108,6 +108,7 @@ justify-content: space-between;
         }
 
         @media (max-width: 650px) {
+            min-height: 90px;
             height: auto;
 
             span {

@@ -16,6 +16,10 @@ const Container = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    width: 98%;
+  }
 `;
 const MainContent = styled.div`
   width: 100%;
@@ -30,6 +34,22 @@ const PatchDiv = styled.div`
     margin-left: 2rem;
     display: flex;
     align-items: center;
+
+    > div {
+      margin-left: 5px;
+    }
+
+    @media (max-width: 600px) {
+      margin-left: 0.5rem;
+      > div {
+      margin-left: 3px;
+      }
+    }
+
+    @media (max-width: 350px) {
+      margin-right: 0.8rem;
+    }
+
     div {
       display: flex;
       align-items: center;
@@ -50,11 +70,22 @@ const PatchDiv = styled.div`
 const TitleDiv = styled.div`
   h1 {
     font-family: var(--title-font);
-    font-size: 1rem;
+    font-size: 1.2rem;
+
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
   }
+
 `;
 
 const DeleteDiv = styled.div`
+  @media (max-width: 600px) {
+    width: 58px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   i {
     width: 20px;
     height: 20px;
@@ -64,6 +95,10 @@ const DeleteDiv = styled.div`
     color: var(--red);
 
     cursor: pointer;
+
+    @media (max-width: 600px) {
+      margin-right: 0.5rem;
+    }
   }
 `;
 
@@ -71,8 +106,30 @@ const SecondContent = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  padding: 0rem 2rem 0rem 2rem;
   margin-bottom: 1rem;
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 1150px) {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 0rem 1.5rem 0rem 1.5rem
+  }
+
+  @media (max-width: 600px) {
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 0rem 1rem 0rem 1rem;
+
+    h3 {
+      font-size: 0.9rem;
+    }
+  }
 `;
 
 export const CardGoals = ({

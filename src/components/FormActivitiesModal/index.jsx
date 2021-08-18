@@ -18,6 +18,21 @@ const Container = styled.div`
   justify-content: space-between;
 
   border-radius: 10px;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+
+  @media (max-width: 350px) {
+    select {
+      font-size: 14px;
+    }
+
+    input {
+      font-size: 14px;
+    }
+  }
+
   form {
     display: flex;
     flex-direction: column;
@@ -41,6 +56,12 @@ const Container = styled.div`
 
       &:hover {
         filter: brightness(110%);
+      }
+
+      @media (max-width: 600px) {
+        width: 95%;
+        height: 45px;
+        font-size: 1.2rem;
       }
     }
   }

@@ -23,6 +23,10 @@ const Container = styled.div`
 
   padding: 1rem;
 
+  @media (max-width: 600px) {
+    width: 90%;
+  }
+
   i {
     cursor: pointer;
     font-size: 1.5rem;

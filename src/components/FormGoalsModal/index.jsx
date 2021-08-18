@@ -13,6 +13,20 @@ const Container = styled.div`
   border-radius: 10px;
   padding: 1rem;
 
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+
+  @media (max-width: 350px) {
+    select {
+      font-size: 14px;
+    }
+
+    input {
+      font-size: 14px;
+    }
+  }
+
   form {
     display: flex;
     flex-direction: column;
