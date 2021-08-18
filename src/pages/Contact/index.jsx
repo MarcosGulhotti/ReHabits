@@ -48,7 +48,7 @@ const Container = styled.div`
   }
   width: 100vw;
   background-color: var(--background);
-  overflow: hidden;
+  overflow-x: hidden;
 `;
 
 const ContactDiv = styled.div`

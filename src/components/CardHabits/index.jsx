@@ -10,54 +10,6 @@ const Container = styled.div`
   i {
     color: var(--red);
   }
-  .Trabalho {
-    //background-color: #9da0ec;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Família {
-    //background-color: #ecab9d;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Amigos {
-    //background-color: #be5bec;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Exercício {
-    //background-color: #3e9350;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Educação {
-    //background-color: #f87777;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Relacionamento {
-    //background-color: #ec9ddf;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Saúde {
-    //background-color: #ec5ba1;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Meditação {
-    //background-color: #936c3e;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
 `;
 const Card = styled.div`
   width: 100%;
