@@ -16,6 +16,11 @@ const Container = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    width: 98%;
+    overflow-x: hidden;
+  }
 `;
 
 const MainContent = styled.div`
@@ -33,6 +38,11 @@ const TitleDiv = styled.div`
   h1 {
     font-family: var(--title-font);
     font-size: 1rem;
+    text-align: center;
+
+    @media (max-width: 600px) {
+      margin-left: 15px;
+    }
   }
 `;
 

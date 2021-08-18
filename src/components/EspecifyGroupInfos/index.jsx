@@ -6,11 +6,19 @@ import api from "../../services/api";
 const Container = styled.div`
   width: 100%;
   height: 60px;
+
+  @media (max-width: 1150px) {
+    height: auto;
+  }
 `;
 const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 1150px) {
+    flex-direction: column;
+  }
 
   button {
     height: 55px;
@@ -28,10 +36,28 @@ const Content = styled.div`
     &:hover {
       filter: brightness(110%);
     }
+
+    @media (max-width: 600px) {
+      font-size: 1rem;
+      height: 45px;
+    }
+  }
+
+  #return {
+
+    @media (max-width: 1150px) {
+      width: 20%;
+      height: 25px;
+      font-size: 0.8rem;
+    }
   }
 
   h1 {
     font-size: 3rem;
+
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
   }
 `;
 
@@ -68,7 +94,7 @@ export const EspecifyGroupInfos = () => {
   return (
     <Container>
       <Content>
-        <button onClick={() => history.push("/groups")}>Voltar</button>
+        <button id="return" onClick={() => history.push("/groups")}>Voltar</button>
         <div>
           <h1>Nome: {dataGroup.name}</h1>
         </div>

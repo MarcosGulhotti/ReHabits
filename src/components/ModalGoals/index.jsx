@@ -17,6 +17,10 @@ const Container = styled.div`
   justify-content: space-between;
 
   border-radius: 10px;
+
+  @media (max-width: 600px) {
+    width: 107%;
+  }
 `;
 const TitleDiv = styled.div`
   width: 100%;
@@ -63,6 +67,10 @@ const Button = styled.button`
 
   &:hover {
     filter: brightness(110%);
+  }
+
+  @media (max-width: 600px) {
+    width: 90%;
   }
 `;
 

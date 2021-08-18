@@ -29,6 +29,7 @@ const Container = styled.div`
   @media (max-width: 768px) {
     margin: 0;
     width: 100%;
+    overflow-x: hidden;
   }
 `;
 
@@ -51,8 +52,14 @@ export const Profile = () => {
       <Menu />
       <Background>
         <Container>
-          {!modal ? <UserInfo /> : <ModalEditName setModal={setModal} />}
-          <ProfileHabits />
+          {!modal ? (
+          <>
+            <UserInfo />
+            <ProfileHabits />
+          </>
+          ) : (
+          <ModalEditName setModal={setModal} />
+          )}
         </Container>
       </Background>
     </>

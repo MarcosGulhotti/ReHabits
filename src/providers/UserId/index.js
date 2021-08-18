@@ -14,6 +14,7 @@ export const UserIdProvider = ({ children }) => {
 
     const setUserId = (token) => {
         const id = jwt_decode(token)
+        localStorage.setItem("Id", JSON.stringify(id.user_id))
         setId(JSON.stringify(id.user_id))
     }
 

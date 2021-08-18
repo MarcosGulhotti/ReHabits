@@ -19,6 +19,15 @@ const Container = styled.div`
 
   border-radius: 10px;
 
+  @media (max-width: 1300px) {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    width: 107%;
+    margin-top: 2rem;
+  }
+
   button {
     height: 30px;
     width: 40%;
@@ -86,6 +95,10 @@ const ButtonDiv = styled.div`
 
     &:hover {
       filter: brightness(110%);
+    }
+
+    @media (max-width: 600px) {
+      width: 90%;
     }
   }
 `;
