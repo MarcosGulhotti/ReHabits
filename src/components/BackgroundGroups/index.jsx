@@ -55,14 +55,19 @@ export const StyledBackgroundGroups = styled.div`
   }
 
   button {
-    font-size: 24px;
-    font-family: var(--font-title);
-    height: 50px;
-    width: 250px;
-    background: #ecdeb0;
-    cursor: pointer;
-    border-radius: 10px;
-    border: 2px solid #000000;
+    @media (min-width: 280px) {
+      font-size: 24px;
+      font-family: var(--font-title);
+      height: 50px;
+      width: 220px;
+      background: #ecdeb0;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 2px solid #000000;
+    }
+    @media (min-width: 360px) {
+      width: 250px;
+    }
   }
 
   .back {
@@ -70,6 +75,9 @@ export const StyledBackgroundGroups = styled.div`
       position: static;
       display: block;
       margin: 20px 0 0 calc(50vw - 110px);
+    }
+    @media (min-width: 360px) {
+      margin: 20px 0 0 calc(50vw - 125px);
     }
     @media (min-width: 768px) {
       position: absolute;
@@ -97,13 +105,14 @@ export const StyledBackgroundGroups = styled.div`
         button {
           height: 60px;
           font-size: 23px;
+          margin-top: 20px;
         }
 
         h1 {
           margin-bottom: 10px;
         }
       }
-      @media (min-width: 1024px) {
+      @media (min-width: 768px) {
         width: 100%;
         flex-direction: row;
         position: relative;
@@ -113,6 +122,12 @@ export const StyledBackgroundGroups = styled.div`
 
         h1 {
           margin: 0;
+        }
+
+        button {
+          height: 60px;
+          font-size: 23px;
+          margin-top: 7px;
         }
       }
     }
