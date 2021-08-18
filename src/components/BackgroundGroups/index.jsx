@@ -67,10 +67,12 @@ export const StyledBackgroundGroups = styled.div`
 
   .back {
     @media (min-width: 280px) {
-      position: static;
-      display: block;
-      margin: 20px 0 0 calc(50vw - 110px);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 20px 0;
     }
+
     @media (min-width: 768px) {
       position: absolute;
       bottom: 20px;
@@ -95,8 +97,12 @@ export const StyledBackgroundGroups = styled.div`
         margin-bottom: 10px;
 
         button {
-          height: 60px;
+          height: 40px;
           font-size: 23px;
+
+          :nth-child(1) {
+            margin-top: 15px;
+          }
         }
 
         h1 {
