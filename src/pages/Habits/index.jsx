@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
 import { useContext, useEffect, useState } from "react";
 import { CardHabits } from "../../components/CardHabits";
-import { ModalHabit } from "../../components/ModalHabit"
+import { ModalHabit } from "../../components/ModalHabit";
 import { ModalEditHabit } from "../../components/ModalEditHabit";
+import { Redirect } from "react-router-dom";
+import { LoginContext } from "../../providers/Login";
 
 const Content = styled.div`
   display: flex;
@@ -33,13 +35,13 @@ const Content = styled.div`
 `;
 
 const Background = styled.div`
-background-color: var(--background);
-width: 100%;
-min-height: calc(100vh - 55px);
-display: flex;
-justify-content: center;
-padding-top: 1rem;
-`
+  background-color: var(--background);
+  width: 100%;
+  min-height: calc(100vh - 55px);
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+`;
 
 const Container = styled.div`
   background-color: var(--background);
@@ -100,9 +102,9 @@ const HabitsContainer = styled.div`
     padding: 2rem 2rem 0rem 2rem;
 
     @media (max-width: 800px) {
-    width: 100%;
-    padding: 1rem 0rem 0rem 0rem;
-  }
+      width: 100%;
+      padding: 1rem 0rem 0rem 0rem;
+    }
 
     > div {
       min-height: 150px;
@@ -116,46 +118,64 @@ const HabitsContainer = styled.div`
       }
     }
   }
-`
+`;
 
 export const Habits = () => {
   const { habits, getHabits } = useContext(HabitsContext);
-  const [modal, setModal] = useState('closed');
-  
+  const [modal, setModal] = useState("closed");
+
+  const { isLogged, setIsLogged } = useContext(LoginContext);
+
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-    getHabits()
-  }, [])
+    getHabits();
+    authenticate();
+    // eslint-disable-next-line
+  }, []);
+
+  const authenticate = () => {
+    if (token !== "") {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  };
+
+  if (!isLogged) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
       <Menu />
-        {modal === 'closed' ? (
-          <>
-            <Container>
+      {modal === "closed" ? (
+        <>
+          <Container>
             <Content>
               <h1>Seus Hábitos</h1>
               <HabitsContainer>
-                  {habits.map((elm, i) => (
-                    <CardHabits key={i} habits={elm} setModal={setModal}/>
-                  ))}
+                {habits.map((elm, i) => (
+                  <CardHabits key={i} habits={elm} setModal={setModal} />
+                ))}
               </HabitsContainer>
               <ButtonPosition>
-                <button onClick={() => setModal('create')}>
+                <button onClick={() => setModal("create")}>
                   Adicionar Hábito
                 </button>
               </ButtonPosition>
             </Content>
-            </Container>
-          </>
-        ) : modal === 'create' ? (
-          <Background>
-            <ModalHabit modal={modal} setModal={setModal} />
-          </Background>
-        ) : (
-          <Background>
-            <ModalEditHabit modal={modal} setModal={setModal} />
-          </Background>
-        )}
+          </Container>
+        </>
+      ) : modal === "create" ? (
+        <Background>
+          <ModalHabit modal={modal} setModal={setModal} />
+        </Background>
+      ) : (
+        <Background>
+          <ModalEditHabit modal={modal} setModal={setModal} />
+        </Background>
+      )}
     </>
   );
 };

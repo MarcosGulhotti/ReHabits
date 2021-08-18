@@ -46,9 +46,9 @@ const Container = styled.div`
   @media (min-width: 769px) {
     height: 100vh;
   }
-  width: 100%;
+  width: 100vw;
   background-color: var(--background);
-  overflow: scroll;
+  overflow: hidden;
 `;
 
 const ContactDiv = styled.div`
@@ -60,7 +60,7 @@ const ContactDiv = styled.div`
     justify-content: space-evenly;
     flex-direction: row;
   }
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }

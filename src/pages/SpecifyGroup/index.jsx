@@ -7,34 +7,40 @@ import { StyledGoalsActivitiesList } from "../../components/GroupList";
 import { StyledCardGoals } from "../../components/CardGroup";
 import { CheckBox, CheckBoxDiv, InfosDiv } from "../../components/CardGroup";
 import { FormGoalsModal } from "../../components/FormGoalsModal";
-import { Modal, ButtonPosition } from '../../components/ModalHabit';
+import { Modal, ButtonPosition } from "../../components/ModalHabit";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input } from '../../components/Input'
+import { Input } from "../../components/Input";
 import { useUserId } from "../../providers/UserId";
+import { FormActivitiesModal } from "../../components/FormActivitiesModal";
 
 export const SpecifyGroup = () => {
   const { id } = useParams();
-  const token = JSON.parse(localStorage.getItem("token"))
+  const token = JSON.parse(localStorage.getItem("token"));
   const [dataGroup, setDataGroup] = useState([]);
   const history = useHistory();
   const [groupGoals, setGroupGoals] = useState([]);
   const [groupActivities, setGroupActivities] = useState([]);
   const [goalModal, setgoalModal] = useState(false);
-  const [editGroupModal, setEditGroupModal] = useState(false)
-  const userInfo = useUserId()
+  const [activitiesModal, setActivitiesModal] = useState(false);
+  const [editGroupModal, setEditGroupModal] = useState(false);
+  const [editActivityModal, setEditActivityModal] = useState(false);
+  const userInfo = useUserId();
+  const [idActivity, setIdActivity] = useState("");
 
   const handleSubscribe = async (id) => {
-    await api.post(
-      `/groups/${id}/subscribe/`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    await api
+      .post(
+        `groups/${id}/subscribe/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .catch((e) => alert("Voce já é inscrito nesse canal!"));
   };
 
   const gettingDataFromGroups = async () => {
@@ -75,48 +81,83 @@ export const SpecifyGroup = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => setGroupGoals(groupGoals.filter(elm => elm.id !== id)))
+      .then(() => setGroupGoals(groupGoals.filter((elm) => elm.id !== id)))
+      .catch((e) => console.log(e));
+  };
+  const removeFromActivities = (id) => {
+    api
+      .delete(`activities/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() =>
+        setGroupActivities(groupActivities.filter((elm) => elm.id !== id))
+      )
       .catch((e) => console.log(e));
   };
 
   const formSchema = yup.object().shape({
-    category: yup.string().required("Categoria obrigatória"),
+    category: yup.string().required("Campo obrigatório"),
   });
 
   const {
-      register,
-      handleSubmit,
-      formState: { errors },
+    register,
+    handleSubmit,
+    formState: { errors },
   } = useForm({
-      resolver: yupResolver(formSchema),
+    resolver: yupResolver(formSchema),
   });
 
   const handleEditGroup = async (data) => {
-    if (dataGroup.creator.id === userInfo.id) {
-      await api.patch(`/groups/${Number(id)}/`, data, {
+    if (dataGroup.creator.id === parseInt(userInfo.id)) {
+      api
+        .patch(`groups/${id}/`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((_) => {
+          setEditGroupModal(false);
+          alert("Categoria mudada com sucesso!");
+        })
+        .catch((e) => console.log(e));
+    } else alert("Você precisa ser dono de um grupo para poder edita-lo");
+  };
+
+  const handleEditActivity = (data) => {
+    const newData = { title: data.category };
+
+    api
+      .patch(`activities/${idActivity}/`, newData, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
-      await alert('grupo editado')
-      .catch(() => alert('Alguma coisa deu errada.'))
-    } else {
-      alert('Apenas o dono do grupo pode editar.')
-    }
+      .then((resp) => {
+        alert("Titulo Alterado");
+        groupActivities.map((elm) =>
+          elm.id === idActivity ? (elm.title = newData.title) : null
+        );
+
+        setIdActivity("");
+        setEditActivityModal(false);
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
     <>
       <Menu />
-      <StyledBackgroundGroups style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+      <StyledBackgroundGroups
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
         <div id="headerPositionSpecify">
-          <button
-            onClick={() =>
-              goalModal ? setgoalModal(!goalModal) : history.push("/groups")
-            }
-          >
-            Voltar
-          </button>
+          <button onClick={() => history.push("/groups")}>Voltar</button>
           <h1>{dataGroup.name}</h1>
           <button onClick={() => handleSubscribe(id)}>Inscrever-se</button>
         </div>
@@ -168,20 +209,73 @@ export const SpecifyGroup = () => {
             </>
           )}
         </div>
-        <div className='goalsActivitiesContainerList'>
+        <div className="goalsActivitiesContainerList">
           <h2>Atividades</h2>
+          {activitiesModal ? (
+            <FormActivitiesModal
+              groupId={id}
+              setActivitiesModal={setActivitiesModal}
+              setGroupActivities={setGroupActivities}
+              groupActivities={groupActivities}
+            />
+          ) : (
+            <>
+              <StyledGoalsActivitiesList>
+                {groupActivities.map((el) => (
+                  <StyledCardGoals style={{ height: `200px` }} key={el.id}>
+                    <CheckBoxDiv>
+                      <h1>{el.title}</h1>
+                      <i
+                        onClick={() => removeFromActivities(el.id)}
+                        class="fas fa-minus-circle"
+                      />
+                    </CheckBoxDiv>
+                    <InfosDiv>
+                      <button
+                        style={{
+                          height: `35px`,
+                          backgroundColor: `var(--background)`,
+                          color: `var(--white)`,
+                          margin: `0 auto`,
+                        }}
+                        onClick={() => {
+                          setEditActivityModal(true);
+                          setIdActivity(el.id);
+                        }}
+                      >
+                        Editar
+                      </button>
+                    </InfosDiv>
+                  </StyledCardGoals>
+                ))}
+              </StyledGoalsActivitiesList>
+              <button
+                onClick={() => setActivitiesModal(!activitiesModal)}
+                className="createGoalsButton"
+              >
+                Criar Atividade
+              </button>
+            </>
+          )}
         </div>
-        <button id='editGroup' onClick={() => setEditGroupModal(true)}>
+        <button id="editGroup" onClick={() => setEditGroupModal(true)}>
           <i class="fas fa-edit"></i>
         </button>
-        {editGroupModal && 
-          <Modal style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+        {editGroupModal && (
+          <Modal
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
             <form onSubmit={handleSubmit(handleEditGroup)}>
-            <i
-              onClick={() => setEditGroupModal(false)}
-              class="fas fa-chevron-left"
-              id="return"
-            />
+              <i
+                onClick={() => setEditGroupModal(false)}
+                class="fas fa-chevron-left"
+                id="return"
+              />
               <div>
                 <div>
                   <Input
@@ -200,7 +294,44 @@ export const SpecifyGroup = () => {
               </ButtonPosition>
             </form>
           </Modal>
-        }
+        )}
+
+        {editActivityModal && (
+          <>
+            <Modal
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <form onSubmit={handleSubmit(handleEditActivity)}>
+                <i
+                  onClick={() => setEditActivityModal(false)}
+                  class="fas fa-chevron-left"
+                  id="return"
+                />
+                <div>
+                  <div>
+                    <Input
+                      error={errors.category?.message}
+                      name="category"
+                      register={register}
+                      placeholder="Coloque um titulo"
+                      label="Titulo"
+                    />
+                  </div>
+                </div>
+                <ButtonPosition>
+                  <button style={{ width: `250px` }} type="submit">
+                    Editar
+                  </button>
+                </ButtonPosition>
+              </form>
+            </Modal>
+          </>
+        )}
       </StyledBackgroundGroups>
     </>
   );

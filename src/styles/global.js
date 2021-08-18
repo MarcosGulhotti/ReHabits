@@ -23,6 +23,23 @@ const GlobalStyle = createGlobalStyle`
     list-style-type: none;
     box-sizing: border-box;
     text-decoration: none;
+
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      border: 1px solid lightgray;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: gray; 
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--background); 
+    }
+
+
   }
 
   body {
