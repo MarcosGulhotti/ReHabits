@@ -124,25 +124,14 @@ export const Habits = () => {
   const { habits, getHabits } = useContext(HabitsContext);
   const [modal, setModal] = useState("closed");
 
-  const { isLogged, setIsLogged } = useContext(LoginContext);
-
-  const token = localStorage.getItem("token");
+  const { isLogged } = useContext(LoginContext);
 
   useEffect(() => {
     getHabits();
-    authenticate();
     // eslint-disable-next-line
   }, []);
 
-  const authenticate = () => {
-    if (token !== "") {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-  };
-
-  if (!isLogged) {
+  if (isLogged === undefined) {
     return <Redirect to="/" />;
   }
 

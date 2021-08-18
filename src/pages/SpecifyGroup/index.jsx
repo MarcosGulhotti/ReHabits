@@ -5,8 +5,10 @@ import { ModalGoals } from "../../components/ModalGoals";
 import { EspecifyGroupInfos } from "../../components/EspecifyGroupInfos";
 import { ModalActivity } from "../../components/ModalActivity";
 import { FormEditGroup } from "../../components/FormEditGroup";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { LoginContext } from "../../providers/Login";
+import { Redirect } from "react-router-dom";
 
 const Button = styled.button`
   height: 30px;
@@ -65,13 +67,18 @@ const GroupContent = styled.div`
 
 export const SpecifyGroup = () => {
   const [editGroupModal, setEditGroupModal] = useState(false);
+
+  const { isLogged } = useContext(LoginContext);
+
+  if (isLogged === undefined) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <>
       <Menu />
       <Container>
-
         <Content>
-
           <EspecifyGroupInfos />
 
           <ButtonDiv>
@@ -89,7 +96,6 @@ export const SpecifyGroup = () => {
             <FormEditGroup setEditGroupModal={setEditGroupModal} />
           )}
         </Content>
-
       </Container>
     </>
   );

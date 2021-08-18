@@ -5,24 +5,9 @@ import { Redirect } from "react-router-dom";
 import { LoginContext } from "../../providers/Login";
 
 export const Groups = () => {
-  const { isLogged, setIsLogged } = useContext(LoginContext);
+  const { isLogged } = useContext(LoginContext);
 
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    authenticate();
-    // eslint-disable-next-line
-  }, []);
-
-  const authenticate = () => {
-    if (token !== "") {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-  };
-
-  if (!isLogged) {
+  if (isLogged === undefined) {
     return <Redirect to="/" />;
   }
 
