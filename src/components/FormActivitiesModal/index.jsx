@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { InputDate } from "../../components/InputDate";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 500px;
   height: 400px;
   padding: 1rem;
@@ -67,12 +67,7 @@ const Container = styled.div`
   }
 `;
 
-export const FormActivitiesModal = ({
-  groupId,
-  setAddActivity,
-  setGroupActivities,
-  groupActivities,
-}) => {
+export const FormActivitiesModal = ({ groupId, setAddActivity, setGroupActivities, groupActivities }) => {
   const token = JSON.parse(localStorage.getItem("token"));
   const formSchema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
@@ -100,7 +95,7 @@ export const FormActivitiesModal = ({
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <form onSubmit={handleSubmit(formSubmit)}>
         <div className="inputDiv">
           <Input
@@ -122,6 +117,6 @@ export const FormActivitiesModal = ({
         </div>
         <button type="submit">Criar atividade</button>
       </form>
-    </Container>
+    </StyledContainer>
   );
 };

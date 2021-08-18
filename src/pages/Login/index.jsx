@@ -3,13 +3,13 @@ import loginImage from "../../Assets/img/LoginPage.svg";
 import { Menu } from "../../components/Menu";
 import { FormLogin } from "../../components/FormLogin";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   height: calc(100vh - 55px);
   display: flex;
   align-items: stretch;
 `;
 
-const Background = styled.div`
+const StyledBackground = styled.div`
   @media (min-width: 1024px) {
     flex: 1;
     background: url(${loginImage});
@@ -20,7 +20,7 @@ const Background = styled.div`
   }
 `;
 
-const Content = styled.div`
+const StyledContent = styled.div`
   width: 40%;
   max-width: 700px;
   display: flex;
@@ -49,7 +49,7 @@ const Content = styled.div`
   }
 `;
 
-const FormContainer = styled.div`
+const StyledFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -124,15 +124,15 @@ export const Login = () => {
   return (
     <>
       <Menu />
-      <Container>
-        <Content>
+      <StyledContainer>
+        <StyledContent>
           <h1>Login</h1>
-          <FormContainer>
+          <StyledFormContainer>
             <FormLogin />
-          </FormContainer>
-        </Content>
-        <Background />
-      </Container>
+          </StyledFormContainer>
+        </StyledContent>
+        <StyledBackground />
+      </StyledContainer>
     </>
   );
 };

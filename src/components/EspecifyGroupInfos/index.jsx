@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import api from "../../services/api";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   height: 60px;
 
@@ -11,7 +11,8 @@ const Container = styled.div`
     height: auto;
   }
 `;
-const Content = styled.div`
+
+const StyledContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,14 +93,14 @@ export const EspecifyGroupInfos = () => {
   };
 
   return (
-    <Container>
-      <Content>
+    <StyledContainer>
+      <StyledContent>
         <button id="return" onClick={() => history.push("/groups")}>Voltar</button>
         <div>
           <h1>Nome: {dataGroup.name}</h1>
         </div>
         <button onClick={() => handleSubscribe(id)}>Inscrever-se</button>
-      </Content>
-    </Container>
+      </StyledContent>
+    </StyledContainer>
   );
 };

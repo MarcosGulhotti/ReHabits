@@ -1,17 +1,13 @@
 import styled from 'styled-components'
 import { Input } from '../Input'
-import { InputCategory } from '../InputCategory'
-import { InputDifficulty } from '../InputDifficulty'
-import { InputFrequency } from '../InputFrequency'
 import { HabitsContext } from "../../providers/Habits";
 import { useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserId } from '../../providers/UserId'
-import toast from 'react-hot-toast'
 
-const Container = styled.div`
+const StyledContainer = styled.div`
 background-color: var(--white);
 display: flex;
 align-items: center;
@@ -25,12 +21,11 @@ width: 80%;
 }
 `
 
-const Content = styled.div`
+const StyledContent = styled.div`
   display: flex;
   justify-content: ${(props) => props.align};
   align-items: center;
   flex-direction: column;
-
   width: 95%;
   max-width: 1366px;
   border-radius: 10px;
@@ -53,7 +48,7 @@ const Content = styled.div`
   }
 `;
 
-export const ButtonPosition = styled.div`
+export const StyledButtonPosition = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
@@ -82,7 +77,7 @@ export const ButtonPosition = styled.div`
     }
 `;
 
-export const Modal = styled.div`
+export const StyledModal = styled.div`
 background-color: var(--background);
 border-radius: 15px;
 padding: 0rem 7rem 0rem 7rem;
@@ -141,10 +136,10 @@ export const ModalHabit = ({ modal, setModal }) => {
     };
 
     return (
-      <Container>
-        <Content align={"center"}>
+      <StyledContainer>
+        <StyledContent align={"center"}>
           <h1>Adicionar hábito</h1>
-            <Modal>
+            <StyledModal>
               <form onSubmit={handleSubmit(formSubmit)}>
               <i
                 onClick={() => setModal('closed')}
@@ -189,14 +184,14 @@ export const ModalHabit = ({ modal, setModal }) => {
                     />
                   </div>
                 </div>
-                <ButtonPosition>
+                <StyledButtonPosition>
                   <button style={{ width: `250px` }} type="submit">
                     Adicionar
                   </button>
-                </ButtonPosition>
+                </StyledButtonPosition>
               </form>
-            </Modal>
-          </Content>
-        </Container>
+            </StyledModal>
+          </StyledContent>
+        </StyledContainer>
     )
 }

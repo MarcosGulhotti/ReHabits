@@ -8,7 +8,7 @@ import { useParams } from "react-router";
 import api from "../../services/api";
 import styled from "styled-components";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 500px;
   height: 350px;
   background-color: var(--gray);
@@ -33,12 +33,13 @@ const Container = styled.div`
     margin-bottom: 2rem;
   }
 `;
-const ButtonDiv = styled.div`
+
+const StyledButtonDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-top: 2rem;
+
   button {
     height: 55px;
     width: 40%;
@@ -103,7 +104,7 @@ export const FormEditGroup = ({ setEditGroupModal }) => {
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <i
         onClick={() => setEditGroupModal(false)}
         class="fas fa-chevron-left"
@@ -120,10 +121,10 @@ export const FormEditGroup = ({ setEditGroupModal }) => {
           />
         </div>
 
-        <ButtonDiv>
+        <StyledButtonDiv>
           <button type="submit">Editar</button>
-        </ButtonDiv>
+        </StyledButtonDiv>
       </form>
-    </Container>
+    </StyledContainer>
   );
 };

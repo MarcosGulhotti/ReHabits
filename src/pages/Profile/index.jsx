@@ -8,7 +8,7 @@ import { ProfileHabits } from "../../components/ProfileHabits";
 import { Redirect } from "react-router-dom";
 import { LoginContext } from "../../providers/Login";
 
-const Background = styled.div`
+const StyledBackground = styled.div`
   background-color: var(--background);
   min-height: calc(100vh - 55px);
   display: flex;
@@ -16,7 +16,7 @@ const Background = styled.div`
   justify-content: center;
 `;
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 80%;
   display: flex;
   justify-content: center;
@@ -50,8 +50,8 @@ export const Profile = () => {
   return (
     <>
       <Menu />
-      <Background>
-        <Container>
+      <StyledBackground>
+        <StyledContainer>
           {!modal ? (
             <>
               <UserInfo />
@@ -60,8 +60,8 @@ export const Profile = () => {
           ) : (
             <ModalEditName setModal={setModal} />
           )}
-        </Container>
-      </Background>
+        </StyledContainer>
+      </StyledBackground>
     </>
   );
 };

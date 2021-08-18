@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import api from "../../services/api";
 
-const Container = styled.li`
+const StyledContainer = styled.li`
   width: 500px;
   min-height: 100px;
   max-height: 105px;
@@ -21,7 +21,7 @@ const Container = styled.li`
     width: 98%;
   }
 `;
-const MainContent = styled.div`
+const StyledMainContent = styled.div`
   width: 100%;
 
   margin-top: 0.8rem;
@@ -29,7 +29,7 @@ const MainContent = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const PatchDiv = styled.div`
+const StyledPatchDiv = styled.div`
   span {
     margin-left: 2rem;
     display: flex;
@@ -67,7 +67,7 @@ const PatchDiv = styled.div`
     }
   }
 `;
-const TitleDiv = styled.div`
+const StyledTitleDiv = styled.div`
   h1 {
     font-family: var(--title-font);
     font-size: 1.2rem;
@@ -79,7 +79,7 @@ const TitleDiv = styled.div`
 
 `;
 
-const DeleteDiv = styled.div`
+const StyledDeleteDiv = styled.div`
   @media (max-width: 600px) {
     width: 58px;
     display: flex;
@@ -102,7 +102,7 @@ const DeleteDiv = styled.div`
   }
 `;
 
-const SecondContent = styled.div`
+const StyledSecondContent = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -167,9 +167,9 @@ export const CardGoals = ({
   };
 
   return (
-    <Container>
-      <MainContent>
-        <PatchDiv>
+    <StyledContainer>
+      <StyledMainContent>
+        <StyledPatchDiv>
           <span>
             Feito
             <div
@@ -179,25 +179,25 @@ export const CardGoals = ({
               {goals.achieved === true ? <i class="fas fa-check" /> : null}
             </div>
           </span>
-        </PatchDiv>
-        <TitleDiv>
+        </StyledPatchDiv>
+        <StyledTitleDiv>
           <h1>{goals.title}</h1>
-        </TitleDiv>
-        <DeleteDiv>
+        </StyledTitleDiv>
+        <StyledDeleteDiv>
           <i
             onClick={() => removeFromGoals(goals.id)}
             class="fas fa-minus-circle"
           />
-        </DeleteDiv>
-      </MainContent>
-      <SecondContent>
+        </StyledDeleteDiv>
+      </StyledMainContent>
+      <StyledSecondContent>
         <div>
           <h3>{goals.how_much_achieved}%</h3>
         </div>
         <div>
           <h3>{goals.difficulty}</h3>
         </div>
-      </SecondContent>
-    </Container>
+      </StyledSecondContent>
+    </StyledContainer>
   );
 };

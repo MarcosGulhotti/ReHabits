@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { InputDifficulty } from "../InputDifficulty";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 510px;
   height: 475px;
   background-color: var(--gray);
@@ -31,9 +31,32 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
     div {
       width: 100%;
       margin-bottom: 1rem;
+    }
+
+    button {
+      height: 55px;
+      width: 40%;
+      border-radius: 7px;
+      border: 2px solid black;
+      background-color: var(--gold);
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 15px 0px 10px 0px;
+      cursor: pointer;
+      transition: filter 0.2s;
+      font-family: var(--font-button);
+
+      &:hover {
+        filter: brightness(110%);
+      }
+
+      @media (max-width: 600px) {
+        width: 90%;
+      }
     }
   }
 `;
@@ -83,7 +106,7 @@ export const FormGoalsModal = ({
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <form onSubmit={handleSubmit(formSubmit)}>
         <div className="inputDiv">
           <Input
@@ -114,6 +137,6 @@ export const FormGoalsModal = ({
         </div>
         <button type="submit">Criar objetivo</button>
       </form>
-    </Container>
+    </StyledContainer>
   );
 };

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { CardGroup } from "../CardGroup";
 import { useHistory } from "react-router";
-import { Modal, ButtonPosition } from "../ModalHabit";
+import { StyledModal, StyledButtonPosition } from "../ModalHabit";
 import { Input } from "../Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -19,6 +19,7 @@ export const StyledGroupList = styled.ul`
     align-items: center;
     flex-direction: column;
   }
+
   @media (min-width: 768px) {
     width: 80%;
     margin: 0 auto;
@@ -102,7 +103,7 @@ export const GroupList = () => {
   });
 
   const handleCreateGroup = async (data) => {
-    const resp = await api.post("/groups/", data, {
+    await api.post("/groups/", data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -150,7 +151,7 @@ export const GroupList = () => {
         </button>
       </div>
       {modalOpen && (
-        <Modal
+        <StyledModal
           style={{
             position: "absolute",
             top: "50%",
@@ -193,13 +194,13 @@ export const GroupList = () => {
                 />
               </div>
             </div>
-            <ButtonPosition>
+            <StyledButtonPosition>
               <button style={{ width: `250px` }} type="submit">
                 Adicionar
               </button>
-            </ButtonPosition>
+            </StyledButtonPosition>
           </form>
-        </Modal>
+        </StyledModal>
       )}
     </StyledBackgroundGroups>
   );

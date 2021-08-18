@@ -21,7 +21,6 @@ export const HabitsProvider = ({ children }) => {
   }
 
   const addToHabits = (item, setModal) => {
-    console.log(item)
     api
       .post(`habits/`, item, {
         headers: {

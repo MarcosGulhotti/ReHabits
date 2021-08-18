@@ -8,12 +8,11 @@ import { ModalEditHabit } from "../../components/ModalEditHabit";
 import { Redirect } from "react-router-dom";
 import { LoginContext } from "../../providers/Login";
 
-const Content = styled.div`
+const StyledContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-
   width: 95%;
   max-width: 1366px;
   height: 88vh;
@@ -34,7 +33,7 @@ const Content = styled.div`
   }
 `;
 
-const Background = styled.div`
+const StyledBackground = styled.div`
   background-color: var(--background);
   width: 100%;
   min-height: calc(100vh - 55px);
@@ -43,7 +42,7 @@ const Background = styled.div`
   padding-top: 1rem;
 `;
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   background-color: var(--background);
   height: calc(100vh - 55px);
   display: flex;
@@ -84,7 +83,7 @@ const ButtonPosition = styled.div`
   }
 `;
 
-const HabitsContainer = styled.div`
+const StyledHabitsContainer = styled.div`
   width: 100%;
   height: 90%;
   overflow-y: scroll;
@@ -140,30 +139,30 @@ export const Habits = () => {
       <Menu />
       {modal === "closed" ? (
         <>
-          <Container>
-            <Content>
+          <StyledContainer>
+            <StyledContent>
               <h1>Seus Hábitos</h1>
-              <HabitsContainer>
+              <StyledHabitsContainer>
                 {habits.map((elm, i) => (
                   <CardHabits key={i} habits={elm} setModal={setModal} />
                 ))}
-              </HabitsContainer>
+              </StyledHabitsContainer>
               <ButtonPosition>
                 <button onClick={() => setModal("create")}>
                   Adicionar Hábito
                 </button>
               </ButtonPosition>
-            </Content>
-          </Container>
+            </StyledContent>
+          </StyledContainer>
         </>
       ) : modal === "create" ? (
-        <Background>
+        <StyledBackground>
           <ModalHabit modal={modal} setModal={setModal} />
-        </Background>
+        </StyledBackground>
       ) : (
-        <Background>
+        <StyledBackground>
           <ModalEditHabit modal={modal} setModal={setModal} />
-        </Background>
+        </StyledBackground>
       )}
     </>
   );

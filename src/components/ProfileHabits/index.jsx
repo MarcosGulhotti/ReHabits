@@ -4,13 +4,13 @@ import styled from 'styled-components'
 import { HabitsContext } from '../../providers/Habits'
 import { CardHabits } from '../CardHabits'
 
-const Container = styled.div`
-width: 94%;
-margin-bottom: 2rem;
+const StyledContainer = styled.div`
+    width: 94%;
+    margin-bottom: 2rem;
 `
 
-const Habits = styled.div`
-margin: 1rem 0rem 2rem 0rem;
+const StyledHabits = styled.div`
+    margin: 1rem 0rem 2rem 0rem;
 
 h2 {
     font-family: var(--font-title);
@@ -64,10 +64,10 @@ h2 {
 }
 `
 
-const CardContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
+const StyledCardContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
 .edit {
     display: none;
@@ -126,23 +126,24 @@ export const ProfileHabits = () => {
     
     useEffect(() => {
         getHabits()
+        // eslint-disable-next-line
     }, [])
 
     return (
-        <Container>
-            <Habits>
+        <StyledContainer>
+            <StyledHabits>
                 <h2>Seus hábitos</h2>
                 <div className="background">
                     <div className="card">
-                        <CardContainer>
+                        <StyledCardContainer>
                             {habits.filter((elm, i) => i < 4).map((elm, i) => (
                                 <CardHabits key={i} habits={elm} />
                             ))}
-                        </CardContainer>
+                        </StyledCardContainer>
                     </div>
                     <button onClick={() => history.push("/habits")} className="all">Ver todos</button>
                 </div>
-            </Habits>
-        </Container>
+            </StyledHabits>
+        </StyledContainer>
     )
 }

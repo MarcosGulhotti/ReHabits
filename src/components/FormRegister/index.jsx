@@ -48,39 +48,39 @@ export const FormRegister = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(formSubmit)}>
-            <div className="inputDiv">
-              <Input
-                error={errors.username?.message}
-                name='username' register={register}
-                placeholder='Coloque seu usuário'
-                label='Usuário' />
-            </div>
-            <div className="inputDiv">
-              <Input
-                error={errors.email?.message}
-                name='email' register={register}
-                placeholder='Coloque seu email'
-                label='E-mail' />
-            </div>
-            <div className="inputDiv">
-              <Input
-                error={errors.password?.message}
-                name='password' register={register}
-                placeholder='Coloque sua senha'
-                label='Senha'
-                type='password' />
-            </div>
-            <div className="inputDiv">
-              <Input
-                error={errors.confirmPassword?.message}
-                name='confirmPassword' register={register}
-                placeholder='Confirme sua senha'
-                label='Confirmar senha'
-                type='password' />
-            </div>
-            <button type="submit">Criar Conta</button>
-            <p>Já possui uma conta? <Link to="/login">Entre aqui!</Link></p>
-        </form>
+      <form onSubmit={handleSubmit(formSubmit)}>
+          <div className="inputDiv">
+            <Input
+              error={errors.username?.message}
+              name='username' register={register}
+              placeholder='Coloque seu usuário'
+              label='Usuário' />
+          </div>
+          <div className="inputDiv">
+            <Input
+              error={errors.email?.message}
+              name='email' register={register}
+              placeholder='Coloque seu email'
+              label='E-mail' />
+          </div>
+          <div className="inputDiv">
+            <Input
+              error={errors.password?.message}
+              name='password' register={register}
+              placeholder='Coloque sua senha'
+              label='Senha'
+              type='password' />
+          </div>
+          <div className="inputDiv">
+            <Input
+              error={errors.confirmPassword?.message}
+              name='confirmPassword' register={register}
+              placeholder='Confirme sua senha'
+              label='Confirmar senha'
+              type='password' />
+          </div>
+          <button type="submit">Criar Conta</button>
+          <p>Já possui uma conta? <Link to="/login">Entre aqui!</Link></p>
+      </form>
     )
 }

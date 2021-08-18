@@ -6,17 +6,14 @@ import { CardActivity } from "../CardActivity";
 import { FormEditActivity } from "../FormEditActivity";
 import { FormActivitiesModal } from "../FormActivitiesModal";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 550px;
   height: 700px;
   padding: 1rem;
-
   background-color: #c4c4c4;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   border-radius: 10px;
 
   @media (max-width: 1300px) {
@@ -51,7 +48,7 @@ const Container = styled.div`
   }
 `;
 
-const TitleDiv = styled.div`
+const StyledTitleDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -62,24 +59,23 @@ const TitleDiv = styled.div`
     font-size: 2.5rem;
   }
 `;
-const ListUl = styled.ul`
+
+const StyledListUl = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   list-style: none;
-
   width: 100%;
   max-height: 550px;
-
   overflow: auto;
-
   margin-bottom: 20px;
 `;
-const ButtonDiv = styled.div`
+
+const StyledButtonDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+
   button {
     height: 55px;
     width: 40%;
@@ -121,13 +117,13 @@ export const ModalActivity = () => {
   }, []);
 
   return (
-    <Container>
-      <TitleDiv>
+    <StyledContainer>
+      <StyledTitleDiv>
         <h2>Atividades</h2>
-      </TitleDiv>
+      </StyledTitleDiv>
 
       {!addActivity && (
-        <ListUl>
+        <StyledListUl>
           {!modal &&
             groupActivities.map((actv) => (
               <CardActivity
@@ -148,10 +144,10 @@ export const ModalActivity = () => {
               groupActivities={groupActivities}
             />
           )}
-        </ListUl>
+        </StyledListUl>
       )}
       {addActivity && (
-        <ListUl>
+        <StyledListUl>
           <FormActivitiesModal
             groupId={id}
             addActivity={addActivity}
@@ -159,28 +155,28 @@ export const ModalActivity = () => {
             setGroupActivities={setGroupActivities}
             groupActivities={groupActivities}
           />
-        </ListUl>
+        </StyledListUl>
       )}
 
       {addActivity ? (
-        <ButtonDiv>
+        <StyledButtonDiv>
           <button
             onClick={() => setAddActivity(!addActivity)}
             className="createGoalsButton"
           >
             Voltar
           </button>
-        </ButtonDiv>
+        </StyledButtonDiv>
       ) : (
-        <ButtonDiv>
+        <StyledButtonDiv>
           <button
             onClick={() => setAddActivity(!addActivity)}
             className="createGoalsButton"
           >
             Criar Atividade
           </button>
-        </ButtonDiv>
+        </StyledButtonDiv>
       )}
-    </Container>
+    </StyledContainer>
   );
 };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   text-align: left;
   div {
     font-size: 17px;
@@ -14,7 +14,7 @@ const Container = styled.div`
   }
 `;
 
-const ContainerInput = styled.div`
+const StyledContainerInput = styled.div`
   background: var(--white);
   border-radius: 10px;
   border: 2px solid var(--gray);
@@ -55,11 +55,11 @@ const ContainerInput = styled.div`
 
 export const InputDifficulty = ({ label, register, name, error, ...rest }) => {
   return (
-    <Container>
+    <StyledContainer>
       <div style={{marginBottom: '0.8rem'}}>
         {label} {!!error && <span> - {error}</span>}{" "}
       </div>
-      <ContainerInput isErrored={!!error}>
+      <StyledContainerInput isErrored={!!error}>
         <select {...register(name)} {...rest}>
           <option value='Muito Fácil'>Escolha uma dificuldade</option>
           <option value="Muito Fácil">Muito Fácil</option>
@@ -68,7 +68,7 @@ export const InputDifficulty = ({ label, register, name, error, ...rest }) => {
           <option value="Difícil">Difícil</option>
           <option value="Muito Difícil">Muito Difícil</option>
         </select>
-      </ContainerInput>
-    </Container>
+      </StyledContainerInput>
+    </StyledContainer>
   );
 };

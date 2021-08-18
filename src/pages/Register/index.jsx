@@ -3,13 +3,13 @@ import registerImage from "../../Assets/img/CadastroPage.svg";
 import { Menu } from "../../components/Menu";
 import { FormRegister } from "../../components/FormRegister";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   height: calc(100vh - 55px);
   display: flex;
   align-items: stretch;
 `;
 
-const Background = styled.div`
+const StyledBackground = styled.div`
   @media (min-width: 1024px) {
     flex: 1;
     background: url(${registerImage});
@@ -20,7 +20,7 @@ const Background = styled.div`
   }
 `;
 
-const Content = styled.div`
+const StyledContent = styled.div`
   width: 40%;
   max-width: 700px;
   display: flex;
@@ -49,7 +49,7 @@ const Content = styled.div`
   }
 `;
 
-const FormContainer = styled.div`
+const StyledFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -128,15 +128,15 @@ export const Register = () => {
   return (
     <>
       <Menu />
-      <Container>
-        <Background />
-        <Content>
+      <StyledContainer>
+        <StyledBackground />
+        <StyledContent>
           <h1>Cadastro</h1>
-          <FormContainer>
+          <StyledFormContainer>
             <FormRegister />
-          </FormContainer>
-        </Content>
-      </Container>
+          </StyledFormContainer>
+        </StyledContent>
+      </StyledContainer>
     </>
   );
 };

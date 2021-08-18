@@ -79,6 +79,7 @@ export const StyledBackgroundGroups = styled.div`
     @media (min-width: 360px) {
       margin: 20px 0 0 calc(50vw - 131px);
     }
+
     @media (min-width: 768px) {
       position: absolute;
       bottom: 20px;
@@ -103,7 +104,7 @@ export const StyledBackgroundGroups = styled.div`
         margin-bottom: 10px;
 
         button {
-          height: 60px;
+          height: 40px;
           font-size: 23px;
           margin-top: 20px;
         }

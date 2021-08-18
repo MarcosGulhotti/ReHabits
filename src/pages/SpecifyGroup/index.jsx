@@ -1,6 +1,4 @@
 import { Menu } from "../../components/Menu";
-
-// New Imports
 import { ModalGoals } from "../../components/ModalGoals";
 import { EspecifyGroupInfos } from "../../components/EspecifyGroupInfos";
 import { ModalActivity } from "../../components/ModalActivity";
@@ -10,7 +8,7 @@ import styled from "styled-components";
 import { LoginContext } from "../../providers/Login";
 import { Redirect } from "react-router-dom";
 
-const Button = styled.button`
+const StyledButton = styled.button`
   height: 30px;
   width: 200px;
   border-radius: 7px;
@@ -28,25 +26,20 @@ const Button = styled.button`
   }
 `;
 
-const ButtonDiv = styled.div`
+const StyledButtonDiv = styled.div`
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin-top: 2rem;
   margin-bottom: 2rem;
 `;
 
-const Content = styled.div`
+const StyledContent = styled.div`
   width: 100%;
   margin: 1rem;
-
   background-color: var(--white);
-
   border-radius: 15px;
-
   padding: 1.5rem;
 
   @media (max-width: 600px) {
@@ -54,16 +47,15 @@ const Content = styled.div`
   }
 `;
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: auto;
-
   background-color: var(--background);
 `;
 
-const GroupContent = styled.div`
+const StyledGroupContent = styled.div`
   display: flex;
   justify-content: space-around;
 
@@ -85,26 +77,26 @@ export const SpecifyGroup = () => {
   return (
     <>
       <Menu />
-      <Container>
-        <Content>
+      <StyledContainer>
+        <StyledContent>
           <EspecifyGroupInfos />
 
-          <ButtonDiv>
-            <Button onClick={() => setEditGroupModal(!editGroupModal)}>
+          <StyledButtonDiv>
+            <StyledButton onClick={() => setEditGroupModal(!editGroupModal)}>
               Editar categoria
-            </Button>
-          </ButtonDiv>
+            </StyledButton>
+          </StyledButtonDiv>
 
-          <GroupContent>
+          <StyledGroupContent>
             <ModalGoals />
             <ModalActivity />
-          </GroupContent>
+          </StyledGroupContent>
 
           {editGroupModal && (
             <FormEditGroup setEditGroupModal={setEditGroupModal} />
           )}
-        </Content>
-      </Container>
+        </StyledContent>
+      </StyledContainer>
     </>
   );
 };

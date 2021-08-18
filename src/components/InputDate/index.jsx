@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   text-align: left;
   div {
     font-size: 17px;
@@ -14,7 +14,7 @@ const Container = styled.div`
   }
 `;
 
-const ContainerInput = styled.div`
+const StyledContainerInput = styled.div`
   background: var(--white);
   border-radius: 10px;
   border: 2px solid var(--gray);
@@ -55,13 +55,13 @@ const ContainerInput = styled.div`
 
 export const InputDate = ({ label, register, name, error, ...rest }) => {
     return (
-      <Container>
+      <StyledContainer>
         <div>
           {label} {!!error && <span> - {error}</span>}{" "}
         </div>
-        <ContainerInput isErrored={!!error}>
+        <StyledContainerInput isErrored={!!error}>
           <input {...register(name)} {...rest} type="datetime-local" />
-        </ContainerInput>
-      </Container>
+        </StyledContainerInput>
+      </StyledContainer>
     );
   };

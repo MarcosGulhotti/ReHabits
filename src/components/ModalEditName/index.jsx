@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useProfile } from "../../providers/Profile";
 
-const Content = styled.div`
+const StyledContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,7 +36,7 @@ const Content = styled.div`
   }
 `;
 
-const ButtonPosition = styled.div`
+const StyledButtonPosition = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@ const ButtonPosition = styled.div`
   }
 `;
 
-const Modal = styled.div`
+const StyledModal = styled.div`
   background-color: var(--background);
   border-radius: 15px;
   padding: 2rem 7rem 2rem 7rem;
@@ -119,9 +119,9 @@ export const ModalEditName = ({ setModal }) => {
   };
 
   return (
-    <Content align={"center"}>
+    <StyledContent align={"center"}>
       <h1>Mudar usuário</h1>
-      <Modal>
+      <StyledModal>
         <form onSubmit={handleSubmit(formSubmit)}>
           <i
             onClick={() => setModal(false)}
@@ -139,11 +139,11 @@ export const ModalEditName = ({ setModal }) => {
               />
             </div>
           </div>
-          <ButtonPosition>
+          <StyledButtonPosition>
             <button type="submit">Mudar</button>
-          </ButtonPosition>
+          </StyledButtonPosition>
         </form>
-      </Modal>
-    </Content>
+      </StyledModal>
+    </StyledContent>
   );
 };

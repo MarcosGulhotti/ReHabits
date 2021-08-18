@@ -5,7 +5,7 @@ import { Input } from "../Input";
 import api from "../../services/api";
 import styled from "styled-components";
 
-const Container = styled.li`
+const StyledContainer = styled.li`
   width: 500px;
   min-height: 100px;
 
@@ -33,7 +33,7 @@ const Container = styled.li`
   }
 `;
 
-const ButtonPosition = styled.div`
+const StyledButtonPosition = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -105,7 +105,7 @@ export const FormEditActivity = ({
   };
 
   return (
-    <Container style={{ height: "230px" }}>
+    <StyledContainer style={{ height: "230px" }}>
       <form onSubmit={handleSubmit(handleEditActivity)}>
         <i
           onClick={() => setModal(!modal)}
@@ -123,10 +123,10 @@ export const FormEditActivity = ({
             />
           </div>
         </div>
-        <ButtonPosition>
+        <StyledButtonPosition>
           <button type="submit">Editar</button>
-        </ButtonPosition>
+        </StyledButtonPosition>
       </form>
-    </Container>
+    </StyledContainer>
   );
 };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import api from "../../services/api";
 
-const Container = styled.li`
+const StyledContainer = styled.li`
   width: 500px;
   min-height: 100px;
 
@@ -23,7 +23,7 @@ const Container = styled.li`
   }
 `;
 
-const MainContent = styled.div`
+const StyledMainContent = styled.div`
   width: 100%;
 
   margin-top: 0.8rem;
@@ -32,7 +32,7 @@ const MainContent = styled.div`
   justify-content: space-between;
 `;
 
-const TitleDiv = styled.div`
+const StyledTitleDiv = styled.div`
   margin-left: 50%;
   transform: translateX(-50%);
   h1 {
@@ -46,7 +46,7 @@ const TitleDiv = styled.div`
   }
 `;
 
-const DeleteDiv = styled.div`
+const StyledDeleteDiv = styled.div`
   i {
     width: 20px;
     height: 20px;
@@ -59,7 +59,7 @@ const DeleteDiv = styled.div`
   }
 `;
 
-const ButtonDiv = styled.div`
+const StyledButtonDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -107,19 +107,19 @@ export const CardActivity = ({
 
   return (
     <>
-      <Container>
-        <MainContent>
-          <TitleDiv>
+      <StyledContainer>
+        <StyledMainContent>
+          <StyledTitleDiv>
             <h1>{actv.title}</h1>
-          </TitleDiv>
-          <DeleteDiv>
+          </StyledTitleDiv>
+          <StyledDeleteDiv>
             <i
               onClick={() => removeFromActivities(actv.id)}
               class="fas fa-minus-circle"
             />
-          </DeleteDiv>
-        </MainContent>
-        <ButtonDiv>
+          </StyledDeleteDiv>
+        </StyledMainContent>
+        <StyledButtonDiv>
           <button
             onClick={() => {
               setModal(!modal);
@@ -128,8 +128,8 @@ export const CardActivity = ({
           >
             Editar
           </button>
-        </ButtonDiv>
-      </Container>
+        </StyledButtonDiv>
+      </StyledContainer>
     </>
   );
 };

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   background: transparent;
   margin-bottom: 1rem;
@@ -11,7 +11,8 @@ const Container = styled.div`
     color: var(--red);
   }
 `;
-const Card = styled.div`
+
+const StyledCard = styled.div`
   width: 100%;
   height: 100px;
   display: flex;
@@ -25,7 +26,7 @@ const Card = styled.div`
   border-radius: 10px;
 `;
 
-const Title = styled.div`
+const StyledTitle = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -108,7 +109,7 @@ const Title = styled.div`
   }
 `;
 
-const Info = styled.div`
+const StyledInfo = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -176,9 +177,9 @@ export const CardHabits = ({ habits, setModal }) => {
   }
 
   return (
-    <Container>
-      <Card className={category}>
-        <Title>
+    <StyledContainer>
+      <StyledCard className={category}>
+        <StyledTitle>
           <div>
             <div className="completed">
               <span className="label">Completado:</span>
@@ -202,8 +203,8 @@ export const CardHabits = ({ habits, setModal }) => {
               />
             </button>
           </span>
-        </Title>
-        <Info>
+        </StyledTitle>
+        <StyledInfo>
           <div>
             <p>Dificuldade:</p>
             <span>{difficulty}</span>
@@ -215,8 +216,8 @@ export const CardHabits = ({ habits, setModal }) => {
             <p>Frequencia:</p>
             <span>{frequency}</span>
           </div>
-        </Info>
-      </Card>
-    </Container>
+        </StyledInfo>
+      </StyledCard>
+    </StyledContainer>
   );
 };

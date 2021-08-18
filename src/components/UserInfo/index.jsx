@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useProfile } from "../../providers/Profile";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -16,6 +16,7 @@ const Container = styled.div`
   }
 
   div {
+
     button {
       height: 30px;
       width: 40%;
@@ -40,7 +41,7 @@ const Container = styled.div`
   }
 `;
 
-const Infos = styled.div`
+const StyledInfos = styled.div`
   display: flex;
   align-items: center;
 
@@ -49,6 +50,7 @@ const Infos = styled.div`
   }
 
   picture {
+
     img {
       width: calc(11vw + 2.5rem);
       border-radius: calc((11vw + 2.5rem) / 2);
@@ -81,8 +83,8 @@ export const UserInfo = () => {
   const { userInfo, setModal } = useProfile();
 
   return (
-    <Container>
-      <Infos>
+    <StyledContainer>
+      <StyledInfos>
         <picture>
           <img
             src="https://d1bvpoagx8hqbg.cloudfront.net/259/2347b61ae2c02d0f2b100474e2c29f71.jpg"
@@ -94,8 +96,8 @@ export const UserInfo = () => {
           <h2>E-mail: {userInfo.email}</h2>
           <button onClick={() => setModal(true)}>Mudar nome</button>
         </div>
-      </Infos>
+      </StyledInfos>
       <div></div>
-    </Container>
+    </StyledContainer>
   );
 };

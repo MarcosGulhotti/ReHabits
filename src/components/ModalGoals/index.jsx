@@ -5,24 +5,22 @@ import { FormGoalsModal } from "../../components/FormGoalsModal";
 import api from "../../services/api";
 import { useParams } from "react-router";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 550px;
   height: 700px;
   padding: 1rem;
-
   background-color: #c4c4c4;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   border-radius: 10px;
 
   @media (max-width: 600px) {
     width: 107%;
   }
 `;
-const TitleDiv = styled.div`
+
+const StyledTitleDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -33,26 +31,25 @@ const TitleDiv = styled.div`
     font-size: 2.5rem;
   }
 `;
-const ListUl = styled.ul`
+
+const StyledListUl = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   list-style: none;
-
   width: 100%;
   max-height: 550px;
-
   overflow: auto;
-
   margin-bottom: 20px;
 `;
-const ButtonDiv = styled.div`
+
+const StyledButtonDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
 `;
-const Button = styled.button`
+
+const StyledButton = styled.button`
   height: 55px;
   width: 40%;
   border-radius: 7px;
@@ -93,32 +90,32 @@ export const ModalGoals = () => {
     <>
       {modal ? (
         <>
-          <Container style={{ alignItems: "center", justifyContent: "center" }}>
-            <TitleDiv>
+          <StyledContainer style={{ alignItems: "center", justifyContent: "center" }}>
+            <StyledTitleDiv>
               <h2>Objetivos</h2>
-            </TitleDiv>
+            </StyledTitleDiv>
             <FormGoalsModal
               groupGoals={groupGoals}
               setGroupGoals={setGroupGoals}
               setgoalModal={setModal}
               groupId={id}
             />
-            <ButtonDiv>
-              <Button
+            <StyledButtonDiv>
+              <StyledButton
                 style={{ marginTop: "2rem" }}
                 onClick={() => setModal(!modal)}
               >
                 Voltar
-              </Button>
-            </ButtonDiv>
-          </Container>
+              </StyledButton>
+            </StyledButtonDiv>
+          </StyledContainer>
         </>
       ) : (
-        <Container>
-          <TitleDiv>
+        <StyledContainer>
+          <StyledTitleDiv>
             <h2>Objetivos</h2>
-          </TitleDiv>
-          <ListUl>
+          </StyledTitleDiv>
+          <StyledListUl>
             {groupGoals.map((goals) => (
               <CardGoals
                 key={goals.id}
@@ -128,11 +125,11 @@ export const ModalGoals = () => {
                 gettingDataFromGroups={gettingDataFromGroups}
               />
             ))}
-          </ListUl>
-          <ButtonDiv>
-            <Button onClick={() => setModal(!modal)}>Criar Objetivo</Button>
-          </ButtonDiv>
-        </Container>
+          </StyledListUl>
+          <StyledButtonDiv>
+            <StyledButton onClick={() => setModal(!modal)}>Criar Objetivo</StyledButton>
+          </StyledButtonDiv>
+        </StyledContainer>
       )}
     </>
   );

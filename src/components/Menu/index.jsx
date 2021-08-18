@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useState, useContext } from "react";
 import { LoginContext } from "../../providers/Login";
 
-const MenuBar = styled.nav`
+const StyledMenuBar = styled.nav`
   width: 100%;
   height: 55px;
   background-color: var(--white);
@@ -17,7 +17,7 @@ const MenuBar = styled.nav`
   }
 `;
 
-const RightNav = styled.ul`
+const StyledRightNav = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
@@ -70,7 +70,7 @@ const RightNav = styled.ul`
   }
 `;
 
-const Burger = styled.div`
+const StyledBurger = styled.div`
   width: 2rem;
   height: 2rem;
   position: relative;
@@ -122,14 +122,14 @@ export const Menu = () => {
   };
 
   return (
-    <MenuBar>
+    <StyledMenuBar>
       <div className="logo">Nav bar</div>
-      <Burger open={open} onClick={() => setOpen(!open)}>
+      <StyledBurger open={open} onClick={() => setOpen(!open)}>
         <div></div>
         <div></div>
         <div></div>
-      </Burger>
-      <RightNav open={open}>
+      </StyledBurger>
+      <StyledRightNav open={open}>
         <li>
           <Link to="/">
             <i class="fas fa-home"></i>
@@ -175,7 +175,7 @@ export const Menu = () => {
             </Link>
           </li>
         )}
-      </RightNav>
-    </MenuBar>
+      </StyledRightNav>
+    </StyledMenuBar>
   );
 };
