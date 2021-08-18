@@ -78,7 +78,7 @@ export const SpecifyGroup = () => {
 
   const { isLogged } = useContext(LoginContext);
 
-  if (isLogged === undefined) {
+  if (isLogged === null) {
     return <Redirect to="/" />;
   }
 
