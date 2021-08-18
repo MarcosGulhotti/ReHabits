@@ -73,6 +73,10 @@ justify-content: space-between;
     display: none;
 }
 
+.removeButton {
+    display: none;
+}
+
 > div {
     width: 48%;
 

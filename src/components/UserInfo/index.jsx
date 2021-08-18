@@ -61,6 +61,10 @@ picture {
     }
 }
 
+div {
+    min-width: 400px;
+}
+
 h2 {
     font-size: calc(1vw + 1rem);
     font-family: var(--font-label);

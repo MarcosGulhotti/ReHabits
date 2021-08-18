@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services/api'
+import toast from "react-hot-toast";
 
 export const FormRegister = () => {
     const history = useHistory()
@@ -39,8 +40,11 @@ export const FormRegister = () => {
       const user = { username, email, password }
       api
       .post("/users/", user)
-      .then((resp) => history.push("/login"))
-      .catch(() => console.log("Nome ou e-mail já existente"))
+      .then(() => {
+        history.push("/login")
+        toast.success("Conta criado com sucesso!")
+      })
+      .catch(() => toast.error("Nome de usuário já existente"))
     }
 
     return (

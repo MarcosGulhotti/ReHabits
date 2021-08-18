@@ -42,11 +42,13 @@ export const Profile = () => {
         <Background>
             <Container>
                 {!modal ? (
-                <UserInfo />
+                <>
+                    <UserInfo />
+                    <ProfileHabits />
+                </>
                 ) : (
                 <ModalEditName setModal={setModal} />
                 )}
-                <ProfileHabits />
             </Container>
         </Background>
         </>
