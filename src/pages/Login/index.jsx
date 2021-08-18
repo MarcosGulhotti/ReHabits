@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-  @media (min-width: 1100px) {
+  @media (min-width: 1024px) {
     flex: 1;
     background: url(${loginImage});
     background-repeat: no-repeat;
@@ -32,6 +32,10 @@ const Content = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 1100px;
   }
 
   h1 {
