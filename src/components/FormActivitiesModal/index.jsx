@@ -7,12 +7,17 @@ import api from "../../services/api";
 import { InputDate } from "../../components/InputDate";
 
 const Container = styled.div`
-  width: 510px;
-  height: 475px;
-  background-color: var(--background);
-  border-radius: 10px;
+  width: 500px;
+  height: 400px;
   padding: 1rem;
-  margin-bottom: 8rem;
+
+  background-color: var(--gray);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-radius: 10px;
   form {
     display: flex;
     flex-direction: column;
@@ -21,12 +26,29 @@ const Container = styled.div`
       width: 100%;
       margin-bottom: 1rem;
     }
+    button {
+      height: 55px;
+      width: 40%;
+      border-radius: 7px;
+      border: 2px solid black;
+      background-color: var(--gold);
+      font-size: 1.5rem;
+      font-weight: lighter;
+      margin: 15px 0px 10px 0px;
+      cursor: pointer;
+      transition: filter 0.2s;
+      font-family: var(--font-button);
+
+      &:hover {
+        filter: brightness(110%);
+      }
+    }
   }
 `;
 
 export const FormActivitiesModal = ({
   groupId,
-  setActivitiesModal,
+  setAddActivity,
   setGroupActivities,
   groupActivities,
 }) => {
@@ -53,7 +75,7 @@ export const FormActivitiesModal = ({
       },
     });
     setGroupActivities([...groupActivities, newData]);
-    setActivitiesModal(false);
+    setAddActivity(false);
   };
 
   return (
