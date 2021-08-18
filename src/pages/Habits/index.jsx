@@ -107,10 +107,14 @@ const HabitsContainer = styled.div`
     }
 
     > div {
-      height: 150px;
+      min-height: 150px;
 
       @media (max-width: 800px) {
-        height: 120px;
+        min-height: 120px;
+      }
+
+      @media (max-width: 350px) {
+        min-height: 150px;
       }
     }
   }
