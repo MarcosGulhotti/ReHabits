@@ -21,17 +21,18 @@ export const HabitsProvider = ({ children }) => {
   }
 
   const addToHabits = (item, setModal) => {
-    console.log(item)
     api
       .post(`habits/`, item, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => getHabits())
-      .catch((e) => console.log(e));
+      .then(() => {
+        getHabits()
+        toast.success("Hábito adicionado");
+      })
+      .catch(() => toast.error("Algo deu errado"));
 
-    toast.success("Hábito Adicionado");
     setModal('closed');
   };
 
@@ -42,8 +43,11 @@ export const HabitsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => getHabits())
-      .catch((e) => console.log(e));
+      .then(() => {
+        getHabits()
+        toast.success("Hábito removido");
+      })
+      .catch((err) => console.log(err));
   };
 
   const editHabits = (item) => {
@@ -53,8 +57,11 @@ export const HabitsProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => getHabits())
-      .catch((e) => console.log(e))
+      .then(() => {
+        getHabits()
+        toast.success("Hábito atualizado")
+      })
+      .catch(() => toast.error("Algo deu errado"))
   }
 
   return (

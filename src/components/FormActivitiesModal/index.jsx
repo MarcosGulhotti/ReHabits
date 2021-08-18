@@ -4,14 +4,20 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
-import { InputDifficulty } from "../InputDifficulty";
+import { InputDate } from "../../components/InputDate";
 
 const StyledContainer = styled.div`
-  width: 510px;
-  height: 475px;
-  background-color: var(--gray);
-  border-radius: 10px;
+  width: 500px;
+  height: 400px;
   padding: 1rem;
+
+  background-color: var(--gray);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-radius: 10px;
 
   @media (max-width: 600px) {
     width: 100%;
@@ -31,12 +37,10 @@ const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     div {
       width: 100%;
       margin-bottom: 1rem;
     }
-
     button {
       height: 55px;
       width: 40%;
@@ -44,7 +48,7 @@ const StyledContainer = styled.div`
       border: 2px solid black;
       background-color: var(--gold);
       font-size: 1.5rem;
-      font-weight: bold;
+      font-weight: lighter;
       margin: 15px 0px 10px 0px;
       cursor: pointer;
       transition: filter 0.2s;
@@ -55,27 +59,19 @@ const StyledContainer = styled.div`
       }
 
       @media (max-width: 600px) {
-        width: 90%;
+        width: 95%;
+        height: 45px;
+        font-size: 1.2rem;
       }
     }
   }
 `;
 
-export const FormGoalsModal = ({
-  groupId,
-  setgoalModal,
-  setGroupGoals,
-  groupGoals,
-}) => {
-  const token = localStorage.getItem("token");
-
+export const FormActivitiesModal = ({ groupId, setAddActivity, setGroupActivities, groupActivities }) => {
+  const token = JSON.parse(localStorage.getItem("token"));
   const formSchema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
-    difficulty: yup.string().required("Campo obrigatório"),
-    how_much_achieved: yup
-      .string()
-      .matches(`^[1-9][0-9]?$|^100$`, "Apenas numeros de 0-100")
-      .required("Campo obrigatório"),
+    realization_time: yup.string().required("Campo obrigatório"),
   });
 
   const {
@@ -86,23 +82,16 @@ export const FormGoalsModal = ({
     resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = (data) => {
-    const { title, difficulty, how_much_achieved } = data;
-    const newData = { title, difficulty, how_much_achieved, group: groupId };
-    const newToken = JSON.parse(token);
+  const formSubmit = async (data) => {
+    const newData = { ...data, group: groupId };
 
-    api
-      .post("/goals/", newData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${newToken}`,
-        },
-      })
-      .then((resp) => {
-        setGroupGoals([...groupGoals, resp.data]);
-        setgoalModal(false);
-      })
-      .catch((e) => console.log(e));
+    await api.post("activities/", newData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setGroupActivities([...groupActivities, newData]);
+    setAddActivity(false);
   };
 
   return (
@@ -118,24 +107,15 @@ export const FormGoalsModal = ({
           />
         </div>
         <div className="inputDiv">
-          <InputDifficulty
-            error={errors.difficulty?.message}
-            name="difficulty"
+          <InputDate
+            error={errors.realization_time?.message}
+            name="realization_time"
             register={register}
-            placeholder="Coloque a dificuldade aqui"
-            label="Dificuldade"
+            placeholder="Coloque o tempo de realização aqui"
+            label="Tempo de realização"
           />
         </div>
-        <div className="inputDiv">
-          <Input
-            error={errors.how_much_achieved?.message}
-            name="how_much_achieved"
-            register={register}
-            placeholder="Coloque quanto você fez aqui"
-            label="Quanto fez"
-          />
-        </div>
-        <button type="submit">Criar objetivo</button>
+        <button type="submit">Criar atividade</button>
       </form>
     </StyledContainer>
   );

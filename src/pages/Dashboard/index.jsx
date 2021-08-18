@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useHistory } from "react-router";
 import { Menu } from "../../components/Menu";
 import { LoginContext } from "../../providers/Login";
@@ -7,8 +7,10 @@ import MenuDashboard from "../../Assets/img/Menu Dashboard.jpg";
 import Atividades from "../../Assets/img/Atividades.png";
 import GroupDashbord from "../../Assets/img/Groups Dashboard.jpg";
 import { DashboardButton } from "../../components/DashboardButton";
+import { Redirect } from "react-router-dom";
 
-const TopContainer = styled.div`
+const StyledTopContainer = styled.div`
+
   @media (min-width: 280px) {
     width: 100vw;
     height: calc(35vh - 55px);
@@ -18,15 +20,18 @@ const TopContainer = styled.div`
     align-items: center;
     border: none;
   }
+
   @media (min-width: 768px) {
     height: calc(31vh - 55px);
   }
+
   @media (min-width: 1024px) {
     height: calc(50vh - 55px);
   }
 `;
 
-const BottomContainer = styled.div`
+const StyledBottomContainer = styled.div`
+
   @media (min-width: 280px) {
     width: 100vw;
     height: calc(65vh);
@@ -36,10 +41,12 @@ const BottomContainer = styled.div`
     flex-direction: column;
     background-color: var(--background);
   }
+
   @media (min-width: 768px) {
     height: calc(69vh);
     background-color: var(--background);
   }
+
   @media (min-width: 1024px) {
     height: 50vh;
     background-color: var(--white);
@@ -47,7 +54,8 @@ const BottomContainer = styled.div`
   }
 `;
 
-const ParagraphContainer = styled.div`
+const StyledParagraphContainer = styled.div`
+
   @media (min-width: 280px) {
     width: 100vw;
     heigth: 100%;
@@ -56,6 +64,7 @@ const ParagraphContainer = styled.div`
     align-items: center;
     flex-direction: column;
   }
+
   @media (min-width: 1024px) {
     margin: 0 0 0 120px;
     height: 60%;
@@ -73,10 +82,12 @@ const ParagraphContainer = styled.div`
       text-align: center;
       margin: 0 20px 20px 5px;
     }
+
     @media (min-width: 768px) {
       font-size: 20px;
       line-height: 28px;
     }
+
     @media (min-width: 1024px) {
       font-size: 24px;
       margin: 30px 60px 30px 60px;
@@ -84,7 +95,8 @@ const ParagraphContainer = styled.div`
   }
 `;
 
-const Titulo = styled.h1`
+const StyledTitle = styled.h1`
+
   @media (min-width: 280px) {
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     color: var(--white);
@@ -95,20 +107,24 @@ const Titulo = styled.h1`
     line-height: 35px;
     margin-top: 20px;
   }
+
   @media (min-width: 768px) {
     font-size: 70px;
     line-height: 84px;
   }
+
   @media (min-width: 1024px) {
     font-size: 44px;
   }
 `;
 
-const ImageMenuDashboardContainer = styled.div`
+const StyledImageMenuDashboardContainer = styled.div`
+
   @media (min-width: 280px) {
     width: 0;
     height: 0;
   }
+
   @media (min-width: 1024px) {
     margin: 0 120px 0 0;
     width: 40vw;
@@ -122,6 +138,7 @@ const ImageMenuDashboardContainer = styled.div`
       width: 0;
       height: 0;
     }
+
     @media (min-width: 1024px) {
       border-radius: 230px;
       display: block;
@@ -134,7 +151,8 @@ const ImageMenuDashboardContainer = styled.div`
   }
 `;
 
-const OtherImagesContainer = styled.div`
+const StyledOtherImagesContainer = styled.div`
+
   @media (min-width: 280px) {
     width: 100vw;
     height: 30vh;
@@ -144,10 +162,12 @@ const OtherImagesContainer = styled.div`
     align-items: center;
     background-color: var(--background);
   }
+
   @media (min-width: 768px) {
     height: 33vh;
     justify-content: center;
   }
+
   @media (min-width: 1024px) {
     height: 50vh;
     width: 50vw;
@@ -155,18 +175,22 @@ const OtherImagesContainer = styled.div`
   }
 
   img {
+
     @media (min-width: 280px) {
       width: 80vw;
       height: 120px;
       border-radius: 10px;
     }
+
     @media (min-width: 768px) {
       height: 250px;
     }
+
     @media (min-width: 1024px) {
       width: 50vw;
       height: 220px;
     }
+
     @media (min-width: 1200px) {
       width: 600px;
       height: 200px;
@@ -177,8 +201,7 @@ const OtherImagesContainer = styled.div`
 
 export const Dashboard = () => {
   const history = useHistory();
-  const { setIsLogged } = useContext(LoginContext);
-  const token = localStorage.getItem("token");
+  const { isLogged } = useContext(LoginContext);
 
   const PushToGroups = () => {
     history.push("/groups");
@@ -188,50 +211,44 @@ export const Dashboard = () => {
     history.push("/habits");
   };
 
-  useEffect(() => {
-    if (token) {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-      history.push("/");
-    }
-    // eslint-disable-next-line
-  }, []);
+  if (isLogged === null) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
       <Menu />
-      <TopContainer>
-        <ParagraphContainer>
-          <Titulo>Aqui na Rehabits</Titulo>
+      <StyledTopContainer>
+        <StyledParagraphContainer>
+          <StyledTitle>Aqui na Rehabits</StyledTitle>
           <p>
             Você pode criar e compartilhar hábitos com outras pessoas, entrar em
             grupos e criar metas para você mesmo, inspirando outras pessoas a
             mudarem o estilo de vida...
           </p>
-        </ParagraphContainer>
-        <ImageMenuDashboardContainer>
+        </StyledParagraphContainer>
+        <StyledImageMenuDashboardContainer>
           <img src={MenuDashboard} alt="Alongamento" />
-        </ImageMenuDashboardContainer>
-      </TopContainer>
-      <BottomContainer>
-        <OtherImagesContainer>
+        </StyledImageMenuDashboardContainer>
+      </StyledTopContainer>
+      <StyledBottomContainer>
+        <StyledOtherImagesContainer>
           <img src={Atividades} alt="Atividades" />
           <DashboardButton
             func={PushToHabits}
             nome="Ver Hábitos"
             loginButton={true}
           />
-        </OtherImagesContainer>
-        <OtherImagesContainer>
+        </StyledOtherImagesContainer>
+        <StyledOtherImagesContainer>
           <img src={GroupDashbord} alt="Corredor" />
           <DashboardButton
             loginButton={false}
             func={PushToGroups}
             nome="Ver Grupos"
           />
-        </OtherImagesContainer>
-      </BottomContainer>
+        </StyledOtherImagesContainer>
+      </StyledBottomContainer>
     </>
   );
 };

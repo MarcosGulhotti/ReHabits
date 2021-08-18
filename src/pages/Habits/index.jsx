@@ -3,15 +3,16 @@ import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
 import { useContext, useEffect, useState } from "react";
 import { CardHabits } from "../../components/CardHabits";
-import { ModalHabit } from "../../components/ModalHabit"
+import { ModalHabit } from "../../components/ModalHabit";
 import { ModalEditHabit } from "../../components/ModalEditHabit";
+import { Redirect } from "react-router-dom";
+import { LoginContext } from "../../providers/Login";
 
-const Content = styled.div`
+const StyledContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-
   width: 95%;
   max-width: 1366px;
   height: 88vh;
@@ -32,16 +33,16 @@ const Content = styled.div`
   }
 `;
 
-const Background = styled.div`
-background-color: var(--background);
-width: 100%;
-min-height: calc(100vh - 55px);
-display: flex;
-justify-content: center;
-padding-top: 1rem;
-`
+const StyledBackground = styled.div`
+  background-color: var(--background);
+  width: 100%;
+  min-height: calc(100vh - 55px);
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+`;
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   background-color: var(--background);
   height: calc(100vh - 55px);
   display: flex;
@@ -82,7 +83,7 @@ const ButtonPosition = styled.div`
   }
 `;
 
-const HabitsContainer = styled.div`
+const StyledHabitsContainer = styled.div`
   width: 100%;
   height: 90%;
   overflow-y: scroll;
@@ -100,58 +101,69 @@ const HabitsContainer = styled.div`
     padding: 2rem 2rem 0rem 2rem;
 
     @media (max-width: 800px) {
-    width: 100%;
-    padding: 1rem 0rem 0rem 0rem;
-  }
+      width: 100%;
+      padding: 1rem 0rem 0rem 0rem;
+    }
 
     > div {
-      height: 150px;
+      min-height: 150px;
 
       @media (max-width: 800px) {
-        height: 120px;
+        min-height: 120px;
+      }
+
+      @media (max-width: 350px) {
+        min-height: 150px;
       }
     }
   }
-`
+`;
 
 export const Habits = () => {
   const { habits, getHabits } = useContext(HabitsContext);
-  const [modal, setModal] = useState('closed');
-  
+  const [modal, setModal] = useState("closed");
+
+  const { isLogged } = useContext(LoginContext);
+
   useEffect(() => {
-    getHabits()
-  }, [])
+    getHabits();
+    // eslint-disable-next-line
+  }, []);
+
+  if (isLogged === null) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>
       <Menu />
-        {modal === 'closed' ? (
-          <>
-            <Container>
-            <Content>
+      {modal === "closed" ? (
+        <>
+          <StyledContainer>
+            <StyledContent>
               <h1>Seus Hábitos</h1>
-              <HabitsContainer>
-                  {habits.map((elm, i) => (
-                    <CardHabits key={i} habits={elm} setModal={setModal}/>
-                  ))}
-              </HabitsContainer>
+              <StyledHabitsContainer>
+                {habits.map((elm, i) => (
+                  <CardHabits key={i} habits={elm} setModal={setModal} />
+                ))}
+              </StyledHabitsContainer>
               <ButtonPosition>
-                <button onClick={() => setModal('create')}>
+                <button onClick={() => setModal("create")}>
                   Adicionar Hábito
                 </button>
               </ButtonPosition>
-            </Content>
-            </Container>
-          </>
-        ) : modal === 'create' ? (
-          <Background>
-            <ModalHabit modal={modal} setModal={setModal} />
-          </Background>
-        ) : (
-          <Background>
-            <ModalEditHabit modal={modal} setModal={setModal} />
-          </Background>
-        )}
+            </StyledContent>
+          </StyledContainer>
+        </>
+      ) : modal === "create" ? (
+        <StyledBackground>
+          <ModalHabit modal={modal} setModal={setModal} />
+        </StyledBackground>
+      ) : (
+        <StyledBackground>
+          <ModalEditHabit modal={modal} setModal={setModal} />
+        </StyledBackground>
+      )}
     </>
   );
 };

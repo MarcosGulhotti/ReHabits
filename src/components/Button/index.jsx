@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ButtonStyle = styled.button`
+const StyledButtonStyle = styled.button`
   @media (max-width: 600px) {
     width: 80%;
   }
@@ -26,13 +26,13 @@ const ButtonStyle = styled.button`
 
 export const Button = ({ nome, loginButton, width, height, func }) => {
   return (
-    <ButtonStyle
+    <StyledButtonStyle
       onClick={() => func()}
       height={height}
       width={width}
       loginButton={loginButton}
     >
       {nome}
-    </ButtonStyle>
+    </StyledButtonStyle>
   );
 };

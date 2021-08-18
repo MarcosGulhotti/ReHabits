@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-const ButtonStyle = styled.button`
-  @media (max-width: 600px) {
-    width: 80%;
-  }
+const StyledButtonStyle = styled.button`
   height: ${({ height }) => (height === undefined ? "55px" : `${height}`)};
   width: ${({ width }) => (width === undefined ? "60%" : `${width}`)};
   border-radius: 7px;
@@ -19,20 +16,26 @@ const ButtonStyle = styled.button`
   border: ${(props) =>
     props.loginButton ? "2px solid #000000" : "2px solid #ECDEB0"};
   color: #000000;
+
   &:hover {
     filter: brightness(110%);
   }
+
+  @media (max-width: 600px) {
+    width: 80%;
+  }
+  
 `;
 
 export const DashboardButton = ({ nome, loginButton, width, height, func }) => {
   return (
-    <ButtonStyle
+    <StyledButtonStyle
       onClick={() => func()}
       height={height}
       width={width}
       loginButton={loginButton}
     >
       {nome}
-    </ButtonStyle>
+    </StyledButtonStyle>
   );
 };

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
 
-const Container = styled.div`
+const StyledContainer = styled.div`
   width: 100%;
   background: transparent;
   margin-bottom: 1rem;
@@ -10,56 +10,9 @@ const Container = styled.div`
   i {
     color: var(--red);
   }
-  .Trabalho {
-    //background-color: #9da0ec;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Família {
-    //background-color: #ecab9d;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Amigos {
-    //background-color: #be5bec;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Exercício {
-    //background-color: #3e9350;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Educação {
-    //background-color: #f87777;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Relacionamento {
-    //background-color: #ec9ddf;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Saúde {
-    //background-color: #ec5ba1;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
-  .Meditação {
-    //background-color: #936c3e;
-    background-color: var(--gold);
-    border-radius: 10px;
-    color: black;
-  }
 `;
-const Card = styled.div`
+
+const StyledCard = styled.div`
   width: 100%;
   height: 100px;
   display: flex;
@@ -68,9 +21,12 @@ const Card = styled.div`
   color: var(--white);
   border: 2px solid black;
   box-shadow: ${(props) => props.styleOnAchieve};
+  background-color: var(--gold);
+  color: black;
+  border-radius: 10px;
 `;
 
-const Title = styled.div`
+const StyledTitle = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -79,7 +35,7 @@ const Title = styled.div`
   font-family: var(--font-label);
 
   .limit {
-    width: 65%;
+    width: 85%;
     word-wrap: break-word;
 
     @media (max-width: 1100px) {
@@ -115,10 +71,21 @@ const Title = styled.div`
     .label {
       font-weight: 400;
       font-size: 0.8rem;
+      margin: 10px 0px -5px 10px;
 
       @media (max-width: 800px) {
         font-size: 0.7rem;
       }
+    }
+  }
+
+  .completed {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    i {
+      margin: 10px 0px -5px 3px;
     }
   }
 
@@ -140,10 +107,9 @@ const Title = styled.div`
       width: 63px;
     }
   }
-
 `;
 
-const Info = styled.div`
+const StyledInfo = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -210,35 +176,35 @@ export const CardHabits = ({ habits, setModal }) => {
     setModal('edit')
   }
 
-  const styleOnAchieve = () => {
-    if (achieved) {
-      return "0px 0px 5px 0px #00cf00e8"
-    } else {
-      return "none"
-    }
-  }
-
   return (
-    <Container>
-      <Card className={category} styleOnAchieve={styleOnAchieve}>
-        <Title>
+    <StyledContainer>
+      <StyledCard className={category}>
+        <StyledTitle>
           <div>
-            <span className="label">Completado:</span>
+            <div className="completed">
+              <span className="label">Completado:</span>
+              <i
+                onClick={() => removeFromHabits(habits)}
+                class={achieved ? "fas fa-check-circle fa-sm" : "fas fa-times-circle fa-sm"}
+                style={achieved ? {color: "#00d000"} : {color: "red"}}
+              />
+            </div>
             <span>{how_much_achieved}</span>
           </div>
           <div className="limit">
             <p>{title}</p>
           </div>
           <span className="remove">
-            <button onClick={() => removeFromHabits(habits)}>
+            <button className="removeButton" onClick={() => removeFromHabits(habits)}>
               <i
                 onClick={() => removeFromHabits(habits)}
-                class="fas fa-minus-circle"
+                class="fas fa-times fa-lg"
+                style={{color: "gray"}}
               />
             </button>
           </span>
-        </Title>
-        <Info>
+        </StyledTitle>
+        <StyledInfo>
           <div>
             <p>Dificuldade:</p>
             <span>{difficulty}</span>
@@ -250,8 +216,8 @@ export const CardHabits = ({ habits, setModal }) => {
             <p>Frequencia:</p>
             <span>{frequency}</span>
           </div>
-        </Info>
-      </Card>
-    </Container>
+        </StyledInfo>
+      </StyledCard>
+    </StyledContainer>
   );
 };

@@ -1,15 +1,13 @@
-import styled from 'styled-components'
-import { Input } from '../Input'
-import { HabitsContext } from "../../providers/Habits";
-import { useContext } from "react";
+import styled from "styled-components";
+import { Input } from "../Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useProfile } from '../../providers/Profile';
+import { useProfile } from "../../providers/Profile";
 
-const Content = styled.div`
+const StyledContent = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 
@@ -20,109 +18,132 @@ const Content = styled.div`
   border-radius: 10px;
   padding: 0.75rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     width: 100%;
     border-radius: 0;
-    height: 90vh;
+    height: calc(100vh - 55px);
   }
 
   h1 {
     font-family: var(--font-title);
     font-size: 3rem;
     font-weight: 400;
+    margin-bottom: 1rem;
+
+    @media (max-width: 600px) {
+      font-size: 2rem;
+    }
   }
 `;
 
-const ButtonPosition = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+const StyledButtonPosition = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    button {
-        height: 65px;
-        width: 30%;
-        border-radius: 7px;
-        border: 2px solid black;
-        background-color: var(--gold);
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin: 15px 0px 10px 0px;
-        cursor: pointer;
-        transition: filter 0.2s;
-        font-family: var(--font-button);
+  button {
+    height: 65px;
+    width: 250px;
+    border-radius: 7px;
+    border: 2px solid black;
+    background-color: var(--gold);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 15px 0px 10px 0px;
+    cursor: pointer;
+    transition: filter 0.2s;
+    font-family: var(--font-button);
 
-        @media (max-width: 600px) {
-        width: 80%;
-        }
+    @media (max-width: 600px) {
+      width: 80%;
+      height: 45px;
+      font-size: 1rem;
     }
+  }
 
-    button:hover {
-        filter: brightness(110%);
-    }
+  button:hover {
+    filter: brightness(110%);
+  }
 `;
 
-const Modal = styled.div`
-background-color: var(--background);
-border-radius: 15px;
-padding: 2rem 7rem 2rem 7rem;
+const StyledModal = styled.div`
+  background-color: var(--background);
+  border-radius: 15px;
+  padding: 2rem 7rem 2rem 7rem;
 
-> * > * > div {
+  @media (max-width: 600px) {
+    width: 100%;
+    padding: 1rem 1rem 1rem 1rem;
+  }
+
+  > * > * > div {
     margin-bottom: 20px;
-}
+  }
 
-input {
-  width: 350px;
-}
+  input {
+    width: 350px;
+  }
 
-button {
-  bottom: 0;
-}
-`
+  button {
+    bottom: 0;
+  }
+
+  #return {
+    background-color: var(--background);
+    padding: 0rem 0rem 1rem 0rem;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+`;
 
 export const ModalEditName = ({ setModal }) => {
-    const { editUsername } = useProfile()
+  const { editUsername } = useProfile();
 
-    const formSchema = yup.object().shape({
-        username: yup.string().required("Categoria obrigatório"),
-    });
+  const formSchema = yup.object().shape({
+    username: yup.string().required("Categoria obrigatório"),
+  });
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(formSchema),
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
 
-    const formSubmit = (data) => {
-        editUsername(data)
-        setModal(false)
-    };
+  const formSubmit = (data) => {
+    editUsername(data);
+    setModal(false);
+  };
 
-    return (
-        <Content align={"center"}>
-            <Modal>
-              <form onSubmit={handleSubmit(formSubmit)}>
-                <button onClick={() => setModal(false)}>Close</button>
-                <div>
-                    <div>
-                        <Input
-                        error={errors.username?.message}
-                        name="username"
-                        register={register}
-                        placeholder="Usuário"
-                        label="Mudar usuário -"
-                        />
-                    </div>
-                </div>
-                <ButtonPosition>
-                  <button style={{ width: `250px` }} type="submit">
-                    Mudar
-                  </button>
-                </ButtonPosition>
-              </form>
-            </Modal>
-          </Content>
-    )
-}
+  return (
+    <StyledContent align={"center"}>
+      <h1>Mudar usuário</h1>
+      <StyledModal>
+        <form onSubmit={handleSubmit(formSubmit)}>
+          <i
+            onClick={() => setModal(false)}
+            class="fas fa-chevron-left"
+            id="return"
+          />
+          <div>
+            <div>
+              <Input
+                error={errors.username?.message}
+                name="username"
+                register={register}
+                placeholder="Usuário"
+                label="Mudar usuário -"
+              />
+            </div>
+          </div>
+          <StyledButtonPosition>
+            <button type="submit">Mudar</button>
+          </StyledButtonPosition>
+        </form>
+      </StyledModal>
+    </StyledContent>
+  );
+};

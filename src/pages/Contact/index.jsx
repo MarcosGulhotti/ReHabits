@@ -42,42 +42,45 @@ const Dados = {
   },
 };
 
-const Container = styled.div`
+const StyledContainer = styled.div`
+  width: 100vw;
+  background-color: var(--background);
+  overflow-x: hidden;
+
   @media (min-width: 769px) {
     height: 100vh;
   }
-  width: 100%;
-  background-color: var(--background);
-  overflow: scroll;
 `;
 
-const ContactDiv = styled.div`
+const StyledContactDiv = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 3rem;
+
   @media (min-width: 769px) {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
   }
-  @media (max-width: 1024px){
+
+  @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
   }
-  margin-top: 3rem;
 `;
 
 export const Contact = () => {
   const { Marcos, Arthur, Lucas, Luiz } = Dados;
   return (
-    <Container>
+    <StyledContainer>
       <Menu />
-      <ContactDiv>
+      <StyledContactDiv>
         <ContactCard Dados={Marcos} />
         <ContactCard Dados={Arthur} />
         <ContactCard Dados={Lucas} />
         <ContactCard Dados={Luiz} />
-      </ContactDiv>
-    </Container>
+      </StyledContactDiv>
+    </StyledContainer>
   );
 };
