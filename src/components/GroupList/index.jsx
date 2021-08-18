@@ -9,6 +9,7 @@ import { Input } from "../Input";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import toast from "react-hot-toast";
 
 export const StyledGroupList = styled.ul`
   @media (min-width: 280px) {
@@ -26,16 +27,22 @@ export const StyledGroupList = styled.ul`
     flex-wrap: wrap;
     flex-direction: row;
     overflow: auto;
+    padding: 1rem;
 
+    button {
+      width: 200px;
+    }
     h2 {
       width: 100%;
     }
   }
   @media (min-width: 1024px) {
     height: 85%;
+    padding: 1rem;
   }
   @media (min-width: 1200px) {
     height: 70%;
+    padding: 1rem;
   }
 `;
 
@@ -48,10 +55,7 @@ export const StyledGoalsActivitiesList = styled.ul`
   max-height: 550px;
   overflow: auto;
   margin-bottom: 20px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  padding: 1rem;
 `;
 
 export const GroupList = () => {
@@ -103,7 +107,9 @@ export const GroupList = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    alert("grupo criado");
+    toast.success("grupo criado");
+    setMyGroups([...myGroups, data]);
+    setModalOpen(false);
   };
 
   return (
@@ -130,7 +136,12 @@ export const GroupList = () => {
         ) : (
           <StyledGroupList>
             {myGroups?.map((el) => (
-              <CardGroup key={el.id} title={el.name} category={el.category} />
+              <CardGroup
+                key={el.id}
+                title={el.name}
+                category={el.category}
+                handleFunction={() => enterGroupInterface(el.id)}
+              />
             ))}
           </StyledGroupList>
         )}
