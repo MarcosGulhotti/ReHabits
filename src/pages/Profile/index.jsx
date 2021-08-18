@@ -24,6 +24,7 @@ const Container = styled.div`
   overflow: auto;
   background-color: var(--white);
   margin: 1rem;
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     margin: 0;
@@ -35,25 +36,14 @@ const Container = styled.div`
 export const Profile = () => {
   const { getUser, modal, setModal } = useProfile();
 
-  const { isLogged, setIsLogged } = useContext(LoginContext);
-
-  const token = localStorage.getItem("token");
-
-  const authenticate = () => {
-    if (token !== "") {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-  };
+  const { isLogged } = useContext(LoginContext);
 
   useEffect(() => {
     getUser();
-    authenticate();
     // eslint-disable-next-line
   }, []);
 
-  if (!isLogged) {
+  if (isLogged === undefined) {
     return <Redirect to="/" />;
   }
 
