@@ -36,7 +36,7 @@ export const FormLogin = () => {
         setUserId(access);
         setIsLogged(localStorage.getItem("token"));
         history.push("/dashboard");
-        toast.success("Logado com sucesso!");
+        window.location.reload();
     }
     catch {
       toast.error("Usuário ou senha inválido")

@@ -10,7 +10,7 @@ export const StyledBackgroundGroups = styled.div`
     position: fixed;
     z-index: -1;
     width: 100vw;
-    overflow: auto;
+    overflow-y: scroll;
     padding: 0;
   }
 
@@ -74,7 +74,7 @@ export const StyledBackgroundGroups = styled.div`
     @media (min-width: 280px) {
       position: static;
       display: block;
-      margin: 20px 0 0 calc(50vw - 113px);
+      margin: 20px 0 0 calc(50vw - 114px);
     }
     @media (min-width: 360px) {
       margin: 20px 0 0 calc(50vw - 131px);
