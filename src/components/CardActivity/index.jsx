@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import styled from "styled-components";
 import api from "../../services/api";
 
@@ -88,6 +89,7 @@ export const CardActivity = ({
   setIdActivity,
   modal,
   setModal,
+  gettingDataFromGroups,
 }) => {
   const token = JSON.parse(localStorage.getItem("token"));
   const [groupActivities, setGroupActivities] = useState([]);
@@ -99,10 +101,12 @@ export const CardActivity = ({
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() =>
-        setGroupActivities(groupActivities.filter((elm) => elm.id !== id))
-      )
-      .catch((e) => console.log(e));
+      .then(() => {
+        gettingDataFromGroups();
+        setGroupActivities(groupActivities.filter((elm) => elm.id !== id));
+        toast.success('Item removido com sucesso')
+      })
+      .catch((e) => toast.error('Algo deu errado'));
   };
 
   return (

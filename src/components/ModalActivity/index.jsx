@@ -133,6 +133,7 @@ export const ModalActivity = () => {
                 actv={actv}
                 setIdActivity={setIdActivity}
                 idActivity={idActivity}
+                gettingDataFromGroups={gettingDataFromGroups}
               />
             ))}
           {modal && (
@@ -154,6 +155,7 @@ export const ModalActivity = () => {
             setAddActivity={setAddActivity}
             setGroupActivities={setGroupActivities}
             groupActivities={groupActivities}
+            gettingDataFromGroups={gettingDataFromGroups}
           />
         </StyledListUl>
       )}

@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { InputDate } from "../../components/InputDate";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const StyledContainer = styled.div`
   width: 500px;
@@ -68,12 +69,23 @@ const StyledContainer = styled.div`
   }
 `;
 
-export const FormActivitiesModal = ({ groupId, setAddActivity, setGroupActivities, groupActivities }) => {
+export const FormActivitiesModal = ({
+  groupId,
+  setAddActivity,
+  setGroupActivities,
+  groupActivities,
+  gettingDataFromGroups,
+}) => {
   const token = JSON.parse(localStorage.getItem("token"));
   const formSchema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     realization_time: yup.string().required("Campo obrigatório"),
   });
+
+  useEffect(() => {
+    gettingDataFromGroups();
+    // eslint-disable-next-line
+  }, []);
 
   const {
     register,
@@ -88,16 +100,16 @@ export const FormActivitiesModal = ({ groupId, setAddActivity, setGroupActivitie
 
     try {
       await api.post("activities/", newData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    toast.success("Atividade criada.")
-    setGroupActivities([...groupActivities, newData]);
-    setAddActivity(false);
-    }
-    catch {
-      toast.error("Algo deu errado.")
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Atividade criada.");
+      setGroupActivities([...groupActivities, newData]);
+      gettingDataFromGroups()
+      setAddActivity(false);
+    } catch {
+      toast.error("Algo deu errado.");
     }
   };
 
