@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import styled from "styled-components";
 import api from "../../services/api";
 
@@ -132,38 +133,41 @@ const StyledSecondContent = styled.div`
   }
 `;
 
-export const CardGoals = ({
-  goals,
-  groupGoals,
-  setGroupGoals,
-  gettingDataFromGroups,
-}) => {
+export const CardGoals = ({ goals, groupGoals, setGroupGoals,gettingDataFromGroups }) => {
   const token = JSON.parse(localStorage.getItem("token"));
 
-  const handlePatch = (elm) => {
+  const handlePatch = async (elm) => {
     const { id, achieved } = elm;
     const newAchieved = { achieved: !achieved };
 
-    api
-      .patch(`/goals/${id}/`, newAchieved, {
+    try {
+      await api.patch(`/goals/${id}/`, newAchieved, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((_) => gettingDataFromGroups())
-      .catch((e) => console.log(e));
+      toast.success("Objetivo concluido com sucesso.")
+      gettingDataFromGroups()
+    }
+    catch {
+      toast.error("Algo deu errado.")
+    }
   };
 
-  const removeFromGoals = (id) => {
-    api
-      .delete(`goals/${id}/`, {
+  const removeFromGoals = async (id) => {
+    try {
+      await api.delete(`goals/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => setGroupGoals(groupGoals.filter((elm) => elm.id !== id)))
-      .catch((e) => console.log(e));
+      toast.success("Objetivo deletado.")
+      setGroupGoals(groupGoals.filter((elm) => elm.id !== id))
+    }
+    catch {
+      toast.error("Algo deu errado.")
+    }
   };
 
   return (

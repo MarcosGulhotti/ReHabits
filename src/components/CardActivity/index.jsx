@@ -94,19 +94,20 @@ export const CardActivity = ({
   const token = JSON.parse(localStorage.getItem("token"));
   const [groupActivities, setGroupActivities] = useState([]);
 
-  const removeFromActivities = (id) => {
-    api
-      .delete(`activities/${id}/`, {
+  const removeFromActivities = async (id) => {
+    try {
+      await api.delete(`activities/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {
-        gettingDataFromGroups();
-        setGroupActivities(groupActivities.filter((elm) => elm.id !== id));
-        toast.success('Item removido com sucesso')
-      })
-      .catch((e) => toast.error('Algo deu errado'));
+      gettingDataFromGroups();
+      setGroupActivities(groupActivities.filter((elm) => elm.id !== id));
+      toast.success('Item removido com sucesso')
+    }
+    catch {
+      toast.error('Algo deu errado')
+    }
   };
 
   return (
