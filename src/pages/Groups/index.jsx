@@ -11,8 +11,6 @@ export const Groups = () => {
     return <Redirect to="/" />;
   }
 
-  console.log(isLogged);
-
   return (
     <>
       <Menu />

@@ -21,7 +21,7 @@ export const ProfileProvider = ({ children }) => {
             setUserInfo(resp.data)
         }
         catch {
-            toast.error('Algo deu errado.')
+           
         }
     }
 

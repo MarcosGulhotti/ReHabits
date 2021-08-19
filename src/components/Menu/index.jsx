@@ -2,18 +2,21 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useState, useContext } from "react";
 import { LoginContext } from "../../providers/Login";
+import imageLogo from "../../Assets/img/logosite.png"
 
 const StyledMenuBar = styled.nav`
   width: 100%;
   height: 55px;
   background-color: var(--white);
-  padding: 0 20px;
+  padding: 0 20px 0 5px;
   display: flex;
   justify-content: space-between;
   position: relative;
   z-index: 100;
   .logo {
-    padding: 15px 0;
+    margin-top: 2px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -123,7 +126,7 @@ export const Menu = () => {
 
   return (
     <StyledMenuBar>
-      <div className="logo">Nav bar</div>
+      <img className="logo" src={imageLogo} alt="logo"></img>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
         <div></div>
         <div></div>
