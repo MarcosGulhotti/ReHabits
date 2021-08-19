@@ -45,6 +45,11 @@ export const StyledGroupList = styled.ul`
     height: 70%;
     padding: 1rem;
   }
+
+  #sentinela {
+    height: 10px;
+    width: 100%;
+  }
 `;
 
 export const StyledGoalsActivitiesList = styled.ul`
@@ -66,11 +71,24 @@ export const GroupList = () => {
   const [myGroups, setMyGroups] = useState([]);
   const history = useHistory();
   const [modalOpen, setModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
-    api.get("/groups/").then((resp) => setGroups(resp.data.results));
+    api.get(`/groups/?per_page=15&page=${currentPage}`)
+      .then((resp) => setGroups([...groups, ...resp.data.results]));
     // eslint-disable-next-line
-  }, []);
+  }, [currentPage]);
+
+  useEffect(() => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        setCurrentPage((currentPageInsideState => currentPageInsideState + 1))
+      }
+    })
+
+    intersectionObserver.observe(document.querySelector('#sentinela'))
+    return () => intersectionObserver.disconnect()
+  }, [])
 
   const enterGroupInterface = (id) => {
     history.push(`/${id}`);
@@ -139,6 +157,7 @@ export const GroupList = () => {
                 handleFunction={() => enterGroupInterface(el.id)}
               />
             ))}
+            <li id='sentinela' />
           </StyledGroupList>
         ) : (
           <StyledGroupList>
