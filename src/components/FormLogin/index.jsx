@@ -28,18 +28,19 @@ export const FormLogin = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = (data) => {
-    api
-      .post("/sessions/", data)
-      .then((response) => {
-        const { access } = response.data;
+  const formSubmit = async (data) => {
+    try {
+      const resp = await api.post("/sessions/", data)
+        const { access } = resp.data;
         localStorage.setItem("token", JSON.stringify(access));
         setUserId(access);
         setIsLogged(localStorage.getItem("token"));
         history.push("/dashboard");
         toast.success("Logado com sucesso!");
-      })
-      .catch(() => toast.error("Usuário ou senha inválido"));
+    }
+    catch {
+      toast.error("Usuário ou senha inválido")
+    }
   };
 
   return (

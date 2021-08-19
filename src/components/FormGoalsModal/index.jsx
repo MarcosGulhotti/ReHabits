@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { InputDifficulty } from "../InputDifficulty";
+import toast from "react-hot-toast";
 
 const StyledContainer = styled.div`
   width: 510px;
@@ -61,12 +62,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-export const FormGoalsModal = ({
-  groupId,
-  setgoalModal,
-  setGroupGoals,
-  groupGoals,
-}) => {
+export const FormGoalsModal = ({ groupId, setgoalModal, setGroupGoals, groupGoals }) => {
   const token = localStorage.getItem("token");
 
   const formSchema = yup.object().shape({
@@ -86,23 +82,25 @@ export const FormGoalsModal = ({
     resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = (data) => {
+  const formSubmit = async (data) => {
     const { title, difficulty, how_much_achieved } = data;
     const newData = { title, difficulty, how_much_achieved, group: groupId };
     const newToken = JSON.parse(token);
 
-    api
-      .post("/goals/", newData, {
+    try {
+      const resp = await api.post("/goals/", newData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${newToken}`,
         },
       })
-      .then((resp) => {
-        setGroupGoals([...groupGoals, resp.data]);
-        setgoalModal(false);
-      })
-      .catch((e) => console.log(e));
+      toast.success('Objetivo criado com sucesso.')
+      setGroupGoals([...groupGoals, resp.data]);
+      setgoalModal(false);
+    }
+    catch {
+      toast.error('Algo deu errado.')
+    }
   };
 
   return (

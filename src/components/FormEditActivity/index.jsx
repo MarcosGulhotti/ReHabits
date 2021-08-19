@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../Input";
 import api from "../../services/api";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 const StyledContainer = styled.li`
   width: 500px;
@@ -62,13 +63,7 @@ const StyledButtonPosition = styled.div`
   }
 `;
 
-export const FormEditActivity = ({
-  modal,
-  setModal,
-  idActivity,
-  setIdActivity,
-  groupActivities,
-}) => {
+export const FormEditActivity = ({ modal, setModal, idActivity, setIdActivity, groupActivities }) => {
   const token = JSON.parse(localStorage.getItem("token"));
 
   const formSchema = yup.object().shape({
@@ -83,25 +78,25 @@ export const FormEditActivity = ({
     resolver: yupResolver(formSchema),
   });
 
-  const handleEditActivity = (data) => {
+  const handleEditActivity = async (data) => {
     const newData = { title: data.category };
 
-    api
-      .patch(`activities/${idActivity}/`, newData, {
+    try {
+      await api.patch(`activities/${idActivity}/`, newData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((resp) => {
-        alert("Titulo Alterado");
-        groupActivities.map((elm) =>
-          elm.id === idActivity ? (elm.title = newData.title) : null
-        );
-
-        setIdActivity("");
-        setModal(!modal);
-      })
-      .catch((e) => console.log(e));
+      toast.success("Titulo Alterado");
+      groupActivities.map(elm =>
+        elm.id === idActivity ? (elm.title = newData.title) : null
+      );
+      setIdActivity("");
+      setModal(!modal);
+    }  
+    catch {
+      toast.error("Algo deu errado.")
+    }
   };
 
   return (

@@ -36,15 +36,16 @@ export const FormRegister = () => {
         resolver: yupResolver(formSchema)
     })
 
-    const formSubmit = ({ username, email, password }) => {
+    const formSubmit = async ({ username, email, password }) => {
       const user = { username, email, password }
-      api
-      .post("/users/", user)
-      .then(() => {
+      try { 
+        await api.post("/users/", user)
         history.push("/login")
         toast.success("Conta criado com sucesso!")
-      })
-      .catch(() => toast.error("Nome de usuário já existente"))
+      }
+      catch {
+        toast.error("Nome de usuário já existente")
+      }
     }
 
     return (

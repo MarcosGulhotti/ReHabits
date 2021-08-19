@@ -113,7 +113,7 @@ export const ModalEditHabit = ({ modal, setModal }) => {
   const { editHabits } = useContext(HabitsContext);
 
   const formSchema = yup.object().shape({
-    how_much_achieved: yup.string().required("Categoria obrigatório"),
+    how_much_achieved: yup.string().required("Categoria obrigatório").matches(/[0-9]+/gi, 'Quantidade de dias obrigatória'),
     achieved: yup.string().required("Categoria obrigatória"),
   });
 

@@ -69,6 +69,7 @@ export const GroupList = () => {
 
   useEffect(() => {
     api.get("/groups/").then((resp) => setGroups(resp.data.results));
+    // eslint-disable-next-line
   }, []);
 
   const enterGroupInterface = (id) => {
@@ -76,12 +77,12 @@ export const GroupList = () => {
   };
 
   const getMyGroups = async () => {
-    const response = await api.get("/groups/subscriptions/", {
+    const resp = await api.get("/groups/subscriptions/", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    setMyGroups(response.data);
+    setMyGroups(resp.data);
     setShowMyGroups(!showMyGroups);
   };
 
@@ -103,7 +104,8 @@ export const GroupList = () => {
   });
 
   const handleCreateGroup = async (data) => {
-    await api.post("/groups/", data, {
+    try {
+      await api.post("/groups/", data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -111,6 +113,10 @@ export const GroupList = () => {
     toast.success("grupo criado");
     setMyGroups([...myGroups, data]);
     setModalOpen(false);
+    }
+    catch {
+      toast.error('Algo deu errado.')
+    }
   };
 
   return (

@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserId } from '../../providers/UserId'
+import { InputDifficulty } from '../InputDifficulty'
 
 const StyledContainer = styled.div`
 background-color: var(--white);
@@ -166,7 +167,7 @@ export const ModalHabit = ({ modal, setModal }) => {
                     />
                   </div>
                   <div>
-                    <Input
+                    <InputDifficulty
                       error={errors.difficulty?.message}
                       name="difficulty"
                       register={register}

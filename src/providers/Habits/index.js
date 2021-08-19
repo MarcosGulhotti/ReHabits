@@ -9,59 +9,54 @@ export const HabitsProvider = ({ children }) => {
   const [habits, setHabits] = useState([]);
   const [editHabit, setEditHabit] = useState("")
   
-  const getHabits = () => {
-    api
-      .get(`habits/personal/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => setHabits(response.data))
-      .catch((err) => console.log(err))
+  const getHabits = async () => {
+    const resp = await api.get(`habits/personal/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    setHabits(resp.data)
   }
 
-  const addToHabits = (item, setModal) => {
-    api
-      .post(`habits/`, item, {
+  const addToHabits = async (item, setModal) => {
+    try {
+      await api.post(`habits/`, item, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {
-        getHabits()
-        toast.success("Hábito adicionado");
-      })
-      .catch(() => toast.error("Algo deu errado"));
-
-    setModal('closed');
+      getHabits()
+      toast.success("Hábito adicionado")
+      setModal('closed')
+    }
+    catch {
+      toast.error("Algo deu errado ao adicionar")
+    }
   };
 
-  const removeFromHabits = (habit) => {
-    api
-      .delete(`habits/${habit.id}/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(() => {
-        getHabits()
-        toast.success("Hábito removido");
-      })
-      .catch((err) => console.log(err));
+  const removeFromHabits = async (habit) => {
+    await api.delete(`habits/${habit.id}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    getHabits()
+    toast.success("Hábito removido");
   };
 
-  const editHabits = (item) => {
-    api
-      .patch(`habits/${editHabit}/`, item, {
+  const editHabits = async (item) => {
+    try { 
+      await api.patch(`habits/${editHabit}/`, item, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {
-        getHabits()
-        toast.success("Hábito atualizado")
-      })
-      .catch(() => toast.error("Algo deu errado"))
+      getHabits()
+      toast.success("Hábito atualizado")
+    }
+    catch{
+      toast.error("Algo deu errado ao editar")
+    }
   }
 
   return (

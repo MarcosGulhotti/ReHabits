@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../../services/api";
 import styled from "styled-components";
+import toast from "react-hot-toast";
 
 const StyledContainer = styled.div`
   width: 500px;
@@ -89,18 +90,21 @@ export const FormEditGroup = ({ setEditGroupModal }) => {
 
   const handleEditGroup = async (data) => {
     if (dataGroup.creator.id === parseInt(userInfo.id)) {
-      api
-        .patch(`groups/${id}/`, data, {
+      try {
+        await api.patch(`groups/${id}/`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((_) => {
-          setEditGroupModal(false);
-          alert("Categoria mudada com sucesso!");
-        })
-        .catch((e) => console.log(e));
-    } else alert("Você precisa ser dono de um grupo para poder edita-lo");
+        setEditGroupModal(false);
+        toast.success("Categoria alterada com sucesso!");
+      }
+      catch {
+        toast.error("Algo deu errado.")
+      }
+    } else {
+      toast.error("Você precisa ser dono de um grupo para poder edita-lo");
+      }
   };
 
   return (

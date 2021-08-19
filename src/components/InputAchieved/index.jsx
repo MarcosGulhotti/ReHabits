@@ -35,7 +35,7 @@ const StyledContainerInput = styled.div`
     border-color: var(--gray);
   }
 
-  input {
+  select {
     font-family: var(--font-label);
     background: transparent;
     align-items: center;

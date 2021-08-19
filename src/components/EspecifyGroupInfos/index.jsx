@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import api from "../../services/api";
@@ -79,17 +80,17 @@ export const EspecifyGroupInfos = () => {
   }, []);
 
   const handleSubscribe = async (id) => {
-    await api
-      .post(
-        `groups/${id}/subscribe/`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    try {
+      await api.post(`groups/${id}/subscribe/`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
           },
-        }
-      )
-      .catch((e) => alert("Voce já é inscrito nesse canal!"));
+        })
+    toast.success('Parabens, você se inscreveu.')
+    }
+    catch(e) {
+      toast.error("Voce já é inscrito nesse canal!")
+    }
   };
 
   return (

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { InputDate } from "../../components/InputDate";
+import toast from "react-hot-toast";
 
 const StyledContainer = styled.div`
   width: 500px;
@@ -85,13 +86,19 @@ export const FormActivitiesModal = ({ groupId, setAddActivity, setGroupActivitie
   const formSubmit = async (data) => {
     const newData = { ...data, group: groupId };
 
-    await api.post("activities/", newData, {
+    try {
+      await api.post("activities/", newData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    toast.success("Atividade criada.")
     setGroupActivities([...groupActivities, newData]);
     setAddActivity(false);
+    }
+    catch {
+      toast.error("Algo deu errado.")
+    }
   };
 
   return (

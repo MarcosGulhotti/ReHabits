@@ -11,29 +11,33 @@ export const ProfileProvider = ({ children }) => {
     const token = JSON.parse(localStorage.getItem("token"));
     const id = JSON.parse(localStorage.getItem("Id"));
 
-    const getUser = () => {
-        api
-            .get(`users/${id}/`, {
+    const getUser = async () => {
+        try {
+            const resp = await api.get(`users/${id}/`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            .then((response) => setUserInfo(response.data))
-            .catch((err) => console.log(err))
+            setUserInfo(resp.data)
+        }
+        catch {
+            toast.error('Algo deu errado.')
+        }
     }
 
-    const editUsername = (item) => {
-        api
-            .patch(`users/${id}/`, item, {
+    const editUsername = async (item) => {
+        try {
+            await api.patch(`users/${id}/`, item, {
                 headers: {
                 Authorization: `Bearer ${token}`,
                 },
             })
-            .then(() => {
-                getUser()
-                toast.success("Nome editado com sucesso!")
-            })
-            .catch(() => toast.error("Usuário já existente"))
+            getUser()
+            toast.success("Nome editado com sucesso!")
+        }
+        catch {
+            toast.error("Usuário já existente")
+        }
       }
 
     return (
