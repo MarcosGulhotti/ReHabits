@@ -1,6 +1,6 @@
 import imageHome from "../../Assets/img/Home Page.svg";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../../providers/Login";
 import { Button } from "../../components/Button";
@@ -146,6 +146,10 @@ export const Home = () => {
   const RedirectToRegister = () => {
     history.push("/register");
   };
+
+  if (isLogged !== null) {
+      return <Redirect to="/dashboard" />
+  }
 
   return (
     <StyledHomePageContainer>

@@ -2,6 +2,9 @@ import styled from "styled-components";
 import registerImage from "../../Assets/img/CadastroPage.svg";
 import { Menu } from "../../components/Menu";
 import { FormRegister } from "../../components/FormRegister";
+import { useContext } from "react";
+import { LoginContext } from "../../providers/Login";
+import { Redirect } from "react-router-dom";
 
 const StyledContainer = styled.div`
   height: calc(100vh - 55px);
@@ -125,6 +128,13 @@ const StyledFormContainer = styled.div`
 `;
 
 export const Register = () => {
+
+  const { isLogged } = useContext(LoginContext);
+
+  if (isLogged !== null) {
+    return <Redirect to="/dashboard" />
+}
+
   return (
     <>
       <Menu />
