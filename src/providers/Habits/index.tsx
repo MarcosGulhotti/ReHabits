@@ -1,13 +1,14 @@
 import { createContext, useState } from "react";
 import toast from "react-hot-toast";
 import api from "../../services/api";
-const token = JSON.parse(localStorage.getItem("token"));
+import { IAddToHabits, IHabits, IHabitsContextData, IProviderProps } from "../../types";
+const token = JSON.parse(localStorage.getItem("token") || "null");
 
-export const HabitsContext = createContext([]);
+export const HabitsContext = createContext({} as IHabitsContextData);
 
-export const HabitsProvider = ({ children }) => {
-  const [habits, setHabits] = useState([]);
-  const [editHabit, setEditHabit] = useState("")
+export const HabitsProvider = ({ children }: IProviderProps) => {
+  const [habits, setHabits] = useState<IHabits[]>([]);
+  const [editHabit, setEditHabit] = useState<number>(0)
   
   const getHabits = async () => {
     const resp = await api.get(`habits/personal/`, {
@@ -18,9 +19,9 @@ export const HabitsProvider = ({ children }) => {
     setHabits(resp.data)
   }
 
-  const addToHabits = async (item, setModal) => {
+  const addToHabits = async ({ newData, setModal }: IAddToHabits) => {
     try {
-      await api.post(`habits/`, item, {
+      await api.post(`habits/`, newData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +35,7 @@ export const HabitsProvider = ({ children }) => {
     }
   };
 
-  const removeFromHabits = async (habit) => {
+  const removeFromHabits = async (habit : {id: number}) => {
     await api.delete(`habits/${habit.id}/`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -44,7 +45,7 @@ export const HabitsProvider = ({ children }) => {
     toast.success("Hábito removido");
   };
 
-  const editHabits = async (item) => {
+  const editHabits = async (item: {}) => {
     try { 
       await api.patch(`habits/${editHabit}/`, item, {
         headers: {

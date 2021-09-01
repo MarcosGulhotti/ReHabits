@@ -121,7 +121,7 @@ const StyledHabitsContainer = styled.div`
 
 export const Habits = () => {
   const { habits, getHabits } = useContext(HabitsContext);
-  const [modal, setModal] = useState("closed");
+  const [modal, setModal] = useState<string>("closed");
 
   const { isLogged } = useContext(LoginContext);
 
@@ -144,7 +144,7 @@ export const Habits = () => {
               <h1>Seus Hábitos</h1>
               <StyledHabitsContainer>
                 {habits.map((elm, i) => (
-                  <CardHabits key={i} habits={elm} setModal={setModal} />
+                  <CardHabits key={i} eachHabits={elm} setModal={setModal} />
                 ))}
               </StyledHabitsContainer>
               <ButtonPosition>
@@ -157,7 +157,7 @@ export const Habits = () => {
         </>
       ) : modal === "create" ? (
         <StyledBackground>
-          <ModalHabit modal={modal} setModal={setModal} />
+          <ModalHabit setModal={setModal} />
         </StyledBackground>
       ) : (
         <StyledBackground>

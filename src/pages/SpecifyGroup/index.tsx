@@ -66,7 +66,7 @@ const StyledGroupContent = styled.div`
 `;
 
 export const SpecifyGroup = () => {
-  const [editGroupModal, setEditGroupModal] = useState(false);
+  const [editGroupModal, setEditGroupModal] = useState<boolean>(false);
 
   const { isLogged } = useContext(LoginContext);
 

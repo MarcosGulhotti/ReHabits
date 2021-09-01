@@ -21,15 +21,6 @@ const Dados = {
     gitlab: "https://gitlab.com/tukinhafl",
     github: "https://github.com/tukinhafl",
   },
-  Lucas: {
-    name: "Lucas Cardoso",
-    img: "https://ca.slack-edge.com/TQZR39SET-U01T8FGTHR6-1050fc9757a2-512",
-    role: "Quality Assurance",
-    cellphone: "(41) 9 97099033",
-    linkedin: "https://www.linkedin.com/in/lucas-cardoso-78a19021a/",
-    gitlab: "https://gitlab.com/padocaking",
-    github: "https://github.com/padocaking",
-  },
   Luiz: {
     name: "Luiz Victor B. Oliveira",
     img: "https://ca.slack-edge.com/TQZR39SET-U01SCCZS11T-26bf72c9a4b0-512",
@@ -71,14 +62,13 @@ const StyledContactDiv = styled.div`
 `;
 
 export const Contact = () => {
-  const { Marcos, Arthur, Lucas, Luiz } = Dados;
+  const { Marcos, Arthur, Luiz } = Dados;
   return (
     <StyledContainer>
       <Menu />
       <StyledContactDiv>
         <ContactCard Dados={Marcos} />
         <ContactCard Dados={Arthur} />
-        <ContactCard Dados={Lucas} />
         <ContactCard Dados={Luiz} />
       </StyledContactDiv>
     </StyledContainer>

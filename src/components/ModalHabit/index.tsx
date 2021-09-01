@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUserId } from '../../providers/UserId'
 import { InputDifficulty } from '../InputDifficulty'
+import { IModalHabitProps, IAddToHabitsForm } from '../../types'
 
 const StyledContainer = styled.div`
 background-color: var(--white);
@@ -22,7 +23,7 @@ width: 80%;
 }
 `
 
-const StyledContent = styled.div`
+const StyledContent = styled.div<{align: string}>`
   display: flex;
   justify-content: ${(props) => props.align};
   align-items: center;
@@ -112,7 +113,7 @@ input {
 }
 `
 
-export const ModalHabit = ({ modal, setModal }) => {
+export const ModalHabit = ({ setModal }: IModalHabitProps) => {
     const { addToHabits } = useContext(HabitsContext);
     const { id } = useUserId()
 
@@ -131,9 +132,9 @@ export const ModalHabit = ({ modal, setModal }) => {
         resolver: yupResolver(formSchema),
     });
 
-    const formSubmit = (data) => {
+    const formSubmit = (data: IAddToHabitsForm) => {
         const newData = { ...data, how_much_achieved: 0, achieved: false, user: Number(id) };
-        addToHabits(newData, setModal, modal);
+        addToHabits(newData, setModal);
     };
 
     return (
@@ -144,7 +145,7 @@ export const ModalHabit = ({ modal, setModal }) => {
               <form onSubmit={handleSubmit(formSubmit)}>
               <i
                 onClick={() => setModal('closed')}
-                class="fas fa-chevron-left"
+                className="fas fa-chevron-left"
                 id="return"
               />
                 <div>

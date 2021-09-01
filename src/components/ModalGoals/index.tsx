@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CardGoals } from "../CardGoals";
-import { FormGoalsModal } from "../../components/FormGoalsModal";
+import { FormGoalsModal } from "../FormGoalsModal";
 import api from "../../services/api";
 import { useParams } from "react-router";
 
@@ -72,9 +72,9 @@ const StyledButton = styled.button`
 `;
 
 export const ModalGoals = () => {
-  const { id } = useParams();
-  const [modal, setModal] = useState(false);
-  const [groupGoals, setGroupGoals] = useState([]);
+  const { id } = useParams<{id: string}>();
+  const [modal, setModal] = useState<boolean>(false);
+  const [groupGoals, setGroupGoals] = useState<{id: number}[]>([]);
 
   const gettingDataFromGroups = async () => {
     const respGoals = await api.get(`/goals/?group=${id}`);
