@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { IDashboardButtonProps, IStyledButtonProps } from '../../types'
 
-const StyledButtonStyle = styled.button`
-  height: ${({ height }) => (height === undefined ? "55px" : `${height}`)};
-  width: ${({ width }) => (width === undefined ? "60%" : `${width}`)};
+const StyledButtonStyle = styled.button<IStyledButtonProps>`
+  height: ${(props) => (props.height === undefined ? "55px" : `${props.height}`)};
+  width: ${(props) => (props.width === undefined ? "60%" : `${props.width}`)};
   border-radius: 7px;
   border: 2px solid black;
   background-color: var(--gold);
@@ -27,7 +28,7 @@ const StyledButtonStyle = styled.button`
   
 `;
 
-export const DashboardButton = ({ nome, loginButton, width, height, func }) => {
+export const DashboardButton = ({ nome, loginButton, width, height, func }: IDashboardButtonProps) => {
   return (
     <StyledButtonStyle
       onClick={() => func()}

@@ -136,8 +136,8 @@ export const ProfileHabits = () => {
                 <div className="background">
                     <div className="card">
                         <StyledCardContainer>
-                            {habits.filter((elm, i) => i < 4).map((elm, i) => (
-                                <CardHabits key={i} habits={elm} />
+                            {habits.filter((_, i) => i < 4).map((elm, i) => (
+                                <CardHabits key={i} eachHabits={elm} />
                             ))}
                         </StyledCardContainer>
                     </div>
