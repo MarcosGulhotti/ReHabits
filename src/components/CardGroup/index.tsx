@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ICardGroupsProps } from "../../types";
 
 const StyledCardGroup = styled.li`
   @media (min-width: 280px) {
@@ -67,7 +68,7 @@ export const StyledCardGoals = styled.li`
   }
 `;
 
-export const CardGroup = ({ title, category, handleFunction }) => {
+export const CardGroup = ({ title, category, handleFunction }: ICardGroupsProps) => {
   return (
     <StyledCardGroup>
       <h2 id="cardsTitle">{title}</h2>

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services/api'
 import toast from "react-hot-toast";
+import { IFormProps } from '../../types'
 
 export const FormRegister = () => {
     const history = useHistory()
@@ -36,7 +37,7 @@ export const FormRegister = () => {
         resolver: yupResolver(formSchema)
     })
 
-    const formSubmit = async ({ username, email, password }) => {
+    const formSubmit = async ({ username, email, password }: IFormProps) => {
       const user = { username, email, password }
       try { 
         await api.post("/users/", user)

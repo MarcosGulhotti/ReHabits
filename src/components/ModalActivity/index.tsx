@@ -5,6 +5,7 @@ import api from "../../services/api";
 import { CardActivity } from "../CardActivity";
 import { FormEditActivity } from "../FormEditActivity";
 import { FormActivitiesModal } from "../FormActivitiesModal";
+import { IGroupActivies } from '../../types'
 
 const StyledContainer = styled.div`
   width: 550px;
@@ -100,11 +101,11 @@ const StyledButtonDiv = styled.div`
 `;
 
 export const ModalActivity = () => {
-  const [groupActivities, setGroupActivities] = useState([]);
-  const { id } = useParams();
-  const [idActivity, setIdActivity] = useState("");
-  const [addActivity, setAddActivity] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [groupActivities, setGroupActivities] = useState<IGroupActivies[]>([]);
+  const { id } = useParams<{id: string}>();
+  const [idActivity, setIdActivity] = useState<string>("");
+  const [addActivity, setAddActivity] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false);
 
   const gettingDataFromGroups = async () => {
     const respActivities = await api.get(`/activities/?group=${id}`);
@@ -132,7 +133,6 @@ export const ModalActivity = () => {
                 key={actv.id}
                 actv={actv}
                 setIdActivity={setIdActivity}
-                idActivity={idActivity}
                 gettingDataFromGroups={gettingDataFromGroups}
               />
             ))}
@@ -151,7 +151,6 @@ export const ModalActivity = () => {
         <StyledListUl>
           <FormActivitiesModal
             groupId={id}
-            addActivity={addActivity}
             setAddActivity={setAddActivity}
             setGroupActivities={setGroupActivities}
             groupActivities={groupActivities}

@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { LoginContext } from "../../providers/Login";
 import { useUserId } from "../../providers/UserId";
 import toast from "react-hot-toast";
+import { IFormProps } from '../../types'
 
 export const FormLogin = () => {
   const history = useHistory();
@@ -28,7 +29,7 @@ export const FormLogin = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = async (data) => {
+  const formSubmit = async (data: IFormProps) => {
     try {
       const resp = await api.post("/sessions/", data)
         const { access } = resp.data;

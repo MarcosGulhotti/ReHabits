@@ -10,6 +10,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import toast from "react-hot-toast";
+import { IGroupProps } from "../../types";
 
 export const StyledGroupList = styled.ul`
   @media (min-width: 280px) {
@@ -65,13 +66,13 @@ export const StyledGoalsActivitiesList = styled.ul`
 `;
 
 export const GroupList = () => {
-  const [groups, setGroups] = useState([]);
-  const token = JSON.parse(localStorage.getItem("token"));
-  const [showMyGroups, setShowMyGroups] = useState(false);
-  const [myGroups, setMyGroups] = useState([]);
+  const [groups, setGroups] = useState<IGroupProps[]>([]);
+  const token = JSON.parse(localStorage.getItem("token") || "null");
+  const [showMyGroups, setShowMyGroups] = useState<boolean>(false);
+  const [myGroups, setMyGroups] = useState<IGroupProps[]>([]);
   const history = useHistory();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1)
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   useEffect(() => {
     api.get(`/groups/?per_page=15&page=${currentPage}`)
@@ -86,11 +87,11 @@ export const GroupList = () => {
       }
     })
 
-    intersectionObserver.observe(document.querySelector('#sentinela'))
+    intersectionObserver.observe(document.querySelector('#sentinela') as HTMLElement)
     return () => intersectionObserver.disconnect()
   }, [])
 
-  const enterGroupInterface = (id) => {
+  const enterGroupInterface = (id: string) => {
     history.push(`/${id}`);
   };
 
@@ -121,7 +122,7 @@ export const GroupList = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const handleCreateGroup = async (data) => {
+  const handleCreateGroup = async (data: IGroupProps) => {
     try {
       await api.post("/groups/", data, {
       headers: {
@@ -138,7 +139,7 @@ export const GroupList = () => {
   };
 
   return (
-    <StyledBackgroundGroups background="#F5F3EB">
+    <StyledBackgroundGroups backgroundColor="#F5F3EB">
       <div className="containerGroups">
         <div id="headerPosition">
           <button onClick={() => setModalOpen(true)}>Criar grupos</button>
@@ -187,7 +188,7 @@ export const GroupList = () => {
           <form onSubmit={handleSubmit(handleCreateGroup)}>
             <i
               onClick={() => setModalOpen(false)}
-              class="fas fa-chevron-left"
+              className="fas fa-chevron-left"
               id="return"
             />
             <div>

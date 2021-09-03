@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import api from "../../services/api";
+import { IDataGroupProps } from "../../types";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -64,10 +65,10 @@ const StyledContent = styled.div`
 `;
 
 export const EspecifyGroupInfos = () => {
-  const [dataGroup, setDataGroup] = useState([]);
-  const { id } = useParams();
+  const [dataGroup, setDataGroup] = useState<IDataGroupProps>({} as IDataGroupProps);
+  const { id } = useParams<{id: string}>();
   const history = useHistory();
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(localStorage.getItem("token") || "null");
 
   const gettingDataFromGroups = async () => {
     const resp = await api.get(`/groups/${id}/`);
@@ -79,7 +80,7 @@ export const EspecifyGroupInfos = () => {
     // eslint-disable-next-line
   }, []);
 
-  const handleSubscribe = async (id) => {
+  const handleSubscribe = async (id: string) => {
     try {
       await api.post(`groups/${id}/subscribe/`, {}, {
         headers: {

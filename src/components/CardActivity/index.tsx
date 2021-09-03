@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import styled from "styled-components";
 import api from "../../services/api";
+import { ICardActivitiesProps } from "../../types";
 
 const StyledContainer = styled.li`
   width: 500px;
@@ -85,16 +86,15 @@ const StyledButtonDiv = styled.div`
 
 export const CardActivity = ({
   actv,
-  idActivity,
   setIdActivity,
   modal,
   setModal,
   gettingDataFromGroups,
-}) => {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const [groupActivities, setGroupActivities] = useState([]);
+}: ICardActivitiesProps) => {
+  const token = JSON.parse(localStorage.getItem("token") || "null");
+  const [groupActivities, setGroupActivities] = useState<{id: string}[]>([]);
 
-  const removeFromActivities = async (id) => {
+  const removeFromActivities = async (id: string) => {
     try {
       await api.delete(`activities/${id}/`, {
         headers: {
@@ -120,7 +120,7 @@ export const CardActivity = ({
           <StyledDeleteDiv>
             <i
               onClick={() => removeFromActivities(actv.id)}
-              class="fas fa-minus-circle"
+              className="fas fa-minus-circle"
             />
           </StyledDeleteDiv>
         </StyledMainContent>

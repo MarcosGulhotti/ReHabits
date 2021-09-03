@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { css } from "styled-components";
+import { IInputProps } from "../../types";
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -14,7 +15,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledContainerInput = styled.div`
+const StyledContainerInput = styled.div<{isErrored: boolean}>`
   background: var(--white);
   border-radius: 10px;
   border: 2px solid var(--gray);
@@ -53,7 +54,7 @@ const StyledContainerInput = styled.div`
   }
 `;
 
-export const InputAchieved = ({ label, register, name, error, ...rest }) => {
+export const InputAchieved = ({ label, register, name, error, ...rest }: IInputProps) => {
   return (
     <StyledContainer>
       <div>

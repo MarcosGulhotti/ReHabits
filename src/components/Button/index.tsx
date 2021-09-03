@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { IButtonProps, IStyledButtonProps } from '../../types'
 
-const StyledButtonStyle = styled.button`
+const StyledButtonStyle = styled.button<IStyledButtonProps>`
   @media (max-width: 600px) {
     width: 80%;
   }
@@ -24,7 +25,7 @@ const StyledButtonStyle = styled.button`
   }
 `;
 
-export const Button = ({ nome, loginButton, width, height, func }) => {
+export const Button = ({ nome, loginButton, width, height, func }: IButtonProps) => {
   return (
     <StyledButtonStyle
       onClick={() => func()}

@@ -5,6 +5,7 @@ import { Input } from "../Input";
 import api from "../../services/api";
 import styled from "styled-components";
 import toast from "react-hot-toast";
+import { IFormEditActivitiesProps } from "../../types";
 
 const StyledContainer = styled.li`
   width: 500px;
@@ -63,8 +64,8 @@ const StyledButtonPosition = styled.div`
   }
 `;
 
-export const FormEditActivity = ({ modal, setModal, idActivity, setIdActivity, groupActivities }) => {
-  const token = JSON.parse(localStorage.getItem("token"));
+export const FormEditActivity = ({ modal, setModal, idActivity, setIdActivity, groupActivities }: IFormEditActivitiesProps) => {
+  const token = JSON.parse(localStorage.getItem("token") || "null");
 
   const formSchema = yup.object().shape({
     category: yup.string().required("Campo obrigatório"),
@@ -78,7 +79,7 @@ export const FormEditActivity = ({ modal, setModal, idActivity, setIdActivity, g
     resolver: yupResolver(formSchema),
   });
 
-  const handleEditActivity = async (data) => {
+  const handleEditActivity = async (data: {category: string}) => {
     const newData = { title: data.category };
 
     try {
@@ -104,7 +105,7 @@ export const FormEditActivity = ({ modal, setModal, idActivity, setIdActivity, g
       <form onSubmit={handleSubmit(handleEditActivity)}>
         <i
           onClick={() => setModal(!modal)}
-          class="fas fa-chevron-left"
+          className="fas fa-chevron-left"
           id="return"
         />
         <div>

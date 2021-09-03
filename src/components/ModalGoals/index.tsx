@@ -74,7 +74,7 @@ const StyledButton = styled.button`
 export const ModalGoals = () => {
   const { id } = useParams<{id: string}>();
   const [modal, setModal] = useState<boolean>(false);
-  const [groupGoals, setGroupGoals] = useState<{id: number}[]>([]);
+  const [groupGoals, setGroupGoals] = useState<{id: string}[]>([]);
 
   const gettingDataFromGroups = async () => {
     const respGoals = await api.get(`/goals/?group=${id}`);

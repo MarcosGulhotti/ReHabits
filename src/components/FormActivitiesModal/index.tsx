@@ -4,9 +4,10 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
-import { InputDate } from "../../components/InputDate";
+import { InputDate } from "../InputDate";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { IFormActivitiesProps } from "../../types";
 
 const StyledContainer = styled.div`
   width: 500px;
@@ -75,8 +76,8 @@ export const FormActivitiesModal = ({
   setGroupActivities,
   groupActivities,
   gettingDataFromGroups,
-}) => {
-  const token = JSON.parse(localStorage.getItem("token"));
+}: IFormActivitiesProps) => {
+  const token = JSON.parse(localStorage.getItem("token") || "null");
   const formSchema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     realization_time: yup.string().required("Campo obrigatório"),
@@ -95,7 +96,7 @@ export const FormActivitiesModal = ({
     resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = async (data) => {
+  const formSubmit = async (data: {title: string, realization_time: string}) => {
     const newData = { ...data, group: groupId };
 
     try {

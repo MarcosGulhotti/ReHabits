@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { css } from "styled-components";
+import { IInputProps } from "../../types";
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -14,7 +15,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledContainerInput = styled.div`
+const StyledContainerInput = styled.div<{isErrored: boolean}>`
   background: var(--white);
   border-radius: 10px;
   border: 2px solid var(--gray);
@@ -24,6 +25,10 @@ const StyledContainerInput = styled.div`
   display: flex;
   transition: 0.5s;
   font-family: var(--font-label);
+
+  @media (max-width: 1300px) {
+    padding: 0.5rem;
+  }
 
   ${(props) =>
     props.isErrored &&
@@ -35,7 +40,7 @@ const StyledContainerInput = styled.div`
     border-color: var(--gray);
   }
 
-  select {
+  input {
     font-family: var(--font-label);
     background: transparent;
     align-items: center;
@@ -53,21 +58,14 @@ const StyledContainerInput = styled.div`
   }
 `;
 
-export const InputDifficulty = ({ label, register, name, error, ...rest }) => {
+export const Input = ({ label, register, name, error, ...rest }: IInputProps) => {
   return (
     <StyledContainer>
-      <div style={{marginBottom: '0.8rem'}}>
+      <div style={{ marginBottom: "0.8rem" }}>
         {label} {!!error && <span> - {error}</span>}{" "}
       </div>
       <StyledContainerInput isErrored={!!error}>
-        <select {...register(name)} {...rest}>
-          <option value='Muito Fácil'>Escolha uma dificuldade</option>
-          <option value="Muito Fácil">Muito Fácil</option>
-          <option value="Fácil">Fácil</option>
-          <option value="Médio">Médio</option>
-          <option value="Difícil">Difícil</option>
-          <option value="Muito Difícil">Muito Difícil</option>
-        </select>
+        <input {...register(name)} {...rest} />
       </StyledContainerInput>
     </StyledContainer>
   );

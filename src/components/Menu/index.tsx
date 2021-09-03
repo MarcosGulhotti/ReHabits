@@ -20,7 +20,7 @@ const StyledMenuBar = styled.nav`
   }
 `;
 
-const StyledRightNav = styled.ul`
+const StyledRightNav = styled.ul<{open: boolean}>`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
@@ -73,7 +73,7 @@ const StyledRightNav = styled.ul`
   }
 `;
 
-const StyledBurger = styled.div`
+const StyledBurger = styled.div<{open: boolean}>`
   width: 2rem;
   height: 2rem;
   position: relative;
@@ -135,45 +135,45 @@ export const Menu = () => {
       <StyledRightNav open={open}>
         <li>
           <Link to="/">
-            <i class="fas fa-home"></i>
+            <i className="fas fa-home"></i>
             Home
           </Link>
         </li>
         <li>
           <Link to="/register">
-            <i class="fas fa-clipboard-list"></i>
+            <i className="fas fa-clipboard-list"></i>
             Register
           </Link>
         </li>
         <li>
           <Link to="/dashboard">
-            <i class="fas fa-columns"></i>
+            <i className="fas fa-columns"></i>
             Dashboard
           </Link>
         </li>
         <li>
           <Link to="/profile">
-            <i class="fas fa-user-circle"></i>
+            <i className="fas fa-user-circle"></i>
             Profile
           </Link>
         </li>
         <li>
           <Link to="/contact">
-            <i class="fas fa-address-card"></i>
+            <i className="fas fa-address-card"></i>
             Contact
           </Link>
         </li>
         {isLogged ? (
           <li>
             <Link onClick={handleLogout}>
-              <i class="fas fa-sign-out-alt"></i>
+              <i className="fas fa-sign-out-alt"></i>
               Logout
             </Link>
           </li>
         ) : (
           <li>
             <Link to="/login">
-              <i class="fas fa-sign-in-alt"></i>
+              <i className="fas fa-sign-in-alt"></i>
               Login
             </Link>
           </li>

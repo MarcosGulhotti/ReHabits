@@ -161,7 +161,7 @@ export const Habits = () => {
         </StyledBackground>
       ) : (
         <StyledBackground>
-          <ModalEditHabit modal={modal} setModal={setModal} />
+          <ModalEditHabit setModal={setModal} />
         </StyledBackground>
       )}
     </>

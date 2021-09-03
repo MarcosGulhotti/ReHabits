@@ -1,13 +1,14 @@
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input } from "../../components/Input";
+import { Input } from "../Input";
 import { useUserId } from "../../providers/UserId";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../../services/api";
 import styled from "styled-components";
 import toast from "react-hot-toast";
+import { IDataGroupProps, IFormEditGroupProps } from "../../types";
 
 const StyledContainer = styled.div`
   width: 500px;
@@ -60,10 +61,10 @@ const StyledButtonDiv = styled.div`
   }
 `;
 
-export const FormEditGroup = ({ setEditGroupModal }) => {
-  const { id } = useParams();
-  const token = JSON.parse(localStorage.getItem("token"));
-  const [dataGroup, setDataGroup] = useState([]);
+export const FormEditGroup = ({ setEditGroupModal }: IFormEditGroupProps) => {
+  const { id } = useParams<{id: string}>();
+  const token = JSON.parse(localStorage.getItem("token") || "null");
+  const [dataGroup, setDataGroup] = useState<IDataGroupProps>({} as IDataGroupProps);
   const userInfo = useUserId();
 
   const gettingDataFromGroups = async () => {
@@ -88,7 +89,7 @@ export const FormEditGroup = ({ setEditGroupModal }) => {
     resolver: yupResolver(formSchema),
   });
 
-  const handleEditGroup = async (data) => {
+  const handleEditGroup = async (data: {category: string}) => {
     if (dataGroup.creator.id === parseInt(userInfo.id)) {
       try {
         await api.patch(`groups/${id}/`, data, {
@@ -111,7 +112,7 @@ export const FormEditGroup = ({ setEditGroupModal }) => {
     <StyledContainer>
       <i
         onClick={() => setEditGroupModal(false)}
-        class="fas fa-chevron-left"
+        className="fas fa-chevron-left"
         id="return"
       />
       <form onSubmit={handleSubmit(handleEditGroup)}>

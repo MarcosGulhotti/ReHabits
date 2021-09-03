@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { IBackgroundGroupsProps } from "../../types";
 import { CardGroup } from "../CardGroup";
 
-export const StyledBackgroundGroups = styled.div`
+export const StyledBackgroundGroups = styled.div<{backgroundColor: string}>`
   background-color: var(--background);
   height: calc(100% - 55px);
   padding: 30px;
@@ -208,7 +209,8 @@ export const BackgroundGroups = ({
   goals,
   backgroundColor,
   activities,
-}) => {
+}: IBackgroundGroupsProps) => {
+
   return (
     <StyledBackgroundGroups backgroundColor={backgroundColor}>
       <div className="containerGroups">
@@ -222,8 +224,6 @@ export const BackgroundGroups = ({
                 <CardGroup
                   key={idx}
                   title={el.title}
-                  difficulty={el.difficulty}
-                  achieved={JSON.stringify(el.achieved)}
                 />
               ))}
             </ul>

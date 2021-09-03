@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { InputDifficulty } from "../InputDifficulty";
 import toast from "react-hot-toast";
+import { IFormGoalsProps, IFormGoalsModalProps } from '../../types'
 
 const StyledContainer = styled.div`
   width: 510px;
@@ -62,15 +63,15 @@ const StyledContainer = styled.div`
   }
 `;
 
-export const FormGoalsModal = ({ groupId, setgoalModal, setGroupGoals, groupGoals }) => {
-  const token = localStorage.getItem("token");
+export const FormGoalsModal = ({ groupId, setgoalModal, setGroupGoals, groupGoals }: IFormGoalsModalProps) => {
+  const token = localStorage.getItem("token") || "null";
 
   const formSchema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     difficulty: yup.string().required("Campo obrigatório"),
     how_much_achieved: yup
       .string()
-      .matches(`^[1-9][0-9]?$|^100$`, "Apenas numeros de 0-100")
+      .matches(/^[1-9][0-9]?$|^100$/, "Apenas numeros de 0-100")
       .required("Campo obrigatório"),
   });
 
@@ -82,7 +83,7 @@ export const FormGoalsModal = ({ groupId, setgoalModal, setGroupGoals, groupGoal
     resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = async (data) => {
+  const formSubmit = async (data: IFormGoalsProps) => {
     const { title, difficulty, how_much_achieved } = data;
     const newData = { title, difficulty, how_much_achieved, group: groupId };
     const newToken = JSON.parse(token);

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Linkedin from "../../Assets/img/Linkedin.jpg";
 import GitHub from "../../Assets/img/GitHub.jpg";
 import GitLab from "../../Assets/img/GitLab.png";
+import { IContactCardProps } from "../../types";
 
 const StyledContainer = styled.div`
   width: 300px;
@@ -72,7 +73,7 @@ const StyledCellphone = styled.div`
   }
 `;
 
-export const ContactCard = ({ Dados }) => {
+export const ContactCard = ({ Dados }: IContactCardProps) => {
   const { name, img, role, cellphone, linkedin, github, gitlab } = Dados;
 
   return (
@@ -94,7 +95,7 @@ export const ContactCard = ({ Dados }) => {
         </a>
       </StyledLinks>
       <StyledCellphone>
-        <i class="fas fa-phone-square-alt"></i>
+        <i className="fas fa-phone-square-alt"></i>
         <p>{cellphone}</p>
       </StyledCellphone>
     </StyledContainer>

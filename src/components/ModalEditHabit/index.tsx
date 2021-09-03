@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputAchieved } from '../InputAchieved'
+import { IModalHabitProps } from '../../types';
 
 const StyledContainer = styled.div`
   background-color: var(--white);
@@ -109,7 +110,7 @@ input {
 }
 `
 
-export const ModalEditHabit = ({ modal, setModal }) => {
+export const ModalEditHabit = ({ setModal }: IModalHabitProps) => {
   const { editHabits } = useContext(HabitsContext);
 
   const formSchema = yup.object().shape({
@@ -125,20 +126,20 @@ export const ModalEditHabit = ({ modal, setModal }) => {
       resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = (data) => {
+  const formSubmit = (data: {how_much_achieved: number, achieved: boolean}) => {
       editHabits(data)
       setModal('closed')
   };
 
   return (
     <StyledContainer>
-      <StyledContent align={"center"}>
+      <StyledContent>
         <h1>Editar hábito</h1>
         <StyledModal>
           <form onSubmit={handleSubmit(formSubmit)}>
             <i
               onClick={() => setModal('closed')}
-              class="fas fa-chevron-left"
+              className="fas fa-chevron-left"
               id="return"
             />
             <div>

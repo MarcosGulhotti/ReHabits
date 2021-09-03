@@ -1,19 +1,16 @@
 import toast from "react-hot-toast";
 import styled from "styled-components";
 import api from "../../services/api";
+import { ICardGoalsProps } from "../../types";
 
 const StyledContainer = styled.li`
   width: 500px;
   min-height: 100px;
   max-height: 105px;
-
   margin-bottom: 1rem;
-
   background-color: var(--gold);
-
   border: 2px solid black;
   border-radius: 10px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,14 +19,14 @@ const StyledContainer = styled.li`
     width: 98%;
   }
 `;
+
 const StyledMainContent = styled.div`
   width: 100%;
-
   margin-top: 0.8rem;
-
   display: flex;
   justify-content: space-between;
 `;
+
 const StyledPatchDiv = styled.div`
   span {
     margin-left: 2rem;
@@ -55,19 +52,16 @@ const StyledPatchDiv = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-
       width: 20px;
       height: 20px;
-
       border-radius: 100%;
       border: 1px solid black;
-
       cursor: pointer;
-
       background-color: var(--white);
     }
   }
 `;
+
 const StyledTitleDiv = styled.div`
   h1 {
     font-family: var(--title-font);
@@ -77,7 +71,6 @@ const StyledTitleDiv = styled.div`
       font-size: 1rem;
     }
   }
-
 `;
 
 const StyledDeleteDiv = styled.div`
@@ -133,11 +126,11 @@ const StyledSecondContent = styled.div`
   }
 `;
 
-export const CardGoals = ({ goals, groupGoals, setGroupGoals,gettingDataFromGroups }) => {
-  const token = JSON.parse(localStorage.getItem("token"));
+export const CardGoals = ({ goals, groupGoals, setGroupGoals, gettingDataFromGroups }: ICardGoalsProps) => {
+  const token = JSON.parse(localStorage.getItem("token") || "null");
 
-  const handlePatch = async (elm) => {
-    const { id, achieved } = elm;
+  const handlePatch = async (id: string, achieved: boolean) => {
+    // const { id, achieved } = elm;
     const newAchieved = { achieved: !achieved };
 
     try {
@@ -155,7 +148,7 @@ export const CardGoals = ({ goals, groupGoals, setGroupGoals,gettingDataFromGrou
     }
   };
 
-  const removeFromGoals = async (id) => {
+  const removeFromGoals = async (id: string) => {
     try {
       await api.delete(`goals/${id}/`, {
         headers: {
@@ -177,10 +170,9 @@ export const CardGoals = ({ goals, groupGoals, setGroupGoals,gettingDataFromGrou
           <span>
             Feito
             <div
-              onClick={() => handlePatch(goals)}
-              achieved={goals.achieved.toString()}
+              onClick={() => handlePatch(goals.id, goals.achieved)}
             >
-              {goals.achieved === true ? <i class="fas fa-check" /> : null}
+              {goals.achieved === true ? <i className="fas fa-check" /> : null}
             </div>
           </span>
         </StyledPatchDiv>
@@ -190,7 +182,7 @@ export const CardGoals = ({ goals, groupGoals, setGroupGoals,gettingDataFromGrou
         <StyledDeleteDiv>
           <i
             onClick={() => removeFromGoals(goals.id)}
-            class="fas fa-minus-circle"
+            className="fas fa-minus-circle"
           />
         </StyledDeleteDiv>
       </StyledMainContent>

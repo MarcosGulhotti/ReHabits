@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { css } from "styled-components";
+import { IInputProps } from "../../types";
 
 const StyledContainer = styled.div`
   text-align: left;
@@ -14,7 +15,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledContainerInput = styled.div`
+const StyledContainerInput = styled.div<{isErrored: boolean}>`
   background: var(--white);
   border-radius: 10px;
   border: 2px solid var(--gray);
@@ -35,7 +36,7 @@ const StyledContainerInput = styled.div`
     border-color: var(--gray);
   }
 
-  input {
+  select {
     font-family: var(--font-label);
     background: transparent;
     align-items: center;
@@ -53,15 +54,22 @@ const StyledContainerInput = styled.div`
   }
 `;
 
-export const InputDate = ({ label, register, name, error, ...rest }) => {
-    return (
-      <StyledContainer>
-        <div>
-          {label} {!!error && <span> - {error}</span>}{" "}
-        </div>
-        <StyledContainerInput isErrored={!!error}>
-          <input {...register(name)} {...rest} type="datetime-local" />
-        </StyledContainerInput>
-      </StyledContainer>
-    );
-  };
+export const InputDifficulty = ({ label, register, name, error, ...rest }: IInputProps) => {
+  return (
+    <StyledContainer>
+      <div style={{marginBottom: '0.8rem'}}>
+        {label} {!!error && <span> - {error}</span>}{" "}
+      </div>
+      <StyledContainerInput isErrored={!!error}>
+        <select {...register(name)} {...rest}>
+          <option value='Muito Fácil'>Escolha uma dificuldade</option>
+          <option value="Muito Fácil">Muito Fácil</option>
+          <option value="Fácil">Fácil</option>
+          <option value="Médio">Médio</option>
+          <option value="Difícil">Difícil</option>
+          <option value="Muito Difícil">Muito Difícil</option>
+        </select>
+      </StyledContainerInput>
+    </StyledContainer>
+  );
+};
