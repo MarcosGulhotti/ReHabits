@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { HabitsContext } from "../../providers/Habits";
+import { ICardHabitsProps } from '../../types'
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -20,7 +21,6 @@ const StyledCard = styled.div`
   justify-content: space-between;
   color: var(--white);
   border: 2px solid black;
-  box-shadow: ${(props) => props.styleOnAchieve};
   background-color: var(--gold);
   color: black;
   border-radius: 10px;
@@ -167,11 +167,11 @@ const StyledInfo = styled.div`
   }
 `;
 
-export const CardHabits = ({ habits, setModal }) => {
-  const { title, difficulty, frequency, category, how_much_achieved, achieved, id } = habits;
+export const CardHabits = ({ eachHabits, setModal }: ICardHabitsProps) => {
+  const { title, difficulty, frequency, category, how_much_achieved, achieved, id } = eachHabits;
   const { removeFromHabits, setEditHabit } = useContext(HabitsContext);
 
-  const handleClick = (id) => {
+  const handleClick = (id: number) => {
     setEditHabit(id)
     setModal('edit')
   }
@@ -184,8 +184,8 @@ export const CardHabits = ({ habits, setModal }) => {
             <div className="completed">
               <span className="label">Completado:</span>
               <i
-                onClick={() => removeFromHabits(habits)}
-                class={achieved ? "fas fa-check-circle fa-sm" : "fas fa-times-circle fa-sm"}
+                onClick={() => removeFromHabits(eachHabits)}
+                className={achieved ? "fas fa-check-circle fa-sm" : "fas fa-times-circle fa-sm"}
                 style={achieved ? {color: "#00d000"} : {color: "red"}}
               />
             </div>
@@ -195,10 +195,10 @@ export const CardHabits = ({ habits, setModal }) => {
             <p>{title}</p>
           </div>
           <span className="remove">
-            <button className="removeButton" onClick={() => removeFromHabits(habits)}>
+            <button className="removeButton" onClick={() => removeFromHabits(eachHabits)}>
               <i
-                onClick={() => removeFromHabits(habits)}
-                class="fas fa-times fa-lg"
+                onClick={() => removeFromHabits(eachHabits)}
+                className="fas fa-times fa-lg"
                 style={{color: "gray"}}
               />
             </button>

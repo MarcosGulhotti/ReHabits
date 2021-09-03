@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useProfile } from "../../providers/Profile";
+import { IModalEditNameProps } from '../../types'
 
 const StyledContent = styled.div`
   display: flex;
@@ -98,7 +99,7 @@ const StyledModal = styled.div`
   }
 `;
 
-export const ModalEditName = ({ setModal }) => {
+export const ModalEditName = ({ setModal }: IModalEditNameProps) => {
   const { editUsername } = useProfile();
 
   const formSchema = yup.object().shape({
@@ -113,19 +114,19 @@ export const ModalEditName = ({ setModal }) => {
     resolver: yupResolver(formSchema),
   });
 
-  const formSubmit = (data) => {
+  const formSubmit = (data: {username: string}) => {
     editUsername(data);
     setModal(false);
   };
 
   return (
-    <StyledContent align={"center"}>
+    <StyledContent>
       <h1>Mudar usuário</h1>
       <StyledModal>
         <form onSubmit={handleSubmit(formSubmit)}>
           <i
             onClick={() => setModal(false)}
-            class="fas fa-chevron-left"
+            className="fas fa-chevron-left"
             id="return"
           />
           <div>

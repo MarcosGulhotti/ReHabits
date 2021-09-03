@@ -1,31 +1,27 @@
 import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
 import api from "../../services/api";
+import { IProfileContextData, IProviderProps, IUserInfo } from "../../types";
 
-const ProfileContext = createContext()
+const ProfileContext = createContext<IProfileContextData>({} as IProfileContextData)
 
-export const ProfileProvider = ({ children }) => {
-    const [userInfo, setUserInfo] = useState({})
-    const [modal, setModal] = useState(false)
+export const ProfileProvider = ({ children }: IProviderProps) => {
+    const [userInfo, setUserInfo] = useState<IUserInfo>({} as IUserInfo)
+    const [modal, setModal] = useState<boolean>(false)
 
-    const token = JSON.parse(localStorage.getItem("token"));
-    const id = JSON.parse(localStorage.getItem("Id"));
-
+    const token = JSON.parse(localStorage.getItem("token") || "null");
+    const id = JSON.parse(localStorage.getItem("Id") || "null");
+    
     const getUser = async () => {
-        try {
-            const resp = await api.get(`users/${id}/`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            setUserInfo(resp.data)
-        }
-        catch {
-           
-        }
+        const resp = await api.get(`users/${id}/`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        setUserInfo(resp.data)
     }
 
-    const editUsername = async (item) => {
+    const editUsername = async (item: {username: string}) => {
         try {
             await api.patch(`users/${id}/`, item, {
                 headers: {

@@ -133,7 +133,7 @@ export const Register = () => {
 
   if (isLogged !== null) {
     return <Redirect to="/dashboard" />
-}
+  }
 
   return (
     <>
